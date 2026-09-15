@@ -4,7 +4,7 @@
 # =============================================================
 
 APP_NAME="chinese-study"
-PORT=3350
+PORT=3388
 DOMAIN="chinese.leetech.vn"
 
 # Nginx config path

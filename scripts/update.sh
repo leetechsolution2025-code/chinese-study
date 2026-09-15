@@ -36,7 +36,7 @@ fi
 
 SSH_USER="${SSH_USER:-root}"
 SSH_DIR="${SSH_DIR:-/root/${APP_NAME}}"
-PORT="${PORT:-3350}"
+PORT="${PORT:-3388}"
 
 # Kiểm tra SSH Key cá nhân (nếu có dùng flag -i, nếu không dùng mặc định hệ thống)
 SSH_OPTS="-o StrictHostKeyChecking=no"
@@ -104,6 +104,7 @@ module.exports = {
       args: 'start -- -p ${PORT}',
       cwd: '${SSH_DIR}',
       instances: 1,
+      exec_mode: 'fork',
       autorestart: true,
       watch: false,
       max_memory_restart: '600M',
@@ -116,46 +117,16 @@ module.exports = {
 };
 EOF
 
-  echo -e \"\033[0;34m[→]\033[0m Khởi động lại ứng dụng PM2...\"
-  if pm2 list | grep -q \"${APP_NAME}\"; then
-      pm2 reload ecosystem.config.js --update-env || pm2 restart ${APP_NAME}
-  else
-      pm2 start ecosystem.config.js
-      pm2 save
-  fi
+  echo -e \"\033[0;34m[→]\033[0m Khởi động lại ứng dụng PM2 trên port ${PORT}...\"
+  pm2 delete \"${APP_NAME}\" 2>/dev/null || true
+  pm2 start ecosystem.config.js
+  pm2 save
 
-  # Tự động thiết lập Nginx & SSL nếu trên VPS chưa có cấu hình cho domain
-  if command -v nginx &>/dev/null && [ -n \"${DOMAIN}\" ] && [ ! -f \"/etc/nginx/sites-enabled/${APP_NAME}\" ]; then
-      echo -e \"\033[0;34m[→]\033[0m Tự động tạo cấu hình Nginx cho tên miền: ${DOMAIN}...\"
-      cat > \"/etc/nginx/sites-available/${APP_NAME}\" << 'NGINX_EOF'
-server {
-    listen 80;
-    server_name ${DOMAIN};
-    client_max_body_size 50M;
-
-    proxy_read_timeout 300s;
-    proxy_send_timeout 300s;
-    proxy_buffering off;
-
-    location / {
-        proxy_pass         http://127.0.0.1:${PORT};
-        proxy_http_version 1.1;
-        proxy_set_header   Upgrade \$http_upgrade;
-        proxy_set_header   Connection 'upgrade';
-        proxy_set_header   Host \$host;
-        proxy_set_header   X-Real-IP \$remote_addr;
-        proxy_set_header   X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header   X-Forwarded-Proto \$scheme;
-    }
-}
-NGINX_EOF
-      ln -sf \"/etc/nginx/sites-available/${APP_NAME}\" \"/etc/nginx/sites-enabled/${APP_NAME}\"
+  # Cập nhật Nginx proxy sang PORT mới
+  if command -v nginx &>/dev/null && [ -n \"${DOMAIN}\" ]; then
+      echo -e \"\033[0;34m[→]\033[0m Cập nhật Nginx reverse proxy sang port ${PORT}...\"
+      sed -i \"s/127.0.0.1:[0-9]*/127.0.0.1:${PORT}/g\" \"/etc/nginx/sites-available/${APP_NAME}\" 2>/dev/null || true
       nginx -t && systemctl reload nginx || true
-
-      if command -v certbot &>/dev/null; then
-          echo -e \"\033[0;34m[→]\033[0m Kích hoạt chứng chỉ SSL HTTPS cho ${DOMAIN}...\"
-          certbot --nginx -d \"${DOMAIN}\" --non-interactive --agree-tos -m \"admin@${DOMAIN}\" --redirect 2>/dev/null || true
-      fi
   fi
 
   echo -e \"\033[0;34m[→]\033[0m Kiểm tra phản hồi dịch vụ...\"
