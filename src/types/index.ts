@@ -116,10 +116,17 @@ export interface Lesson {
   id: string; // e.g. 'hsk1-lesson-01'
   courseId: string;
   lessonNumber: number;
+  stage?: number;
+  stageTitleVi?: string;
+  stageTitleEn?: string;
   titleHanzi: string;
   titlePinyin: string;
   titleVi: string;
   titleEn?: string;
+  radicals?: string[];
+  writingChars?: string[];
+  audioFile?: string;
+  audioFiles?: { name: string; file: string }[];
   objectives: string[];
   objectivesEn?: string[];
   dialogue: DialogueLine[];

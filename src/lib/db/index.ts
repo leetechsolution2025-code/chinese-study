@@ -124,7 +124,16 @@ function initTables(db: Database.Database) {
       title_hanzi TEXT NOT NULL,
       title_pinyin TEXT NOT NULL,
       title_vi TEXT NOT NULL,
+      title_en TEXT,
+      stage INTEGER DEFAULT 1,
+      stage_title_vi TEXT,
+      stage_title_en TEXT,
+      radicals TEXT,
+      writing_chars TEXT,
+      audio_file TEXT,
+      audio_files TEXT,
       objectives TEXT NOT NULL,
+      objectives_en TEXT,
       dialogue TEXT NOT NULL,
       vocabularies TEXT NOT NULL,
       grammar_points TEXT NOT NULL,
@@ -135,6 +144,30 @@ function initTables(db: Database.Database) {
     CREATE INDEX IF NOT EXISTS idx_lesson_course ON lessons(course_id);
     CREATE INDEX IF NOT EXISTS idx_lesson_number ON lessons(course_id, lesson_number);
   `);
+
+  // Migrate columns if table was created in an earlier version
+  const tableInfo = db.prepare(`PRAGMA table_info(lessons)`).all() as { name: string }[];
+  const columnNames = new Set(tableInfo.map((col) => col.name));
+  const newCols: [string, string][] = [
+    ['title_en', 'TEXT'],
+    ['stage', 'INTEGER DEFAULT 1'],
+    ['stage_title_vi', 'TEXT'],
+    ['stage_title_en', 'TEXT'],
+    ['radicals', 'TEXT'],
+    ['writing_chars', 'TEXT'],
+    ['audio_file', 'TEXT'],
+    ['audio_files', 'TEXT'],
+    ['objectives_en', 'TEXT'],
+  ];
+  for (const [col, colType] of newCols) {
+    if (!columnNames.has(col)) {
+      try {
+        db.exec(`ALTER TABLE lessons ADD COLUMN ${col} ${colType};`);
+      } catch (e) {
+        console.warn(`Could not add column ${col}:`, e);
+      }
+    }
+  }
 
   // 8. Bảng Tiến độ học bài học của người dùng
   db.exec(`
@@ -276,11 +309,13 @@ function seedInitialData(db: Database.Database) {
     );
   }
 
-  // Seed Bài học chi tiết (idempotent: INSERT OR IGNORE)
+  // Seed Bài học chi tiết (idempotent: INSERT OR REPLACE)
   const insertLesson = db.prepare(`
-    INSERT OR IGNORE INTO lessons (
-      id, course_id, lesson_number, title_hanzi, title_pinyin, title_vi, objectives, dialogue, vocabularies, grammar_points, quiz_data
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT OR REPLACE INTO lessons (
+      id, course_id, lesson_number, title_hanzi, title_pinyin, title_vi, title_en,
+      stage, stage_title_vi, stage_title_en, radicals, writing_chars, audio_file, audio_files,
+      objectives, objectives_en, dialogue, vocabularies, grammar_points, quiz_data
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
   for (const l of coursesData.lessons) {
@@ -291,7 +326,16 @@ function seedInitialData(db: Database.Database) {
       l.titleHanzi,
       l.titlePinyin,
       l.titleVi,
+      (l as any).titleEn || '',
+      (l as any).stage || 1,
+      (l as any).stageTitleVi || '',
+      (l as any).stageTitleEn || '',
+      JSON.stringify((l as any).radicals || []),
+      JSON.stringify((l as any).writingChars || []),
+      (l as any).audioFile || '',
+      JSON.stringify((l as any).audioFiles || []),
       JSON.stringify(l.objectives),
+      JSON.stringify((l as any).objectivesEn || []),
       JSON.stringify(l.dialogue),
       JSON.stringify(l.vocabularies),
       JSON.stringify(l.grammarPoints),

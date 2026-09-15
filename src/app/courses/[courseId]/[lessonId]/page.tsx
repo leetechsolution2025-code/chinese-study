@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect, useState, use } from 'react';
+import React, { useEffect, useState, useRef, use } from 'react';
 import Link from 'next/link';
 import {
   ArrowLeft,
   Volume2,
+  VolumeX,
   Eye,
   EyeOff,
   PenTool,
@@ -15,6 +16,8 @@ import {
   Sparkles,
   Trophy,
   ArrowRight,
+  Download,
+  ExternalLink,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Lesson } from '@/types';
@@ -32,15 +35,35 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
   const isEn = language === 'en';
 
   const [lesson, setLesson] = useState<Lesson | null>(null);
-  const [activeTab, setActiveTab] = useState<'dialogue' | 'vocab' | 'grammar' | 'quiz'>('dialogue');
+  const [activeTab, setActiveTab] = useState<'dialogue' | 'vocab' | 'grammar' | 'writing' | 'quiz'>('dialogue');
   const [showPinyin, setShowPinyin] = useState(true);
   const [showTranslation, setShowTranslation] = useState(true);
   const [userAnswers, setUserAnswers] = useState<Record<string, number>>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [quizScore, setQuizScore] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isPlayingNative, setIsPlayingNative] = useState(false);
+  const nativeAudioRef = useRef<HTMLAudioElement | null>(null);
 
   const { speak } = useSpeech();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const sp = new URLSearchParams(window.location.search);
+      const tab = sp.get('tab');
+      if (tab && ['dialogue', 'vocab', 'grammar', 'writing', 'quiz'].includes(tab)) {
+        setActiveTab(tab as any);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (nativeAudioRef.current) {
+        nativeAudioRef.current.pause();
+      }
+    };
+  }, [lessonId]);
 
   useEffect(() => {
     fetch(`/api/lessons/${lessonId}`)
@@ -62,6 +85,34 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
     if (!lesson) return;
     const fullText = lesson.dialogue.map((d) => `${d.speaker}说：${d.hanzi}`).join('。');
     speak(fullText, 0.85);
+  };
+
+  const handleToggleNativeAudio = () => {
+    if (!lesson?.audioFile) return;
+
+    if (isPlayingNative) {
+      if (nativeAudioRef.current) {
+        nativeAudioRef.current.pause();
+      }
+      setIsPlayingNative(false);
+      return;
+    }
+
+    if (nativeAudioRef.current) {
+      nativeAudioRef.current.pause();
+    }
+
+    const audio = new Audio(lesson.audioFile);
+    nativeAudioRef.current = audio;
+    setIsPlayingNative(true);
+
+    audio.play().catch((err) => {
+      console.warn('Native audio play error:', err);
+      setIsPlayingNative(false);
+    });
+
+    audio.onended = () => setIsPlayingNative(false);
+    audio.onerror = () => setIsPlayingNative(false);
   };
 
   const handleSelectAnswer = (questionId: string, optionIndex: number) => {
@@ -186,11 +237,12 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
         </div>
 
         {/* Tab Switcher Buttons */}
-        <div style={{ display: 'flex', gap: '6px', background: 'var(--bg-tertiary)', padding: '4px', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+        <div style={{ display: 'flex', gap: '6px', background: 'var(--bg-tertiary)', padding: '4px', borderRadius: '12px', border: '1px solid var(--border-subtle)', flexWrap: 'wrap' }}>
           {[
             { id: 'dialogue', label: isEn ? 'Dialogue (课文)' : 'Bài khóa (课文)' },
             { id: 'vocab', label: isEn ? `Vocabulary (${lesson?.vocabularies?.length || 0})` : `Từ vựng (${lesson?.vocabularies?.length || 0})` },
             { id: 'grammar', label: isEn ? 'Grammar (语法)' : 'Ngữ pháp (语法)' },
+            { id: 'writing', label: isEn ? `Writing (${lesson?.writingChars?.length || 0})` : `Tập viết (${lesson?.writingChars?.length || 0})` },
             { id: 'quiz', label: isEn ? 'Practice (练习)' : 'Luyện tập (练习)' },
           ].map((tab) => (
             <button
@@ -223,7 +275,28 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
               {isEn ? 'Situational Dialogue' : 'Hội thoại tình huống'}
             </h3>
 
-            <div style={{ display: 'flex', gap: '8px' }}>
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              {lesson?.audioFile && (
+                <button
+                  type="button"
+                  onClick={handleToggleNativeAudio}
+                  className="btn-secondary"
+                  style={{
+                    padding: '6px 14px',
+                    fontSize: '0.8rem',
+                    borderColor: isPlayingNative ? 'var(--accent-crimson)' : undefined,
+                    color: isPlayingNative ? 'var(--accent-crimson)' : undefined,
+                  }}
+                >
+                  {isPlayingNative ? <VolumeX size={14} /> : <Volume2 size={14} />}
+                  <span>
+                    {isPlayingNative
+                      ? (isEn ? 'Stop Native Audio' : 'Dừng Audio BLCUP')
+                      : (isEn ? 'Native BLCUP Audio' : 'Audio gốc BLCUP')}
+                  </span>
+                </button>
+              )}
+
               <button
                 type="button"
                 onClick={() => setShowPinyin(!showPinyin)}
@@ -500,7 +573,132 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
         </div>
       )}
 
-      {/* Tab 4: Luyện tập kiểm tra (Practice Quiz) */}
+      {/* Tab: Tập viết chữ Hán & Quy tắc bút thuận */}
+      {activeTab === 'writing' && lesson && (
+        <div className="glass-panel" style={{ padding: '28px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '14px' }}>
+            <div>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '800', margin: 0, color: 'var(--text-primary)' }}>
+                {isEn ? 'Hanzi Writing & Stroke Practice' : 'Tập viết chữ Hán & Quy tắc bút thuận'}
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+                {isEn
+                  ? 'Key characters and radicals introduced in this lesson based on the official writing workbook.'
+                  : 'Các chữ Hán và bộ thủ trọng tâm cần luyện viết theo Vở Tập Viết Chuẩn HSK 1.'}
+              </p>
+            </div>
+
+            <a
+              href="/docs/hsk1/tap-viet.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+              style={{ padding: '8px 14px', fontSize: '0.82rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            >
+              <Download size={14} />
+              <span>{isEn ? 'Download Writing Sheet PDF' : 'Tải Vở Tập Viết PDF'}</span>
+            </a>
+          </div>
+
+          {/* Radicals Section */}
+          {lesson.radicals && lesson.radicals.length > 0 && (
+            <div style={{ marginBottom: '28px' }}>
+              <h4 style={{ fontSize: '0.95rem', fontWeight: '700', marginBottom: '12px', color: 'var(--text-primary)' }}>
+                {isEn ? 'Radicals in this lesson:' : 'Bộ thủ trong bài học:'}
+              </h4>
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                {lesson.radicals.map((rad, rIdx) => (
+                  <div
+                    key={rIdx}
+                    className="glass-card"
+                    style={{
+                      padding: '10px 16px',
+                      borderRadius: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                  >
+                    <span style={{ fontSize: '1.25rem', fontFamily: 'var(--font-hanzi)', color: 'var(--accent-crimson)', fontWeight: 'bold' }}>
+                      {rad.split(' ')[0]}
+                    </span>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                      {rad}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Writing Characters Grid */}
+          <div>
+            <h4 style={{ fontSize: '0.95rem', fontWeight: '700', marginBottom: '14px', color: 'var(--text-primary)' }}>
+              {isEn ? 'Characters to write:' : 'Chữ Hán luyện viết:'}
+            </h4>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+                gap: '14px',
+              }}
+            >
+              {(lesson.writingChars || []).map((char, cIdx) => (
+                <div
+                  key={cIdx}
+                  className="glass-card"
+                  style={{
+                    padding: '20px 16px',
+                    borderRadius: '14px',
+                    textAlign: 'center',
+                    border: '1px solid var(--border-subtle)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '10px',
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '76px',
+                      height: '76px',
+                      borderRadius: '12px',
+                      background: 'var(--bg-tertiary)',
+                      border: '1px dashed var(--accent-crimson)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '2.5rem',
+                      fontFamily: 'var(--font-hanzi)',
+                      color: 'var(--text-primary)',
+                      boxShadow: 'inset 0 0 10px rgba(0,0,0,0.05)',
+                    }}
+                  >
+                    {char}
+                  </div>
+                  <Link
+                    href={`/writing`}
+                    className="btn-secondary"
+                    style={{
+                      padding: '5px 12px',
+                      fontSize: '0.78rem',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    <PenTool size={12} />
+                    <span>{isEn ? 'Practice' : 'Tập vẽ nét'}</span>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Tab 5: Luyện tập kiểm tra (Practice Quiz) */}
       {activeTab === 'quiz' && lesson && (
         <div className="glass-panel" style={{ padding: '28px', maxWidth: '720px', margin: '0 auto', width: '100%' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>

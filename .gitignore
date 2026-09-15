@@ -46,3 +46,7 @@ next-env.d.ts
 *.db-journal
 *.db-wal
 *.db-shm
+
+# Local reference docs (2.2GB archive)
+doc/
+
