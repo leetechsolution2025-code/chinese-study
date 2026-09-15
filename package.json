@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "vps:update": "bash scripts/update.sh",
+    "vps:backup": "bash scripts/auto_backup.sh",
+    "vps:sync-db": "bash scripts/sync-db.sh",
+    "vps:start": "bash scripts/start.sh",
+    "vps:stop": "bash scripts/stop.sh"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.3",

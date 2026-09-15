@@ -37,7 +37,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning={true}>
         <Navbar />
         <main style={{ minHeight: 'calc(100vh - 70px)', padding: '24px 16px' }}>
           {children}
