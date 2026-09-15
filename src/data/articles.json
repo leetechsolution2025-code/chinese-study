@@ -1,0 +1,32 @@
+[
+  {
+    "id": "reader-01",
+    "title": "我的朋友小明 (Bạn tôi là Tiểu Minh)",
+    "hskLevel": 1,
+    "translationVi": "Tiểu Minh là bạn tốt của tôi. Anh ấy rất thích học tiếng Trung. Mỗi ngày, chúng tôi cùng nhau nghe nhạc và xem sách. Hôm nay thời tiết rất đẹp, chúng tôi cùng đi uống trà.",
+    "content": [
+      { "hanzi": "小明", "pinyin": "Xiǎomíng", "meaningVi": "Tiểu Minh (tên riêng)", "hanviet": "Tiểu Minh" },
+      { "hanzi": "是", "pinyin": "shì", "meaningVi": "là", "hanviet": "Thị" },
+      { "hanzi": "我", "pinyin": "wǒ", "meaningVi": "tôi", "hanviet": "Ngã" },
+      { "hanzi": "的", "pinyin": "de", "meaningVi": "của", "hanviet": "Đích" },
+      { "hanzi": "好", "pinyin": "hǎo", "meaningVi": "tốt", "hanviet": "Hảo" },
+      { "hanzi": "朋友", "pinyin": "péngyou", "meaningVi": "bạn bè", "hanviet": "Bằng hữu" },
+      { "hanzi": "。", "pinyin": "", "meaningVi": "", "hanviet": "" },
+      { "hanzi": "他", "pinyin": "tā", "meaningVi": "anh ấy", "hanviet": "Tha" },
+      { "hanzi": "很", "pinyin": "hěn", "meaningVi": "rất", "hanviet": "Hẩn" },
+      { "hanzi": "喜欢", "pinyin": "xǐhuan", "meaningVi": "thích", "hanviet": "Hỷ hoan" },
+      { "hanzi": "学", "pinyin": "xué", "meaningVi": "học", "hanviet": "Học" },
+      { "hanzi": "汉语", "pinyin": "Hànyǔ", "meaningVi": "tiếng Hán", "hanviet": "Hán ngữ" },
+      { "hanzi": "。", "pinyin": "", "meaningVi": "", "hanviet": "" },
+      { "hanzi": "今天", "pinyin": "jīntiān", "meaningVi": "hôm nay", "hanviet": "Kim thiên" },
+      { "hanzi": "天气", "pinyin": "tiānqì", "meaningVi": "thời tiết", "hanviet": "Thiên khí" },
+      { "hanzi": "很", "pinyin": "hěn", "meaningVi": "rất", "hanviet": "Hẩn" },
+      { "hanzi": "好", "pinyin": "hǎo", "meaningVi": "tốt, đẹp", "hanviet": "Hảo" },
+      { "hanzi": "，", "pinyin": "", "meaningVi": "", "hanviet": "" },
+      { "hanzi": "我们", "pinyin": "wǒmen", "meaningVi": "chúng tôi", "hanviet": "Ngã môn" },
+      { "hanzi": "去", "pinyin": "qù", "meaningVi": "đi", "hanviet": "Khứ" },
+      { "hanzi": "喝茶", "pinyin": "hē chá", "meaningVi": "uống trà", "hanviet": "Hát trà" },
+      { "hanzi": "。", "pinyin": "", "meaningVi": "", "hanviet": "" }
+    ]
+  }
+]

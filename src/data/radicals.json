@@ -1,0 +1,74 @@
+[
+  {
+    "radical": "亻",
+    "pinyin": "rén",
+    "hanviet": "Nhân (bộ nhân đứng)",
+    "meaning": "Người",
+    "strokes": 2,
+    "mnemonic": "Hình tượng một người đang đứng nghiêng mình. Các chữ liên quan đến con người, hành vi xã hội.",
+    "examples": ["你", "他", "休", "体", "做"]
+  },
+  {
+    "radical": "女",
+    "pinyin": "nǚ",
+    "hanviet": "Nữ",
+    "meaning": "Phụ nữ, con gái",
+    "strokes": 3,
+    "mnemonic": "Hình người phụ nữ đoan trang quỳ gối chắp tay. Các chữ liên quan đến phái nữ, gia đình, tình cảm.",
+    "examples": ["好", "她", "妈", "妹", "姐"]
+  },
+  {
+    "radical": "口",
+    "pinyin": "kǒu",
+    "hanviet": "Khẩu",
+    "meaning": "Miệng, mồm, lối vào",
+    "strokes": 3,
+    "mnemonic": "Hình cái miệng há rộng. Các chữ liên quan đến ăn uống, nói năng, gọi kêu, âm thanh.",
+    "examples": ["吃", "喝", "叫", "听", "问"]
+  },
+  {
+    "radical": "氵",
+    "pinyin": "shuǐ",
+    "hanviet": "Thủy (bộ ba chấm thủy)",
+    "meaning": "Nước, chất lỏng",
+    "strokes": 3,
+    "mnemonic": "Ba giọt nước bắn tung tóe. Các chữ liên quan đến sông hồ, biển cả, nước, độ ẩm.",
+    "examples": ["江", "河", "海", "洗", "渴"]
+  },
+  {
+    "radical": "木",
+    "pinyin": "mù",
+    "hanviet": "Mộc",
+    "meaning": "Cây cối, gỗ",
+    "strokes": 4,
+    "mnemonic": "Hình một thân cây có cành phía trên và rễ phía dưới. Các chữ liên quan đến cây cối, rừng rậm, đồ gỗ.",
+    "examples": ["林", "森", "本", "桥", "杯"]
+  },
+  {
+    "radical": "心 / 忄",
+    "pinyin": "xīn",
+    "hanviet": "Tâm",
+    "meaning": "Trái tim, tấm lòng, cảm xúc",
+    "strokes": 4,
+    "mnemonic": "Hình trái tim và mạch máu. Các chữ liên quan đến suy nghĩ, tâm trạng, tình cảm.",
+    "examples": ["想", "忘", "怕", "情", "快"]
+  },
+  {
+    "radical": "讠",
+    "pinyin": "yán",
+    "hanviet": "Ngôn",
+    "meaning": "Lời nói, ngôn ngữ",
+    "strokes": 2,
+    "mnemonic": "Lời nói phát ra từ miệng. Các chữ liên quan đến nói chuyện, ngôn ngữ, thảo luận.",
+    "examples": ["说", "话", "语", "请", "读"]
+  },
+  {
+    "radical": "宀",
+    "pinyin": "mián",
+    "hanviet": "Miên",
+    "meaning": "Mái nhà, nóc nhà",
+    "strokes": 3,
+    "mnemonic": "Hình mái hiên nhà che chở mưa nắng. Các chữ liên quan đến phòng ốc, nơi cư trú, an toàn.",
+    "examples": ["家", "字", "安", "室", "客"]
+  }
+]

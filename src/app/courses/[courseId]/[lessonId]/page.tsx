@@ -1,0 +1,592 @@
+'use client';
+
+import React, { useEffect, useState, use } from 'react';
+import Link from 'next/link';
+import {
+  ArrowLeft,
+  Volume2,
+  Eye,
+  EyeOff,
+  PenTool,
+  Layers,
+  BookOpen,
+  CheckCircle2,
+  XCircle,
+  Sparkles,
+  Trophy,
+  ArrowRight,
+} from 'lucide-react';
+import confetti from 'canvas-confetti';
+import { Lesson } from '@/types';
+import { AudioButton } from '@/components/common/AudioButton';
+import { useSpeech } from '@/hooks/useSpeech';
+
+interface LessonWorkspaceProps {
+  params: Promise<{ courseId: string; lessonId: string }>;
+}
+
+export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
+  const { courseId, lessonId } = use(params);
+  const [lesson, setLesson] = useState<Lesson | null>(null);
+  const [activeTab, setActiveTab] = useState<'dialogue' | 'vocab' | 'grammar' | 'quiz'>('dialogue');
+  const [showPinyin, setShowPinyin] = useState(true);
+  const [showTranslation, setShowTranslation] = useState(true);
+  const [userAnswers, setUserAnswers] = useState<Record<string, number>>({});
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [quizScore, setQuizScore] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const { speak } = useSpeech();
+
+  useEffect(() => {
+    fetch(`/api/lessons/${lessonId}`)
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success && json.data) {
+          setLesson(json.data);
+          if (json.data.completed) {
+            setQuizScore(json.data.score || 100);
+            setQuizSubmitted(true);
+          }
+        }
+      })
+      .catch((e) => console.error('Failed to load lesson details:', e))
+      .finally(() => setLoading(false));
+  }, [lessonId]);
+
+  const handlePlayFullDialogue = () => {
+    if (!lesson) return;
+    const fullText = lesson.dialogue.map((d) => `${d.speaker}说：${d.hanzi}`).join('。');
+    speak(fullText, 0.85);
+  };
+
+  const handleSelectAnswer = (questionId: string, optionIndex: number) => {
+    if (quizSubmitted) return;
+    setUserAnswers((prev) => ({
+      ...prev,
+      [questionId]: optionIndex,
+    }));
+  };
+
+  const handleSubmitQuiz = () => {
+    if (!lesson) return;
+
+    let correctCount = 0;
+    lesson.quizData.forEach((q) => {
+      if (userAnswers[q.id] === q.correctIndex) {
+        correctCount += 1;
+      }
+    });
+
+    const score = Math.round((correctCount / lesson.quizData.length) * 100);
+    setQuizScore(score);
+    setQuizSubmitted(true);
+
+    if (score >= 60) {
+      confetti({
+        particleCount: 70,
+        spread: 70,
+        origin: { y: 0.6 },
+      });
+    }
+
+    // Gửi kết quả lên SQLite backend
+    fetch(`/api/lessons/${lessonId}/complete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ courseId, score }),
+    }).catch((e) => console.error('Failed to submit lesson completion:', e));
+  };
+
+  if (!lesson && !loading) {
+    return (
+      <div style={{ maxWidth: '800px', margin: '40px auto', textAlign: 'center' }}>
+        <h2>Không tìm thấy bài học</h2>
+        <Link href={`/courses/${courseId}`} className="btn-secondary" style={{ marginTop: '16px', display: 'inline-flex' }}>
+          Quay lại danh sách bài học
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      {/* Top Breadcrumb & Actions */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+        <Link
+          href={`/courses/${courseId}`}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            color: 'var(--text-secondary)',
+            fontSize: '0.9rem',
+          }}
+        >
+          <ArrowLeft size={16} />
+          <span>Lộ trình {courseId.toUpperCase()}</span>
+        </Link>
+
+        {lesson?.completed && (
+          <span className="badge badge-emerald">
+            <CheckCircle2 size={13} />
+            <span>Đã hoàn thành ({lesson.score}đ)</span>
+          </span>
+        )}
+      </div>
+
+      {/* Lesson Hero Header */}
+      <div
+        className="glass-panel"
+        style={{
+          padding: '24px 28px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '16px',
+        }}
+      >
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+            <span className="badge badge-crimson">Bài {lesson?.lessonNumber}</span>
+            <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Giáo trình Chuẩn HSK</span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <h1
+              style={{
+                fontSize: '2rem',
+                fontWeight: '900',
+                color: 'var(--text-primary)',
+                fontFamily: 'var(--font-hanzi)',
+                lineHeight: '1.1',
+              }}
+            >
+              {lesson?.titleHanzi}
+            </h1>
+            <div>
+              <div style={{ fontSize: '1.2rem', fontWeight: '700', color: 'var(--accent-crimson)' }}>
+                {lesson?.titlePinyin}
+              </div>
+              <div style={{ fontSize: '0.95rem', color: 'var(--text-secondary)' }}>
+                {lesson?.titleVi}
+              </div>
+            </div>
+            {lesson && <AudioButton text={lesson.titleHanzi} size={20} />}
+          </div>
+        </div>
+
+        {/* Tab Switcher Buttons */}
+        <div style={{ display: 'flex', gap: '6px', background: 'var(--bg-tertiary)', padding: '4px', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+          {[
+            { id: 'dialogue', label: 'Bài khóa (课文)' },
+            { id: 'vocab', label: `Từ vựng (${lesson?.vocabularies?.length || 0})` },
+            { id: 'grammar', label: 'Ngữ pháp (语法)' },
+            { id: 'quiz', label: 'Luyện tập (练习)' },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id as any)}
+              style={{
+                padding: '8px 14px',
+                borderRadius: '8px',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                background: activeTab === tab.id ? 'var(--accent-crimson)' : 'transparent',
+                color: activeTab === tab.id ? '#ffffff' : 'var(--text-secondary)',
+                boxShadow: activeTab === tab.id ? 'var(--shadow-sm)' : 'none',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Tab 1: Bài khóa hội thoại (Dialogue) */}
+      {activeTab === 'dialogue' && lesson && (
+        <div className="glass-panel" style={{ padding: '28px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: '700' }}>Hội thoại tình huống</h3>
+
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button
+                type="button"
+                onClick={() => setShowPinyin(!showPinyin)}
+                className="btn-secondary"
+                style={{ padding: '6px 12px', fontSize: '0.8rem' }}
+              >
+                {showPinyin ? <EyeOff size={14} /> : <Eye size={14} />}
+                <span>{showPinyin ? 'Ẩn Pinyin' : 'Hiện Pinyin'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowTranslation(!showTranslation)}
+                className="btn-secondary"
+                style={{ padding: '6px 12px', fontSize: '0.8rem' }}
+              >
+                <span>{showTranslation ? 'Ẩn dịch nghĩa' : 'Hiện dịch nghĩa'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={handlePlayFullDialogue}
+                className="btn-primary"
+                style={{ padding: '6px 14px', fontSize: '0.8rem' }}
+              >
+                <Volume2 size={14} />
+                <span>Nghe toàn bài</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Dialogue Lines */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {lesson.dialogue.map((line, idx) => (
+              <div
+                key={idx}
+                className="glass-card"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '16px 20px',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                  <div
+                    style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      background: 'linear-gradient(135deg, #e11d48, #be123c)',
+                      color: '#ffffff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: '800',
+                      fontSize: '0.95rem',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {line.speaker}
+                  </div>
+
+                  <div>
+                    <div
+                      style={{
+                        fontSize: '1.4rem',
+                        fontWeight: '700',
+                        color: 'var(--text-primary)',
+                        fontFamily: 'var(--font-hanzi)',
+                      }}
+                    >
+                      {line.hanzi}
+                    </div>
+
+                    {showPinyin && (
+                      <div style={{ fontSize: '0.9rem', color: 'var(--accent-crimson)', marginTop: '2px', fontWeight: '500' }}>
+                        {line.pinyin}
+                      </div>
+                    )}
+
+                    {showTranslation && (
+                      <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                        {line.vi}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <AudioButton text={line.hanzi} size={18} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Tab 2: Từ vựng mới (Vocabularies) */}
+      {activeTab === 'vocab' && lesson && (
+        <div className="glass-panel" style={{ padding: '28px' }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '18px' }}>
+            Từ vựng mới bài học ({lesson.vocabularies.length} từ)
+          </h3>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '14px' }}>
+            {lesson.vocabularies.map((vocab) => (
+              <div
+                key={vocab.id}
+                className="glass-card"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  padding: '16px',
+                }}
+              >
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <span
+                        style={{
+                          fontSize: '2.2rem',
+                          fontWeight: '800',
+                          color: '#fb7185',
+                          fontFamily: 'var(--font-hanzi)',
+                          lineHeight: '1',
+                        }}
+                      >
+                        {vocab.hanzi}
+                      </span>
+                      <div>
+                        <div style={{ fontSize: '1.1rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                          {vocab.pinyin}
+                        </div>
+                        <span className="badge badge-gold" style={{ fontSize: '0.7rem', padding: '1px 6px' }}>
+                          Hán-Việt: {vocab.hanviet}
+                        </span>
+                      </div>
+                    </div>
+
+                    <AudioButton text={vocab.hanzi} size={16} />
+                  </div>
+
+                  <div style={{ fontSize: '0.9rem', color: '#10b981', fontWeight: '600', marginTop: '10px' }}>
+                    {vocab.meaning}
+                  </div>
+
+                  {vocab.exampleHanzi && (
+                    <div style={{ marginTop: '10px', padding: '8px 10px', background: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)', borderRadius: '8px', fontSize: '0.78rem' }}>
+                      <div style={{ color: 'var(--text-primary)' }}>{vocab.exampleHanzi}</div>
+                      <div style={{ color: 'var(--text-secondary)', marginTop: '2px' }}>{vocab.exampleMeaning}</div>
+                    </div>
+                  )}
+                </div>
+
+                <div style={{ display: 'flex', gap: '8px', marginTop: '14px', borderTop: '1px solid var(--border-subtle)', paddingTop: '10px' }}>
+                  <Link
+                    href="/writing"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      fontSize: '0.75rem',
+                      color: 'var(--text-secondary)',
+                    }}
+                  >
+                    <PenTool size={12} />
+                    <span>Tập viết chữ</span>
+                  </Link>
+
+                  <Link
+                    href="/flashcards"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      fontSize: '0.75rem',
+                      color: 'var(--text-secondary)',
+                      marginLeft: 'auto',
+                    }}
+                  >
+                    <Layers size={12} />
+                    <span>Thêm vào SRS</span>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Tab 3: Điểm ngữ pháp (Grammar Points) */}
+      {activeTab === 'grammar' && lesson && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+          {lesson.grammarPoints.map((gp, idx) => (
+            <div key={idx} className="glass-panel" style={{ padding: '24px 28px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+                <span className="badge badge-crimson">Ngữ pháp {idx + 1}</span>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+                  {gp.title}
+                </h3>
+              </div>
+
+              {gp.structure && (
+                <div
+                  style={{
+                    padding: '10px 14px',
+                    background: 'var(--accent-crimson-light)',
+                    border: '1px solid rgba(225, 29, 72, 0.25)',
+                    borderRadius: '10px',
+                    fontSize: '0.9rem',
+                    fontWeight: '700',
+                    color: 'var(--accent-crimson)',
+                    marginBottom: '14px',
+                    display: 'inline-block',
+                  }}
+                >
+                  Cấu trúc: {gp.structure}
+                </div>
+              )}
+
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6', marginBottom: '16px' }}>
+                {gp.explanation}
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {gp.examples.map((ex, i) => (
+                  <div
+                    key={i}
+                    className="feature-bullet-item"
+                    style={{
+                      padding: '10px 14px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontSize: '1.05rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                        {ex.hanzi}
+                      </div>
+                      <div style={{ fontSize: '0.82rem', color: 'var(--accent-crimson)', marginTop: '2px' }}>
+                        {ex.pinyin}
+                      </div>
+                      <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                        {ex.vi}
+                      </div>
+                    </div>
+                    <AudioButton text={ex.hanzi} size={15} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Tab 4: Luyện tập kiểm tra (Practice Quiz) */}
+      {activeTab === 'quiz' && lesson && (
+        <div className="glass-panel" style={{ padding: '28px', maxWidth: '720px', margin: '0 auto', width: '100%' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+              Bài tập củng cố kiến thức ({lesson.quizData.length} câu)
+            </h3>
+
+            {quizSubmitted && (
+              <span className="badge badge-gold" style={{ fontSize: '0.85rem', padding: '4px 12px' }}>
+                Điểm số: {quizScore} / 100
+              </span>
+            )}
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+            {lesson.quizData.map((q, qIndex) => {
+              const selectedOpt = userAnswers[q.id];
+              const isCorrect = selectedOpt === q.correctIndex;
+
+              return (
+                <div
+                  key={q.id}
+                  style={{
+                    padding: '18px',
+                    background: 'var(--bg-tertiary)',
+                    borderRadius: '14px',
+                    border: '1px solid var(--border-subtle)',
+                  }}
+                >
+                  <div style={{ fontSize: '1rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '14px' }}>
+                    Câu {qIndex + 1}: {q.question}
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '8px' }}>
+                    {q.options.map((opt, optIdx) => {
+                      const isSelected = selectedOpt === optIdx;
+                      let btnBg = 'var(--bg-card)';
+                      let btnBorder = 'var(--border-subtle)';
+
+                      if (quizSubmitted) {
+                        if (optIdx === q.correctIndex) {
+                          btnBg = 'rgba(16, 185, 129, 0.25)';
+                          btnBorder = '#10b981';
+                        } else if (isSelected) {
+                          btnBg = 'rgba(239, 68, 68, 0.25)';
+                          btnBorder = '#ef4444';
+                        }
+                      } else if (isSelected) {
+                        btnBg = 'rgba(225, 29, 72, 0.2)';
+                        btnBorder = '#fb7185';
+                      }
+
+                      return (
+                        <button
+                          key={optIdx}
+                          type="button"
+                          onClick={() => handleSelectAnswer(q.id, optIdx)}
+                          style={{
+                            textAlign: 'left',
+                            padding: '12px 16px',
+                            borderRadius: '10px',
+                            background: btnBg,
+                            border: `1px solid ${btnBorder}`,
+                            color: 'var(--text-primary)',
+                            cursor: quizSubmitted ? 'default' : 'pointer',
+                            fontSize: '0.92rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            transition: 'all 0.15s ease',
+                          }}
+                        >
+                          <span>{opt}</span>
+                          {quizSubmitted && optIdx === q.correctIndex && (
+                            <CheckCircle2 size={16} color="#10b981" />
+                          )}
+                          {quizSubmitted && isSelected && optIdx !== q.correctIndex && (
+                            <XCircle size={16} color="#ef4444" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {quizSubmitted && (
+                    <div style={{ marginTop: '10px', fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
+                      💡 <strong>Giải thích:</strong> {q.explanation}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
+            {!quizSubmitted ? (
+              <button
+                type="button"
+                onClick={handleSubmitQuiz}
+                className="btn-primary"
+                style={{ padding: '14px', fontSize: '1rem' }}
+              >
+                <span>Nộp bài & Chấm điểm</span>
+              </button>
+            ) : (
+              <div style={{ textAlign: 'center', marginTop: '10px' }}>
+                <div style={{ fontSize: '1.1rem', fontWeight: '700', color: '#34d399', marginBottom: '8px' }}>
+                  ✓ Đã lưu tiến độ hoàn thành bài học vào SQLite
+                </div>
+                <Link href={`/courses/${courseId}`} className="btn-secondary">
+                  <span>Xem các bài học tiếp theo</span>
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

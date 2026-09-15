@@ -1,0 +1,66 @@
+[
+  {
+    "toneNumber": 1,
+    "nameVi": "Thanh 1 (Âm bình)",
+    "pinyinName": "yīn píng (第一声)",
+    "pitchContour": "55",
+    "description": "Cao và phẳng đều từ đầu đến cuối (độ cao 5-5). Giống như nốt Sol cao trong âm nhạc được ngân dài vững vàng.",
+    "sampleSyllables": [
+      { "character": "妈", "pinyin": "mā", "hanviet": "Ma", "meaning": "Mẹ" },
+      { "character": "八", "pinyin": "bā", "hanviet": "Bát", "meaning": "Số 8" },
+      { "character": "天", "pinyin": "tiān", "hanviet": "Thiên", "meaning": "Trời, ngày" },
+      { "character": "书", "pinyin": "shū", "hanviet": "Thư", "meaning": "Sách" }
+    ]
+  },
+  {
+    "toneNumber": 2,
+    "nameVi": "Thanh 2 (Dương bình)",
+    "pinyinName": "yáng píng (第二声)",
+    "pitchContour": "35",
+    "description": "Bắt đầu từ độ cao trung bình (3) rồi vút lên cao (5). Tương tự dấu sắc trong tiếng Việt nhưng kéo dài và thanh thoát hơn.",
+    "sampleSyllables": [
+      { "character": "麻", "pinyin": "má", "hanviet": "Ma", "meaning": "Cây gai, tê" },
+      { "character": "人", "pinyin": "rén", "hanviet": "Nhân", "meaning": "Người" },
+      { "character": "国", "pinyin": "guó", "hanviet": "Quốc", "meaning": "Đất nước" },
+      { "character": "学", "pinyin": "xué", "hanviet": "Học", "meaning": "Học tập" }
+    ]
+  },
+  {
+    "toneNumber": 3,
+    "nameVi": "Thanh 3 (Thượng thanh)",
+    "pinyinName": "shǎng shēng (第三声)",
+    "pitchContour": "214",
+    "description": "Hạ xuống vực sâu nhất (từ 2 xuống 1) rồi bật nhẹ lên cao (lên 4). Là thanh dài nhất và cần phát âm tròn vành rõ chữ.",
+    "sampleSyllables": [
+      { "character": "马", "pinyin": "mǎ", "hanviet": "Mã", "meaning": "Con ngựa" },
+      { "character": "好", "pinyin": "hǎo", "hanviet": "Hảo", "meaning": "Tốt, đẹp" },
+      { "character": "你", "pinyin": "nǐ", "hanviet": "Nhĩ", "meaning": "Bạn, anh, chị" },
+      { "character": "水", "pinyin": "shuǐ", "hanviet": "Thủy", "meaning": "Nước" }
+    ]
+  },
+  {
+    "toneNumber": 4,
+    "nameVi": "Thanh 4 (Khứ thanh)",
+    "pinyinName": "qù shēng (第四声)",
+    "pitchContour": "51",
+    "description": "Rơi mạnh và dứt khoát từ đỉnh cao nhất (5) xuống tận đáy (1). Âm sắc quả quyết, ngắn gọn, dứt điểm.",
+    "sampleSyllables": [
+      { "character": "骂", "pinyin": "mà", "hanviet": "Mạ", "meaning": "Mắng chửi" },
+      { "character": "爱", "pinyin": "ài", "hanviet": "Ái", "meaning": "Yêu thương" },
+      { "character": "大", "pinyin": "dà", "hanviet": "Đại", "meaning": "To, lớn" },
+      { "character": "看", "pinyin": "kàn", "hanviet": "Khán", "meaning": "Xem, nhìn" }
+    ]
+  },
+  {
+    "toneNumber": 0,
+    "nameVi": "Thanh nhẹ (Khinh thanh)",
+    "pinyinName": "qīng shēng (轻声)",
+    "pitchContour": "Light",
+    "description": "Ngắn, nhẹ, không có ký hiệu dấu. Âm rơi nhẹ theo thanh điệu đứng trước nó.",
+    "sampleSyllables": [
+      { "character": "吗", "pinyin": "ma", "hanviet": "Ma", "meaning": "Trợ từ nghi vấn (...không?)" },
+      { "character": "子", "pinyin": "zi", "hanviet": "Tử", "meaning": "Hậu tố danh từ (bàn, ghế...)" },
+      { "character": "的", "pinyin": "de", "hanviet": "Đích", "meaning": "Của, mà (trợ từ kết cấu)" }
+    ]
+  }
+]

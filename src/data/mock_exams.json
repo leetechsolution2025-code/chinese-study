@@ -1,0 +1,492 @@
+[
+  {
+    "id": "hsk1-mock-01",
+    "level": 1,
+    "title": "Đề thi thử HSK 1 - Đề số 01",
+    "description": "Đề thi thử mô phỏng cấu trúc HSK 1 chuẩn quốc tế gồm 2 phần: Nghe hiểu và Đọc hiểu. Thời gian làm bài 35 phút.",
+    "totalTimeMinutes": 35,
+    "totalQuestions": 8,
+    "maxScore": 200,
+    "passingScore": 120,
+    "listeningQuestionsCount": 4,
+    "readingQuestionsCount": 4,
+    "questions": [
+      {
+        "id": "hsk1-q1",
+        "section": "listening",
+        "questionNumber": 1,
+        "prompt": "Nghe đoạn ghi âm sau và chọn đáp án phù hợp nhất:",
+        "audioPrompt": "你好！很高兴认识你。",
+        "pinyin": "Nǐ hǎo! Hěn gāoxìng rènshì nǐ.",
+        "options": [
+          { "id": "A", "text": "你好！我也很高兴认识你。", "pinyin": "Nǐ hǎo! Wǒ yě hěn gāoxìng rènshì nǐ." },
+          { "id": "B", "text": "不客气，再见。", "pinyin": "Bù kèqì, zàijiàn." },
+          { "id": "C", "text": "我二十岁。", "pinyin": "Wǒ èrshí suì." }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Đoạn ghi âm chào hỏi '你好！很高兴认识你。' (Chào bạn! Rất vui được quen biết bạn). Đáp án A là câu đáp lại lịch sự tương ứng.",
+        "points": 25
+      },
+      {
+        "id": "hsk1-q2",
+        "section": "listening",
+        "questionNumber": 2,
+        "prompt": "Nghe câu hỏi và chọn câu trả lời đúng:",
+        "audioPrompt": "现在几点了？",
+        "pinyin": "Xiànzài jǐ diǎn le?",
+        "options": [
+          { "id": "A", "text": "今天星期三。", "pinyin": "Jīntiān xīngqīsān." },
+          { "id": "B", "text": "现在下午三点半。", "pinyin": "Xiànzài xiàwǔ sān diǎn bàn." },
+          { "id": "C", "text": "学校很大。", "pinyin": "Xuéxiào hěn dà." }
+        ],
+        "correctAnswer": "B",
+        "explanation": "Câu hỏi '现在几点了？' hỏi về thời gian (Bây giờ là mấy giờ rồi?). Đáp án B trả lời chính xác giờ giấc (Bây giờ là 3 giờ rưỡi chiều).",
+        "points": 25
+      },
+      {
+        "id": "hsk1-q3",
+        "section": "listening",
+        "questionNumber": 3,
+        "prompt": "Nghe câu mô tả và chọn ý nghĩa tương đương:",
+        "audioPrompt": "我爱吃中国菜，中国菜很好吃。",
+        "pinyin": "Wǒ ài chī Zhōngguó cài, Zhōngguó cài hěn hǎochī.",
+        "options": [
+          { "id": "A", "text": "Tôi không thích đồ ăn Trung Quốc.", "pinyin": "Wǒ bù xǐhuān Zhōngguó cài." },
+          { "id": "B", "text": "Tôi rất thích ăn món Trung Quốc vì rất ngon.", "pinyin": "Wǒ hěn xǐhuān chī Zhōngguó cài yīnwei hěn hǎochī." },
+          { "id": "C", "text": "Tôi muốn học nấu món ăn Trung Quốc.", "pinyin": "Wǒ xiǎng xué zuò Zhōngguó cài." }
+        ],
+        "correctAnswer": "B",
+        "explanation": "'我爱吃中国菜' (Tôi thích ăn món Trung Quốc), '很好吃' (rất ngon). Đáp án B diễn đạt đúng nghĩa.",
+        "points": 25
+      },
+      {
+        "id": "hsk1-q4",
+        "section": "listening",
+        "questionNumber": 4,
+        "prompt": "Nghe câu đối thoại và chọn địa điểm được nhắc tới:",
+        "audioPrompt": "请问，李老师在学校吗？他在办公室。",
+        "pinyin": "Qǐngwèn, Lǐ lǎoshī zài xuéxiào ma? Tā zài bàngōngshì.",
+        "options": [
+          { "id": "A", "text": "Ở nhà (家里)", "pinyin": "Jiālǐ" },
+          { "id": "B", "text": "Ở bệnh viện (医院)", "pinyin": "Yīyuàn" },
+          { "id": "C", "text": "Ở văn phòng tại trường (办公室)", "pinyin": "Bàngōngshì" }
+        ],
+        "correctAnswer": "C",
+        "explanation": "Đoạn ghi âm nêu rõ thầy Lý đang ở trường và trong văn phòng (他在办公室).",
+        "points": 25
+      },
+      {
+        "id": "hsk1-q5",
+        "section": "reading",
+        "questionNumber": 5,
+        "prompt": "Chọn từ thích hợp điền vào chỗ trống: 他是我的好朋友，______ 叫大卫。",
+        "pinyin": "Tā shì wǒ de hǎo péngyou, ______ jiào Dàwèi.",
+        "options": [
+          { "id": "A", "text": "他", "pinyin": "tā (anh ấy)" },
+          { "id": "B", "text": "什么", "pinyin": "shénme (cái gì)" },
+          { "id": "C", "text": "哪儿", "pinyin": "nǎr (ở đâu)" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Chủ ngữ là đại từ ngôi thứ ba số ít '他' (anh ấy): '他是我的好朋友，他叫大卫。' (Anh ấy là bạn tốt của tôi, anh ấy tên là David).",
+        "points": 25
+      },
+      {
+        "id": "hsk1-q6",
+        "section": "reading",
+        "questionNumber": 6,
+        "prompt": "Đọc câu sau và chọn câu trả lời tương ứng: 你想喝什么？",
+        "pinyin": "Nǐ xiǎng hē shénme?",
+        "options": [
+          { "id": "A", "text": "我想喝茶，谢谢。", "pinyin": "Wǒ xiǎng hē chá, xièxie." },
+          { "id": "B", "text": "我想买一本书。", "pinyin": "Wǒ xiǎng mǎi yì běn shū." },
+          { "id": "C", "text": "我在看电视。", "pinyin": "Wǒ zài kàn diànshì." }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Động từ '喝' (uống). Câu hỏi 'Bạn muốn uống gì?' đi với câu trả lời '我想喝茶' (Tôi muốn uống trà).",
+        "points": 25
+      },
+      {
+        "id": "hsk1-q7",
+        "section": "reading",
+        "questionNumber": 7,
+        "prompt": "Chọn lượng từ thích hợp: 桌子上有三 ______ 苹果。",
+        "pinyin": "Zhuōzi shang yǒu sān ______ píngguǒ.",
+        "options": [
+          { "id": "A", "text": "本", "pinyin": "běn (cuốn/quyển)" },
+          { "id": "B", "text": "个", "pinyin": "gè (quả/cái)" },
+          { "id": "C", "text": "岁", "pinyin": "suì (tuổi)" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "Lượng từ thông dụng cho quả táo (苹果) là '个' (gè). '三代'/'三本' là sai, chỉ có '三个苹果' là đúng chuẩn.",
+        "points": 25
+      },
+      {
+        "id": "hsk1-q8",
+        "section": "reading",
+        "questionNumber": 8,
+        "prompt": "Xác định câu đúng ngữ pháp tiếng Trung:",
+        "pinyin": "Xuǎnzé zhèngquè de jùzi:",
+        "options": [
+          { "id": "A", "text": "明天我和朋友去商店买东西。", "pinyin": "Míngtiān wǒ hé péngyou qù shāngdiàn mǎi dōngxi." },
+          { "id": "B", "text": "我和朋友买东西去商店明天。", "pinyin": "Wǒ hé péngyou mǎi dōngxi qù shāngdiàn míngtiān." },
+          { "id": "C", "text": "去商店明天我和朋友买东西。", "pinyin": "Qù shāngdiàn míngtiān wǒ hé péngyou mǎi dōngxi." }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Ngữ pháp tiếng Trung chuẩn: Trạng từ chỉ thời gian (明天) đứng trước hoặc sau chủ ngữ, theo sau là nơi chốn (去商店) rồi đến mục đích hành động (买东西).",
+        "points": 25
+      }
+    ]
+  },
+  {
+    "id": "hsk2-mock-01",
+    "level": 2,
+    "title": "Đề thi thử HSK 2 - Đề số 01",
+    "description": "Đề thi thử HSK 2 bao quát từ vựng 300 từ: mua sắm, thời tiết, hỏi đường, sức khỏe. Thời gian làm bài 50 phút.",
+    "totalTimeMinutes": 50,
+    "totalQuestions": 8,
+    "maxScore": 200,
+    "passingScore": 120,
+    "listeningQuestionsCount": 4,
+    "readingQuestionsCount": 4,
+    "questions": [
+      {
+        "id": "hsk2-q1",
+        "section": "listening",
+        "questionNumber": 1,
+        "prompt": "Nghe đoạn hội thoại và chọn đáp án chính xác:",
+        "audioPrompt": "外面的天气怎么样？正在下雨呢，你出门记得带伞。",
+        "pinyin": "Wàimiàn de tiānqì zěnmeyàng? Zhèngzài xiàyǔ ne, nǐ chūmén jìde dài sǎn.",
+        "options": [
+          { "id": "A", "text": "Trời đang nắng to.", "pinyin": "Tiānqì hěn qíng." },
+          { "id": "B", "text": "Trời đang mưa, cần mang theo dù.", "pinyin": "Zhèngzài xiàyǔ, dài sǎn." },
+          { "id": "C", "text": "Thời tiết rất lạnh, có tuyết rơi.", "pinyin": "Tiānqì hěn lěng, xiàxuě." }
+        ],
+        "correctAnswer": "B",
+        "explanation": "'正在下雨' (đang mưa) và '记得带伞' (nhớ mang ô/dù). Đáp án B chính xác.",
+        "points": 25
+      },
+      {
+        "id": "hsk2-q2",
+        "section": "listening",
+        "questionNumber": 2,
+        "prompt": "Nghe câu thông báo và chọn thời gian cuộc hẹn:",
+        "audioPrompt": "我们明天早上八点在火车站门口见，请大家不要迟到。",
+        "pinyin": "Wǒmen míngtiān zǎoshang bā diǎn zài huǒchēzhàn ménkǒu jiàn, qǐng dàjiā bú yào chídào.",
+        "options": [
+          { "id": "A", "text": "8h sáng mai (明天早上八点)", "pinyin": "Míngtiān zǎoshang bā diǎn" },
+          { "id": "B", "text": "8h tối mai (明天晚上八点)", "pinyin": "Míngtiān wǎnshang bā diǎn" },
+          { "id": "C", "text": "Chiều nay 3h (今天下午三点)", "pinyin": "Jīntiān xiàwǔ sān diǎn" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Đoạn thông báo: '明天早上八点' (8 giờ sáng ngày mai). Đáp án A.",
+        "points": 25
+      },
+      {
+        "id": "hsk2-q3",
+        "section": "listening",
+        "questionNumber": 3,
+        "prompt": "Nghe đoạn thoại về sức khỏe và chọn lời khuyên của bác sĩ:",
+        "audioPrompt": "你感冒了，要多喝水，按时吃药，好好休息几天。",
+        "pinyin": "Nǐ gǎnmào le, yào duō hē shuǐ, ànshí chī yào, hǎohāo xiūxi jǐ tiān.",
+        "options": [
+          { "id": "A", "text": "Đi tập thể dục nhiều hơn.", "pinyin": "Duō yùndòng." },
+          { "id": "B", "text": "Uống nhiều nước, uống thuốc đúng giờ và nghỉ ngơi.", "pinyin": "Duō hē shuǐ, chī yào, xiūxi." },
+          { "id": "C", "text": "Đi làm việc bình thường.", "pinyin": "Qù shàngbān." }
+        ],
+        "correctAnswer": "B",
+        "explanation": "'多喝水' (uống nhiều nước), '按时吃药' (uống thuốc đúng giờ), '好好休息' (nghỉ ngơi dưỡng bệnh). Đáp án B.",
+        "points": 25
+      },
+      {
+        "id": "hsk2-q4",
+        "section": "listening",
+        "questionNumber": 4,
+        "prompt": "Nghe câu hỏi giá cả và chọn số tiền người mua cần trả:",
+        "audioPrompt": "这件衣服八十块，买两件可以便宜十块钱。",
+        "pinyin": "Zhè jiàn yīfu bāshí kuài, mǎi liǎng jiàn kěyǐ piányi shí kuài qián.",
+        "options": [
+          { "id": "A", "text": "80 tệ (80块)", "pinyin": "Bāshí kuài" },
+          { "id": "B", "text": "150 tệ (150块)", "pinyin": "Yìbǎi wǔshí kuài" },
+          { "id": "C", "text": "160 tệ (160块)", "pinyin": "Yìbǎi liùshí kuài" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "Một cái 80 tệ, mua 2 cái (160 tệ) được bớt 10 tệ -> còn 150 tệ (150块).",
+        "points": 25
+      },
+      {
+        "id": "hsk2-q5",
+        "section": "reading",
+        "questionNumber": 5,
+        "prompt": "Chọn từ nối thích hợp: 虽然今天天气很冷，______ 他还是去跑步了。",
+        "pinyin": "Suīrán jīntiān tiānqì hěn lěng, ______ tā háishì qù pǎobù le.",
+        "options": [
+          { "id": "A", "text": "因为", "pinyin": "yīnwèi (bởi vì)" },
+          { "id": "B", "text": "但是", "pinyin": "dànshì (nhưng mà)" },
+          { "id": "C", "text": "所以", "pinyin": "suǒyǐ (cho nên)" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "Cặp liên từ chỉ sự nhượng bộ tương phản trong tiếng Trung: 虽然……但是…… (tuy rằng... nhưng mà...).",
+        "points": 25
+      },
+      {
+        "id": "hsk2-q6",
+        "section": "reading",
+        "questionNumber": 6,
+        "prompt": "Đọc câu sau và chọn đáp án có nghĩa đúng: 从我家到公司坐地铁只要二十分钟，非常方便。",
+        "pinyin": "Cóng wǒ jiā dào gōngsī zuò dìtiě zhǐ yào èrshí fēnzhōng, fēicháng fāngbiàn.",
+        "options": [
+          { "id": "A", "text": "Đi tàu điện ngầm từ nhà đến công ty chỉ mất 20 phút, rất tiện lợi.", "pinyin": "" },
+          { "id": "B", "text": "Công ty cách nhà tôi rất xa, mất hơn 2 tiếng đi xe buýt.", "pinyin": "" },
+          { "id": "C", "text": "Tôi không thích đi tàu điện ngầm vì rất đông.", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "'坐地铁' (đi tàu điện ngầm), '二十分钟' (20 phút), '非常方便' (vô cùng tiện lợi).",
+        "points": 25
+      },
+      {
+        "id": "hsk2-q7",
+        "section": "reading",
+        "questionNumber": 7,
+        "prompt": "Điền giới từ thích hợp: 请大家 ______ 汉字写在黑板上。",
+        "pinyin": "Qǐng dàjiā ______ hànzì xiě zài hēibǎn shang.",
+        "options": [
+          { "id": "A", "text": "比", "pinyin": "bǐ (so sánh)" },
+          { "id": "B", "text": "把", "pinyin": "bǎ (câu chữ bả)" },
+          { "id": "C", "text": "往", "pinyin": "wǎng (hướng về)" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "Cấu trúc câu chữ 把: S + 把 + Tân ngữ + Động từ + Thành phần khác (把汉字写在黑板上 - Viết chữ Hán lên bảng).",
+        "points": 25
+      },
+      {
+        "id": "hsk2-q8",
+        "section": "reading",
+        "questionNumber": 8,
+        "prompt": "Chọn câu so sánh đúng quy tắc: 哥哥 ______ 弟弟高。",
+        "pinyin": "Gēge ______ dìdi gāo.",
+        "options": [
+          { "id": "A", "text": "比", "pinyin": "bǐ (hơn)" },
+          { "id": "B", "text": "很", "pinyin": "hěn (rất)" },
+          { "id": "C", "text": "多", "pinyin": "duō (nhiều)" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Cấu trúc so sánh hơn trong tiếng Trung: A + 比 + B + Tính từ (哥哥比弟弟高 - Anh trai cao hơn em trai).",
+        "points": 25
+      }
+    ]
+  },
+  {
+    "id": "hsk3-mock-01",
+    "level": 3,
+    "title": "Đề thi thử HSK 3 - Đề số 01",
+    "description": "Đề thi thử HSK 3 bao quát 600 từ vựng và câu phức tạp: so sánh hơn kém, trạng thái bổ ngữ, câu chữ 把. Thang điểm 300.",
+    "totalTimeMinutes": 85,
+    "totalQuestions": 6,
+    "maxScore": 300,
+    "passingScore": 180,
+    "listeningQuestionsCount": 3,
+    "readingQuestionsCount": 3,
+    "questions": [
+      {
+        "id": "hsk3-q1",
+        "section": "listening",
+        "questionNumber": 1,
+        "prompt": "Nghe đoạn phỏng vấn xin việc và chọn điểm mạnh của ứng viên:",
+        "audioPrompt": "我以前在一家国际贸易公司工作了三年，汉语听说流利，也能熟练使用电脑办公软件。",
+        "pinyin": "Wǒ yǐqián zài yì jiā guójì màoyì gōngsī gōngzuò le sān nián, hànyǔ tīngshuō liúlì, yě néng shúliàn shǐyòng diànnǎo bàngōng ruǎnjiàn.",
+        "options": [
+          { "id": "A", "text": "Có 3 năm kinh nghiệm thương mại, nói tiếng Trung lưu loát.", "pinyin": "" },
+          { "id": "B", "text": "Mới tốt nghiệp đại học, chưa có kinh nghiệm.", "pinyin": "" },
+          { "id": "C", "text": "Chỉ biết tiếng Anh, không biết sử dụng phần mềm máy tính.", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "'工作了三年' (đã làm 3 năm), '汉语听说流利' (nghe nói tiếng Trung trôi chảy). Đáp án A.",
+        "points": 50
+      },
+      {
+        "id": "hsk3-q2",
+        "section": "listening",
+        "questionNumber": 2,
+        "prompt": "Nghe kế hoạch du lịch và chọn phương tiện di chuyển được chọn:",
+        "audioPrompt": "坐飞机虽然快，但是机票太贵了。我们还是坐高铁去北京吧，又舒服又能看风景。",
+        "pinyin": "Zuò fēijī suīrán kuài, dànshì jīpiào tài guì le. Wǒmen háishì zuò gāotiě qù Běijīng ba, yòu shūfu yòu néng kàn fēngjǐng.",
+        "options": [
+          { "id": "A", "text": "Máy bay (飞机)", "pinyin": "Fēijī" },
+          { "id": "B", "text": "Tàu cao tốc (高铁)", "pinyin": "Gāotiě" },
+          { "id": "C", "text": "Xe khách (汽车)", "pinyin": "Qìchē" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "Quyết định cuối cùng: '还是坐高铁去北京吧' (chúng ta vẫn nên đi tàu cao tốc đến Bắc Kinh). Đáp án B.",
+        "points": 50
+      },
+      {
+        "id": "hsk3-q3",
+        "section": "listening",
+        "questionNumber": 3,
+        "prompt": "Nghe đoạn hội thoại và chọn lý do anh ấy đến muộn:",
+        "audioPrompt": "实在不好意思，路上突然发生了交通事故，路上堵车堵了一个多小时。",
+        "pinyin": "Shízài bù hǎoyìsi, lùshang tūrán fāshēng le jiāotōng shìgù, lùshang dǔchē dǔ le yí gè duō xiǎoshí.",
+        "options": [
+          { "id": "A", "text": "Ngủ quên ở nhà.", "pinyin": "" },
+          { "id": "B", "text": "Xảy ra tai nạn giao thông và kẹt xe hơn 1 tiếng.", "pinyin": "" },
+          { "id": "C", "text": "Quên mang tài liệu cuộc họp.", "pinyin": "" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "'发生交通事故' (xảy ra tai nạn giao thông), '堵车堵了一个多小时' (tắc đường hơn 1 giờ).",
+        "points": 50
+      },
+      {
+        "id": "hsk3-q4",
+        "section": "reading",
+        "questionNumber": 4,
+        "prompt": "Chọn trợ từ thích hợp điền vào chỗ trống: 他高兴 ______ 跳了起来。",
+        "pinyin": "Tā gāoxìng ______ tiào le qǐlai.",
+        "options": [
+          { "id": "A", "text": "的", "pinyin": "de (sở hữu)" },
+          { "id": "B", "text": "地", "pinyin": "de (trạng ngữ)" },
+          { "id": "C", "text": "得", "pinyin": "de (bổ ngữ trình độ/mức độ)" }
+        ],
+        "correctAnswer": "C",
+        "explanation": "Cấu trúc bổ ngữ mức độ: Tính từ + 得 + Mức độ/Kết quả biểu hiện (高兴得跳了起来 - Vui đến mức nhảy cẫng lên). Dùng chữ 得.",
+        "points": 50
+      },
+      {
+        "id": "hsk3-q5",
+        "section": "reading",
+        "questionNumber": 5,
+        "prompt": "Chọn cặp liên từ đúng: 这道题 ______ 看起来很难，______ 只要细心就能做对。",
+        "pinyin": "Zhè dào tí ______ kàn qǐlai hěn nán, ______ zhǐyào xìxīn jiù néng zuò duì.",
+        "options": [
+          { "id": "A", "text": "虽然……但是……", "pinyin": "suīrán... dànshì..." },
+          { "id": "B", "text": "不但……而且……", "pinyin": "búdàn... érqiě..." },
+          { "id": "C", "text": "因为……所以……", "pinyin": "yīnwèi... suǒyǐ..." }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Câu biểu thị sự chuyển ngoặt nhượng bộ: 'Tuy trông rất khó, nhưng chỉ cần cẩn thận là làm đúng' -> 虽然……但是……",
+        "points": 50
+      },
+      {
+        "id": "hsk3-q6",
+        "section": "reading",
+        "questionNumber": 6,
+        "prompt": "Đọc đoạn văn và chọn ý chính: 运动不仅能让我们拥有健康的体魄，还能减轻学习和工作的压力，让心情变得愉快。",
+        "pinyin": "Yùndòng bùjǐn néng ràng wǒmen yōngyǒu jiànkāng de tǐpò, hái néng jiǎnqīng xuéxí hé gōngzuò de yālì, ràng xīnqíng biàn de yúkuài.",
+        "options": [
+          { "id": "A", "text": "Vận động thể thao đem lại lợi ích to lớn cho cả thể chất lẫn tinh thần.", "pinyin": "" },
+          { "id": "B", "text": "Học tập và làm việc không cần vận động thể thao.", "pinyin": "" },
+          { "id": "C", "text": "Chỉ có người trẻ mới nên tập luyện thể thao.", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Bài nhấn mạnh 2 lợi ích: thể phách khỏe mạnh (健康的体魄) và giải tỏa áp lực giúp tâm trạng vui vẻ (减轻压力，心情愉快).",
+        "points": 50
+      }
+    ]
+  },
+  {
+    "id": "hsk4-mock-01",
+    "level": 4,
+    "title": "Đề thi thử HSK 4 - Đề số 01",
+    "description": "Đề thi thử HSK 4 chuẩn hoá với 1200 từ vựng. Đòi hỏi khả năng phân tích ngữ cảnh xã hội, thành ngữ và suy luận logic. Thang điểm 300.",
+    "totalTimeMinutes": 100,
+    "totalQuestions": 6,
+    "maxScore": 300,
+    "passingScore": 180,
+    "listeningQuestionsCount": 3,
+    "readingQuestionsCount": 3,
+    "questions": [
+      {
+        "id": "hsk4-q1",
+        "section": "listening",
+        "questionNumber": 1,
+        "prompt": "Nghe bài phân tích về thói quen tiêu dùng và chọn quan điểm của tác giả:",
+        "audioPrompt": "现在很多年轻人在购物时不仅关注商品的质量和价格，更看重商品所传递的环保理念与品牌文化。",
+        "pinyin": "Xiànzài hěn duō niánqīngrén zài gòuwù shí bùjǐn guānzhù shāngpǐn de zhìliàng hé jiàgé, gèng kànzhòng shāngpǐn suǒ chuándì de huánbǎo lǐniàn yǔ pǐnpái wénhuà.",
+        "options": [
+          { "id": "A", "text": "Giới trẻ ngày nay rất coi trọng yếu tố bảo vệ môi trường và văn hóa thương hiệu khi mua sắm.", "pinyin": "" },
+          { "id": "B", "text": "Giới trẻ chỉ quan tâm đến giá rẻ nhất trên thị trường.", "pinyin": "" },
+          { "id": "C", "text": "Người tiêu dùng không còn để ý đến chất lượng sản phẩm nữa.", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "'不仅关注……更看重环保理念与品牌文化' (không chỉ chú trọng... mà càng coi trọng quan niệm bảo vệ môi trường và văn hóa thương hiệu).",
+        "points": 50
+      },
+      {
+        "id": "hsk4-q2",
+        "section": "listening",
+        "questionNumber": 2,
+        "prompt": "Nghe câu chuyện về danh ngôn cuộc sống và chọn ý nghĩa cốt lõi:",
+        "audioPrompt": "失败并不可怕，可怕的是在失败之后失去了重新开始的勇气和信心。",
+        "pinyin": "Shībài bìng bù kěpà, kěpà de shì zài shībài zhīhòu shīqù le chóngxīn kāishǐ de yǒngqì hé xìnxīn.",
+        "options": [
+          { "id": "A", "text": "Thất bại không đáng sợ, đáng sợ là đánh mất dũng khí và niềm tin bắt đầu lại.", "pinyin": "" },
+          { "id": "B", "text": "Thất bại là điều tồi tệ nhất không thể cứu vãn.", "pinyin": "" },
+          { "id": "C", "text": "Không nên thử sức với những việc có nguy cơ thất bại.", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Câu khẳng định: '失败并不可怕，可怕的是失去重新开始的勇气和信心'.",
+        "points": 50
+      },
+      {
+        "id": "hsk4-q3",
+        "section": "listening",
+        "questionNumber": 3,
+        "prompt": "Nghe đoạn thông báo tại sân bay và chọn việc hành khách cần làm:",
+        "audioPrompt": "前往上海的MU5108次航班因为天气原因推迟起飞，请各位旅客在24号登机口耐心等候通知。",
+        "pinyin": "Qiánwǎng Shànghǎi de MU5108 cì hángbān yīnwèi tiānqì yuányīn tuīchí qǐfēi, qǐng gèwèi lǚkè zài èrshísì hào dēngjīkǒu nàixīn děnghòu tōngzhī.",
+        "options": [
+          { "id": "A", "text": "Đổi vé sang chuyến bay khác ngay lập tức.", "pinyin": "" },
+          { "id": "B", "text": "Kiên nhẫn chờ thông báo tại cửa khởi hành số 24.", "pinyin": "" },
+          { "id": "C", "text": "Rời sân bay trở về khách sạn.", "pinyin": "" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "'在24号登机口耐心等候通知' (Kiên nhẫn chờ đợi thông báo tại cửa lên máy bay số 24).",
+        "points": 50
+      },
+      {
+        "id": "hsk4-q4",
+        "section": "reading",
+        "questionNumber": 4,
+        "prompt": "Chọn từ thích hợp: 科学技术的发展 ______ 改变了人们的生活方式。",
+        "pinyin": "Kēxué jìshù de fāzhǎn ______ gǎibiàn le rénmen de shēnghuó fāngshì.",
+        "options": [
+          { "id": "A", "text": "深刻地", "pinyin": "shēnkè de (sâu sắc)" },
+          { "id": "B", "text": "马虎地", "pinyin": "mǎhu de (qua loa)" },
+          { "id": "C", "text": "故意地", "pinyin": "gùyì de (cố ý)" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Cụm từ phối hợp chuẩn tiếng Trung HSK 4: 深刻地改变 (thay đổi một cách sâu sắc).",
+        "points": 50
+      },
+      {
+        "id": "hsk4-q5",
+        "section": "reading",
+        "questionNumber": 5,
+        "prompt": "Sắp xếp lại các phân câu thành một câu hoàn chỉnh hợp logic:\n(1) 才能在激烈的竞争中立于不败之地\n(2) 一个企业只有不断创新\n(3) 提高产品和服务的质量",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "(2) - (3) - (1)", "pinyin": "" },
+          { "id": "B", "text": "(1) - (2) - (3)", "pinyin": "" },
+          { "id": "C", "text": "(3) - (1) - (2)", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Cấu trúc điều kiện duy nhất 只有……才……: (2) Một doanh nghiệp chỉ có không ngừng đổi mới -> (3) nâng cao chất lượng sản phẩm và dịch vụ -> (1) mới có thể đứng vững trong cạnh tranh khốc liệt. Thứ tự: 2 - 3 - 1.",
+        "points": 50
+      },
+      {
+        "id": "hsk4-q6",
+        "section": "reading",
+        "questionNumber": 6,
+        "prompt": "Đọc và rút ra kết luận: 俗话说'千里之行，始于足下'。任何远大的理想如果不付诸实际行动，最终都只能是一句空话。",
+        "pinyin": "Súhuà shuō 'qiānlǐ zhī xíng, shǐ yú zú xià'. Rènhé yuǎndà de lǐxiǎng rúguǒ bú fùzhū shíjì xíngdòng, zuìzhōng dōu zhǐ néng shì yí jù kōnghuà.",
+        "options": [
+          { "id": "A", "text": "Hành động thực tế từng bước một là chìa khóa để hiện thực hóa lý tưởng.", "pinyin": "" },
+          { "id": "B", "text": "Đi bộ ngàn dặm rất mệt mỏi.", "pinyin": "" },
+          { "id": "C", "text": "Không cần đặt ra lý tưởng cao xa làm gì.", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Câu tục ngữ 'Hành trình vạn dặm bắt đầu từ bước chân đầu tiên' và ý tứ nhấn mạnh tầm quan trọng của hành động thực tế (实际行动).",
+        "points": 50
+      }
+    ]
+  }
+]

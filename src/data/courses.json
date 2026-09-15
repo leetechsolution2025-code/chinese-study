@@ -1,0 +1,733 @@
+{
+  "courses": [
+    {
+      "id": "hsk1",
+      "title": "Lớp học HSK 1 - Nhập môn",
+      "level": 1,
+      "totalLessons": 15,
+      "targetVocab": 150,
+      "description": "Làm quen với bảng chữ cái Pinyin, 4 thanh điệu, quy tắc viết chữ Hán và 150 từ vựng giao tiếp cơ bản nhất trong đời sống.",
+      "color": "#e11d48",
+      "badgeClass": "badge-crimson"
+    },
+    {
+      "id": "hsk2",
+      "title": "Lớp học HSK 2 - Sơ cấp",
+      "level": 2,
+      "totalLessons": 15,
+      "targetVocab": 300,
+      "description": "Nâng cao vốn từ vựng lên 300 từ. Làm chủ các chủ đề: thời tiết, sức khỏe, giao thông, mua sắm và thói quen sinh hoạt hàng ngày.",
+      "color": "#0ea5e9",
+      "badgeClass": "badge-sky"
+    },
+    {
+      "id": "hsk3",
+      "title": "Lớp học HSK 3 - Sơ - Trung cấp",
+      "level": 3,
+      "totalLessons": 20,
+      "targetVocab": 600,
+      "description": "Mở rộng 600 từ vựng. Nắm vững câu chữ 把, câu so sánh 比, câu phức liên từ, tự tin giao tiếp khi đi du lịch và làm việc cơ bản.",
+      "color": "#f59e0b",
+      "badgeClass": "badge-gold"
+    },
+    {
+      "id": "hsk4",
+      "title": "Lớp học HSK 4 - Trung cấp",
+      "level": 4,
+      "totalLessons": 20,
+      "targetVocab": 1200,
+      "description": "Làm chủ 1200 từ vựng và ngữ pháp nâng cao. Có khả năng thảo luận trôi chảy về các chủ đề văn hóa, xã hội, công việc và tình cảm.",
+      "color": "#10b981",
+      "badgeClass": "badge-emerald"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "hsk1-lesson-01",
+      "courseId": "hsk1",
+      "lessonNumber": 1,
+      "titleHanzi": "你好",
+      "titlePinyin": "Nǐ hǎo",
+      "titleVi": "Chào bạn",
+      "objectives": [
+        "Biết cách chào hỏi và đáp lại lời chào thông dụng trong tiếng Trung.",
+        "Nắm vững đại từ nhân xưng ngôi thứ 2 (你) và thể lịch sự (您).",
+        "Quy tắc biến điệu khi 2 thanh 3 đi liền nhau (nǐ hǎo -> ní hǎo)."
+      ],
+      "dialogue": [
+        {
+          "speaker": "A",
+          "hanzi": "你好！",
+          "pinyin": "Nǐ hǎo!",
+          "vi": "Chào bạn!"
+        },
+        {
+          "speaker": "B",
+          "hanzi": "你好！",
+          "pinyin": "Nǐ hǎo!",
+          "vi": "Chào bạn!"
+        },
+        {
+          "speaker": "A",
+          "hanzi": "您好！",
+          "pinyin": "Nín hǎo!",
+          "vi": "Kính chào ngài/thầy/cô!"
+        },
+        {
+          "speaker": "B",
+          "hanzi": "你们好！",
+          "pinyin": "Nǐmen hǎo!",
+          "vi": "Chào các bạn!"
+        }
+      ],
+      "vocabularies": [
+        {
+          "id": "hsk1-001",
+          "hanzi": "你",
+          "pinyin": "nǐ",
+          "hanviet": "Nhĩ",
+          "meaning": "Bạn, anh, chị (ngôi thứ 2)",
+          "level": 1,
+          "partOfSpeech": "Đại từ",
+          "strokes": 7,
+          "radical": "亻",
+          "exampleHanzi": "你好！",
+          "examplePinyin": "Nǐ hǎo!",
+          "exampleMeaning": "Chào bạn!"
+        },
+        {
+          "id": "hsk1-002",
+          "hanzi": "好",
+          "pinyin": "hǎo",
+          "hanviet": "Hảo",
+          "meaning": "Tốt, đẹp, khỏe",
+          "level": 1,
+          "partOfSpeech": "Tính từ",
+          "strokes": 6,
+          "radical": "女",
+          "exampleHanzi": "今天天气很好。",
+          "examplePinyin": "Jīntiān tiānqì hěn hǎo.",
+          "exampleMeaning": "Hôm nay thời tiết rất tốt."
+        },
+        {
+          "id": "hsk1-nin",
+          "hanzi": "您",
+          "pinyin": "nín",
+          "hanviet": "Nẫm",
+          "meaning": "Ngài, ông, bà, thầy (kính ngữ của 你)",
+          "level": 1,
+          "partOfSpeech": "Đại từ",
+          "strokes": 11,
+          "radical": "心",
+          "exampleHanzi": "老师，您好！",
+          "examplePinyin": "Lǎoshī, nín hǎo!",
+          "exampleMeaning": "Thầy/Cô, em kính chào Thầy/Cô!"
+        },
+        {
+          "id": "hsk1-men",
+          "hanzi": "们",
+          "pinyin": "men",
+          "hanviet": "Môn",
+          "meaning": "Các (hậu tố số nhiều)",
+          "level": 1,
+          "partOfSpeech": "Trợ từ",
+          "strokes": 5,
+          "radical": "亻",
+          "exampleHanzi": "你们好。",
+          "examplePinyin": "Nǐmen hǎo.",
+          "exampleMeaning": "Chào các bạn."
+        }
+      ],
+      "grammarPoints": [
+        {
+          "title": "Lời chào thông dụng: 你好 (Nǐ hǎo)",
+          "explanation": "Trong tiếng Trung, cách chào cơ bản nhất là ghép đại từ nhân xưng với tính từ '好' (Hảo - tốt). Khi chào người lớn tuổi hoặc cấp trên, thay '你' bằng kính ngữ '您' (Nín - có bộ Tâm ở dưới, thể hiện tấm lòng tôn kính).",
+          "structure": "[Người được chào] + 好",
+          "examples": [
+            { "hanzi": "你好！", "pinyin": "Nǐ hǎo!", "vi": "Chào bạn!" },
+            { "hanzi": "您好！", "pinyin": "Nín hǎo!", "vi": "Kính chào ngài/thầy!" },
+            { "hanzi": "你们好！", "pinyin": "Nǐmen hǎo!", "vi": "Chào các bạn!" }
+          ]
+        },
+        {
+          "title": "Biến điệu thanh 3 (Half & Full 3rd tone change)",
+          "explanation": "Khi hai âm tiết mang thanh 3 đi liền nhau, âm tiết thứ nhất sẽ tự động biến thành thanh 2 (dấu sắc). Ví dụ: '你' (nǐ - thanh 3) + '好' (hǎo - thanh 3) được đọc chuẩn là 'ní hǎo'.",
+          "structure": "Thanh 3 + Thanh 3 ➔ Thanh 2 + Thanh 3",
+          "examples": [
+            { "hanzi": "你好", "pinyin": "nǐ + hǎo ➔ ní hǎo", "vi": "Chào bạn" }
+          ]
+        }
+      ],
+      "quizData": [
+        {
+          "id": "q1-1",
+          "question": "Khi muốn chào thầy giáo một cách lịch sự, bạn nên nói thế nào?",
+          "options": ["你好！", "您好！", "对不起！", "没关系！"],
+          "correctIndex": 1,
+          "explanation": "'您好' (Nín hǎo) là hình thức kính cẩn của '你好', dùng để chào thầy cô, người lớn tuổi."
+        },
+        {
+          "id": "q1-2",
+          "question": "Khi hai thanh 3 đi liền nhau trong tiếng Trung (ví dụ '你好'), thanh 3 đầu tiên biến thành thanh mấy?",
+          "options": ["Thanh 1", "Thanh 2", "Thanh 4", "Thanh nhẹ"],
+          "correctIndex": 1,
+          "explanation": "Theo quy tắc biến điệu, hai thanh 3 đi cạnh nhau thì thanh đầu tiên biến âm thành thanh 2 (ní hǎo)."
+        },
+        {
+          "id": "q1-3",
+          "question": "Chữ '您' (Nín) có thêm bộ thủ nào ở phía dưới chữ '你'?",
+          "options": ["Bộ Khẩu (口)", "Bộ Mộc (木)", "Bộ Tâm (心)", "Bộ Thủy (水)"],
+          "correctIndex": 2,
+          "explanation": "Chữ '您' gồm chữ '你' ở trên và bộ 'Tâm' (心 - trái tim) ở dưới, tượng trưng cho sự tôn kính từ tận đáy lòng."
+        }
+      ]
+    },
+    {
+      "id": "hsk1-lesson-02",
+      "courseId": "hsk1",
+      "lessonNumber": 2,
+      "titleHanzi": "谢谢你",
+      "titlePinyin": "Xièxie nǐ",
+      "titleVi": "Cảm ơn bạn",
+      "objectives": [
+        "Biết cách nói lời cảm ơn và đáp lại lời cảm ơn.",
+        "Biết cách xin lỗi và đáp lại lời xin lỗi.",
+        "Làm quen với phó từ phủ định 不 (bù)."
+      ],
+      "dialogue": [
+        {
+          "speaker": "A",
+          "hanzi": "谢谢你！",
+          "pinyin": "Xièxie nǐ!",
+          "vi": "Cảm ơn bạn!"
+        },
+        {
+          "speaker": "B",
+          "hanzi": "不客气！",
+          "pinyin": "Bú kèqi!",
+          "vi": "Không có gì (đừng khách sáo)!"
+        },
+        {
+          "speaker": "A",
+          "hanzi": "对不起！",
+          "pinyin": "Duìbuqǐ!",
+          "vi": "Xin lỗi bạn!"
+        },
+        {
+          "speaker": "B",
+          "hanzi": "没关系！",
+          "pinyin": "Méi guānxi!",
+          "vi": "Không sao đâu!"
+        }
+      ],
+      "vocabularies": [
+        {
+          "id": "hsk1-xiexie",
+          "hanzi": "谢谢",
+          "pinyin": "xièxie",
+          "hanviet": "Tạ tạ",
+          "meaning": "Cảm ơn",
+          "level": 1,
+          "partOfSpeech": "Động từ",
+          "strokes": 12,
+          "radical": "讠",
+          "exampleHanzi": "谢谢你的帮助。",
+          "examplePinyin": "Xièxie nǐ de bāngzhù.",
+          "exampleMeaning": "Cảm ơn sự giúp đỡ của bạn."
+        },
+        {
+          "id": "hsk1-bu",
+          "hanzi": "不",
+          "pinyin": "bù",
+          "hanviet": "Bất",
+          "meaning": "Không (phủ định)",
+          "level": 1,
+          "partOfSpeech": "Phó từ",
+          "strokes": 4,
+          "radical": "一",
+          "exampleHanzi": "我不是老师。",
+          "examplePinyin": "Wǒ bú shì lǎoshī.",
+          "exampleMeaning": "Tôi không phải là giáo viên."
+        },
+        {
+          "id": "hsk1-keqi",
+          "hanzi": "客气",
+          "pinyin": "kèqi",
+          "hanviet": "Khách khí",
+          "meaning": "Khách sáo, lịch sự",
+          "level": 1,
+          "partOfSpeech": "Tính từ",
+          "strokes": 9,
+          "radical": "宀",
+          "exampleHanzi": "别客气。",
+          "examplePinyin": "Bié kèqi.",
+          "exampleMeaning": "Đừng khách sáo."
+        },
+        {
+          "id": "hsk1-duibuqi",
+          "hanzi": "对不起",
+          "pinyin": "duìbuqǐ",
+          "hanviet": "Đối bất khởi",
+          "meaning": "Xin lỗi",
+          "level": 1,
+          "partOfSpeech": "Cụm từ",
+          "strokes": 15,
+          "radical": "寸",
+          "exampleHanzi": "对不起，我迟到了。",
+          "examplePinyin": "Duìbuqǐ, wǒ chídào le.",
+          "exampleMeaning": "Xin lỗi, tôi đến muộn."
+        },
+        {
+          "id": "hsk1-meiguanxi",
+          "hanzi": "没关系",
+          "pinyin": "méi guānxi",
+          "hanviet": "Một quan hệ",
+          "meaning": "Không sao cả, không hề gì",
+          "level": 1,
+          "partOfSpeech": "Cụm từ",
+          "strokes": 18,
+          "radical": "氵",
+          "exampleHanzi": "没关系，慢慢来。",
+          "examplePinyin": "Méi guānxi, mànman lái.",
+          "exampleMeaning": "Không sao đâu, cứ từ từ thôi."
+        }
+      ],
+      "grammarPoints": [
+        {
+          "title": "Cảm ơn và Đáp lại lời cảm ơn",
+          "explanation": "Khi nhận được sự giúp đỡ, dùng '谢谢' (Xièxie). Người đối diện đáp lại lịch sự bằng '不客气' (Bú kèqi - Đừng khách sáo) hoặc '不用谢' (Bú yòng xiè - Không cần cảm ơn).",
+          "structure": "谢谢 ➔ 不客气",
+          "examples": [
+            { "hanzi": "谢谢你！—— 不客气！", "pinyin": "Xièxie nǐ! —— Bú kèqi!", "vi": "Cảm ơn bạn! —— Đừng khách sáo!" }
+          ]
+        },
+        {
+          "title": "Xin lỗi và Đáp lại lời xin lỗi",
+          "explanation": "Khi làm phiền ai đó, dùng '对不起' (Duìbuqǐ). Người kia tha thứ hoặc trấn an sẽ nói '没关系' (Méi guānxi).",
+          "structure": "对不起 ➔ 没关系",
+          "examples": [
+            { "hanzi": "对不起！—— 没关系！", "pinyin": "Duìbuqǐ! —— Méi guānxi!", "vi": "Xin lỗi! —— Không sao đâu!" }
+          ]
+        }
+      ],
+      "quizData": [
+        {
+          "id": "q2-1",
+          "question": "Khi ai đó nói '谢谢你！' với bạn, câu đáp lại lịch sự nhất là gì?",
+          "options": ["没关系！", "对不起！", "不客气！", "你好！"],
+          "correctIndex": 2,
+          "explanation": "Khi được cảm ơn, câu đáp chuẩn mực là '不客气' (Bú kèqi - Đừng khách sáo)."
+        },
+        {
+          "id": "q2-2",
+          "question": "Khi bạn vô tình va vào ai đó và nói '对不起！', người kia sẽ đáp lại là gì?",
+          "options": ["没关系！", "谢谢！", "不客气！", "再见！"],
+          "correctIndex": 0,
+          "explanation": "Đáp lại lời xin lỗi '对不起' là '没关系' (Méi guānxi - Không sao đâu)."
+        }
+      ]
+    },
+    {
+      "id": "hsk1-lesson-03",
+      "courseId": "hsk1",
+      "lessonNumber": 3,
+      "titleHanzi": "你叫什么名字",
+      "titlePinyin": "Nǐ jiào shénme míngzi",
+      "titleVi": "Bạn tên là gì",
+      "objectives": [
+        "Biết cách hỏi tên và giới thiệu tên của mình.",
+        "Làm chủ đại từ nghi vấn 什么 (shénme - cái gì).",
+        "Nắm vững động từ 是 (shì - là) và danh từ chỉ quốc gia."
+      ],
+      "dialogue": [
+        {
+          "speaker": "李月",
+          "hanzi": "你叫什么名字？",
+          "pinyin": "Nǐ jiào shénme míngzi?",
+          "vi": "Bạn tên là gì?"
+        },
+        {
+          "speaker": "大卫",
+          "hanzi": "我叫大卫。",
+          "pinyin": "Wǒ jiào Dàwèi.",
+          "vi": "Tôi tên là David."
+        },
+        {
+          "speaker": "李月",
+          "hanzi": "你是中国人吗？",
+          "pinyin": "Nǐ shì Zhōngguó rén ma?",
+          "vi": "Bạn là người Trung Quốc phải không?"
+        },
+        {
+          "speaker": "大卫",
+          "hanzi": "我不是中国人，我是美国人。",
+          "pinyin": "Wǒ bú shì Zhōngguó rén, wǒ shì Měiguó rén.",
+          "vi": "Tôi không phải người Trung Quốc, tôi là người Mỹ."
+        }
+      ],
+      "vocabularies": [
+        {
+          "id": "hsk1-jiao",
+          "hanzi": "叫",
+          "pinyin": "jiào",
+          "hanviet": "Khiếu",
+          "meaning": "Tên là, gọi là, kêu",
+          "level": 1,
+          "partOfSpeech": "Động từ",
+          "strokes": 5,
+          "radical": "口",
+          "exampleHanzi": "你叫什么？",
+          "examplePinyin": "Nǐ jiào shénme?",
+          "exampleMeaning": "Bạn tên là gì?"
+        },
+        {
+          "id": "hsk1-shenme",
+          "hanzi": "什么",
+          "pinyin": "shénme",
+          "hanviet": "Thập ma",
+          "meaning": "Cái gì, gì",
+          "level": 1,
+          "partOfSpeech": "Đại từ",
+          "strokes": 7,
+          "radical": "亻",
+          "exampleHanzi": "这是什么？",
+          "examplePinyin": "Zhè shì shénme?",
+          "exampleMeaning": "Đây là cái gì?"
+        },
+        {
+          "id": "hsk1-mingzi",
+          "hanzi": "名字",
+          "pinyin": "míngzi",
+          "hanviet": "Danh tự",
+          "meaning": "Tên",
+          "level": 1,
+          "partOfSpeech": "Danh từ",
+          "strokes": 12,
+          "radical": "夕",
+          "exampleHanzi": "我的名字叫李月。",
+          "examplePinyin": "Wǒ de míngzi jiào Lǐ Yuè.",
+          "exampleMeaning": "Tên tôi là Lý Nguyệt."
+        },
+        {
+          "id": "hsk1-shi",
+          "hanzi": "是",
+          "pinyin": "shì",
+          "hanviet": "Thị",
+          "meaning": "Là, đúng",
+          "level": 1,
+          "partOfSpeech": "Động từ",
+          "strokes": 9,
+          "radical": "日",
+          "exampleHanzi": "我是越南人。",
+          "examplePinyin": "Wǒ shì Yuènán rén.",
+          "exampleMeaning": "Tôi là người Việt Nam."
+        },
+        {
+          "id": "hsk1-ma",
+          "hanzi": "吗",
+          "pinyin": "ma",
+          "hanviet": "Ma",
+          "meaning": "...không? (trợ từ nghi vấn)",
+          "level": 1,
+          "partOfSpeech": "Trợ từ",
+          "strokes": 6,
+          "radical": "口",
+          "exampleHanzi": "你好吗？",
+          "examplePinyin": "Nǐ hǎo ma?",
+          "exampleMeaning": "Bạn khỏe không?"
+        }
+      ],
+      "grammarPoints": [
+        {
+          "title": "Đại từ nghi vấn '什么' (shénme)",
+          "explanation": "Dùng để hỏi 'cái gì'. Trong tiếng Trung, đại từ nghi vấn giữ nguyên vị trí trong câu như thành phần mà nó thay thế, không đảo ngữ lên đầu câu như tiếng Anh.",
+          "structure": "Chủ ngữ + Động từ + 什么 (+ Danh từ)?",
+          "examples": [
+            { "hanzi": "你叫什么名字？", "pinyin": "Nǐ jiào shénme míngzi?", "vi": "Bạn tên là gì?" },
+            { "hanzi": "这是什么书？", "pinyin": "Zhè shì shénme shū?", "vi": "Đây là sách gì?" }
+          ]
+        },
+        {
+          "title": "Câu hỏi Yes/No với trợ từ '吗' (ma)",
+          "explanation": "Để biến một câu trần thuật thành câu hỏi có/không, chỉ cần thêm trợ từ nghi vấn '吗' vào cuối câu.",
+          "structure": "Câu khẳng định + 吗?",
+          "examples": [
+            { "hanzi": "你是中国人吗？", "pinyin": "Nǐ shì Zhōngguó rén ma?", "vi": "Bạn là người Trung Quốc phải không?" },
+            { "hanzi": "他是老师吗？", "pinyin": "Tā shì lǎoshī ma?", "vi": "Anh ấy là giáo viên phải không?" }
+          ]
+        }
+      ],
+      "quizData": [
+        {
+          "id": "q3-1",
+          "question": "Chọn câu đúng để hỏi tên ai đó:",
+          "options": ["你名字是什么叫？", "你叫什么名字？", "叫你什么名字？", "什么叫你名字？"],
+          "correctIndex": 1,
+          "explanation": "Cấu trúc hỏi tên chuẩn trong tiếng Trung là: 你叫什么名字？ (Chủ ngữ + 叫 + 什么 + 名字)."
+        },
+        {
+          "id": "q3-2",
+          "question": "Câu '我是中国人' (Tôi là người Trung Quốc) khi chuyển thành câu hỏi Yes/No thì thêm chữ gì vào cuối?",
+          "options": ["呢", "吧", "吗", "啊"],
+          "correctIndex": 2,
+          "explanation": "Thêm trợ từ nghi vấn '吗' vào cuối câu khẳng định để tạo câu hỏi nghi vấn."
+        }
+      ]
+    },
+    {
+      "id": "hsk2-lesson-01",
+      "courseId": "hsk2",
+      "lessonNumber": 1,
+      "titleHanzi": "九月去北京旅游最好",
+      "titlePinyin": "Jiǔyuè qù Běijīng lǚyóu zuì hǎo",
+      "titleVi": "Tháng 9 đi Bắc Kinh du lịch là tốt nhất",
+      "objectives": [
+        "Biết cách diễn đạt thời điểm lý tưởng để làm gì đó.",
+        "Nắm vững phó từ chỉ mức độ 最 (zuì - nhất).",
+        "Sử dụng đại từ 觉得 (juéde - cảm thấy)."
+      ],
+      "dialogue": [
+        {
+          "speaker": "王方",
+          "hanzi": "我要去北京旅游，你觉得什么时候去最好？",
+          "pinyin": "Wǒ yào qù Běijīng lǚyóu, nǐ juéde shénme shíhou qù zuì hǎo?",
+          "vi": "Tôi muốn đi Bắc Kinh du lịch, bạn thấy đi lúc nào là tốt nhất?"
+        },
+        {
+          "speaker": "大卫",
+          "hanzi": "九月去北京旅游最好。",
+          "pinyin": "Jiǔyuè qù Běijīng lǚyóu zuì hǎo.",
+          "vi": "Tháng 9 đi Bắc Kinh du lịch là tốt nhất."
+        },
+        {
+          "speaker": "王方",
+          "hanzi": "为什么？",
+          "pinyin": "Wèishénme?",
+          "vi": "Tại sao?"
+        },
+        {
+          "speaker": "大卫",
+          "hanzi": "因为九月的北京天气不冷也不热。",
+          "pinyin": "Yīnwèi jiǔyuè de Běijīng tiānqì bù lěng yě bú rè.",
+          "vi": "Bởi vì tháng 9 thời tiết ở Bắc Kinh không lạnh cũng không nóng."
+        }
+      ],
+      "vocabularies": [
+        {
+          "id": "hsk2-lvyou",
+          "hanzi": "旅游",
+          "pinyin": "lǚyóu",
+          "hanviet": "Lữ du",
+          "meaning": "Du lịch",
+          "level": 2,
+          "partOfSpeech": "Động từ",
+          "strokes": 16,
+          "radical": "方",
+          "exampleHanzi": "我们去旅游吧。",
+          "examplePinyin": "Wǒmen qù lǚyóu ba.",
+          "exampleMeaning": "Chúng ta đi du lịch đi."
+        },
+        {
+          "id": "hsk2-juede",
+          "hanzi": "觉得",
+          "pinyin": "juéde",
+          "hanviet": "Giác đắc",
+          "meaning": "Cảm thấy, thấy rằng",
+          "level": 2,
+          "partOfSpeech": "Động từ",
+          "strokes": 18,
+          "radical": "见",
+          "exampleHanzi": "我觉得汉语很有趣。",
+          "examplePinyin": "Wǒ juéde Hànyǔ hěn yǒuqù.",
+          "exampleMeaning": "Tôi cảm thấy tiếng Trung rất thú vị."
+        },
+        {
+          "id": "hsk2-zui",
+          "hanzi": "最",
+          "pinyin": "zuì",
+          "hanviet": "Tối",
+          "meaning": "Nhất (mức độ cao nhất)",
+          "level": 2,
+          "partOfSpeech": "Phó từ",
+          "strokes": 12,
+          "radical": "曰",
+          "exampleHanzi": "我最喜欢喝茶。",
+          "examplePinyin": "Wǒ zuì xǐhuan hē chá.",
+          "exampleMeaning": "Tôi thích uống trà nhất."
+        }
+      ],
+      "grammarPoints": [
+        {
+          "title": "Phó từ mức độ '最' (zuì - nhất)",
+          "explanation": "Đứng trước tính từ hoặc động từ tâm lý để chỉ mức độ cao nhất.",
+          "structure": "最 + Tính từ / Động từ tâm lý",
+          "examples": [
+            { "hanzi": "最好", "pinyin": "zuì hǎo", "vi": "Tốt nhất" },
+            { "hanzi": "我最喜欢猫。", "pinyin": "Wǒ zuì xǐhuan māo.", "vi": "Tôi thích mèo nhất." }
+          ]
+        }
+      ],
+      "quizData": [
+        {
+          "id": "q-hsk2-1",
+          "question": "Điền từ thích hợp vào chỗ trống: 我____喜欢吃中国菜。(Tôi thích ăn món Trung Quốc nhất)",
+          "options": ["最", "也", "都", "不"],
+          "correctIndex": 0,
+          "explanation": "Dùng '最' trước động từ tâm lý '喜欢' để diễn đạt 'thích nhất'."
+        }
+      ]
+    },
+    {
+      "id": "hsk3-lesson-01",
+      "courseId": "hsk3",
+      "lessonNumber": 1,
+      "titleHanzi": "周末你有什么打算",
+      "titlePinyin": "Zhōumò nǐ yǒu shénme dǎsuan",
+      "titleVi": "Cuối tuần bạn có dự định gì",
+      "objectives": [
+        "Biết cách hỏi và chia sẻ kế hoạch cuối tuần.",
+        "Làm chủ cấu trúc liên từ 'Một chút cũng không': 一点儿也/都不...",
+        "Nắm vững động từ 打算 (dự định, tính toán)."
+      ],
+      "dialogue": [
+        {
+          "speaker": "小丽",
+          "hanzi": "周末你有什么打算？",
+          "pinyin": "Zhōumò nǐ yǒu shénme dǎsuan?",
+          "vi": "Cuối tuần bạn có dự định gì không?"
+        },
+        {
+          "speaker": "小刚",
+          "hanzi": "我早就想好了，请你吃饭，看电影，喝咖啡。",
+          "pinyin": "Wǒ zǎo jiù xiǎng hǎo le, qǐng nǐ chīfàn, kàn diànyǐng, hē kāfēi.",
+          "vi": "Tôi đã tính xong từ sớm rồi, mời bạn đi ăn cơm, xem phim và uống cà phê."
+        }
+      ],
+      "vocabularies": [
+        {
+          "id": "hsk3-zhoumo",
+          "hanzi": "周末",
+          "pinyin": "zhōumò",
+          "hanviet": "Chu mạt",
+          "meaning": "Cuối tuần",
+          "level": 3,
+          "partOfSpeech": "Danh từ",
+          "strokes": 12,
+          "radical": "口",
+          "exampleHanzi": "周末愉快！",
+          "examplePinyin": "Zhōumò yúkuài!",
+          "exampleMeaning": "Cuối tuần vui vẻ!"
+        },
+        {
+          "id": "hsk3-dasuan",
+          "hanzi": "打算",
+          "pinyin": "dǎsuan",
+          "hanviet": "Đả toán",
+          "meaning": "Dự định, kế hoạch",
+          "level": 3,
+          "partOfSpeech": "Động từ / Danh từ",
+          "strokes": 19,
+          "radical": "扌",
+          "exampleHanzi": "你有什么打算？",
+          "examplePinyin": "Nǐ yǒu shénme dǎsuan?",
+          "exampleMeaning": "Bạn có kế hoạch gì?"
+        }
+      ],
+      "grammarPoints": [
+        {
+          "title": "Bổ ngữ kết quả: 想好 / 准备好 (Xong, hoàn tất)",
+          "explanation": "Động từ kết hợp với '好' làm bổ ngữ kết quả biểu thị hành động đã hoàn tất và đạt kết quả mỹ mãn.",
+          "structure": "Động từ + 好",
+          "examples": [
+            { "hanzi": "我想好了。", "pinyin": "Wǒ xiǎng hǎo le.", "vi": "Tôi đã suy nghĩ kỹ/quyết định xong rồi." }
+          ]
+        }
+      ],
+      "quizData": [
+        {
+          "id": "q-hsk3-1",
+          "question": "Từ '周末' (Zhōumò) có âm Hán - Việt là gì?",
+          "options": ["Chu mạt", "Nhật mạt", "Nguyệt mạt", "Niên mạt"],
+          "correctIndex": 0,
+          "explanation": "'周' là Chu (tuần), '末' là Mạt (cuối) -> Chu mạt nghĩa là Cuối tuần."
+        }
+      ]
+    },
+    {
+      "id": "hsk4-lesson-01",
+      "courseId": "hsk4",
+      "lessonNumber": 1,
+      "titleHanzi": "简单的爱情",
+      "titlePinyin": "Jiǎndān de àiqíng",
+      "titleVi": "Tình yêu giản đơn",
+      "objectives": [
+        "Thảo luận về các quan điểm tình cảm và hôn nhân gia đình.",
+        "Làm chủ cách dùng của phó từ 不仅...而且... (Không những... mà còn...).",
+        "Nắm vững cách dùng phó từ 从来 (từ trước tới nay)."
+      ],
+      "dialogue": [
+        {
+          "speaker": "孙月",
+          "hanzi": "听说你跟丈夫结婚快二十年了，你们的生活怎么样？",
+          "pinyin": "Tīngshuō nǐ gēn zhàngfu jiéhūn kuài èrshí nián le, nǐmen de shēnghuó zěnmeyàng?",
+          "vi": "Nghe nói bạn với chồng kết hôn sắp được 20 năm rồi, cuộc sống của hai bạn thế nào?"
+        },
+        {
+          "speaker": "李老师",
+          "hanzi": "我们俩不仅性格合适，而且从来没红过脸。",
+          "pinyin": "Wǒmen liǎ bùjǐn xìnggé héshì, érqiě cónglái méi hóngguo liǎn.",
+          "vi": "Hai đứa mình không những tính cách hòa hợp mà từ trước đến nay chưa bao giờ cãi cọ đỏ mặt."
+        }
+      ],
+      "vocabularies": [
+        {
+          "id": "hsk4-jiandan",
+          "hanzi": "简单",
+          "pinyin": "jiǎndān",
+          "hanviet": "Giản đơn",
+          "meaning": "Đơn giản, giản dị",
+          "level": 4,
+          "partOfSpeech": "Tính từ",
+          "strokes": 20,
+          "radical": "竹",
+          "exampleHanzi": "这个问题很简答。",
+          "examplePinyin": "Zhège wèntí hěn jiǎndān.",
+          "exampleMeaning": "Vấn đề này rất đơn giản."
+        },
+        {
+          "id": "hsk4-aiqing",
+          "hanzi": "爱情",
+          "pinyin": "àiqíng",
+          "hanviet": "Ái tình",
+          "meaning": "Tình yêu",
+          "level": 4,
+          "partOfSpeech": "Danh từ",
+          "strokes": 21,
+          "radical": "爫",
+          "exampleHanzi": "浪漫的爱情。",
+          "examplePinyin": "Làngmàn de àiqíng.",
+          "exampleMeaning": "Tình yêu lãng mạn."
+        }
+      ],
+      "grammarPoints": [
+        {
+          "title": "Cấu trúc liên từ: 不仅...而且... (Không những... mà còn...)",
+          "explanation": "Dùng để nối hai phân câu có quan hệ tăng tiến, biểu thị mức độ sâu hơn hoặc rộng hơn.",
+          "structure": "Chủ ngữ + 不仅... 而且...",
+          "examples": [
+            { "hanzi": "他不仅聪明，而且很努力。", "pinyin": "Tā bùjǐn cōngming, érqiě hěn nǔlì.", "vi": "Anh ấy không những thông minh mà còn rất chăm chỉ." }
+          ]
+        }
+      ],
+      "quizData": [
+        {
+          "id": "q-hsk4-1",
+          "question": "Điền liên từ thích hợp: 他____会说汉语，____说得很流利。(Anh ấy không những biết nói tiếng Trung mà còn nói rất lưu loát)",
+          "options": ["不仅...而且...", "虽然...但是...", "因为...所以...", "只要...就..."],
+          "correctIndex": 0,
+          "explanation": "Dùng cặp liên từ '不仅...而且...' để biểu thị quan hệ tăng tiến."
+        }
+      ]
+    }
+  ]
+}
