@@ -15,9 +15,7 @@ import {
   GraduationCap,
   Trophy,
   Target,
-  Clock,
   ChevronRight,
-  Lightbulb,
 } from 'lucide-react';
 import { AudioButton } from '@/components/common/AudioButton';
 import { storage, UserStats } from '@/lib/storage';
@@ -620,137 +618,6 @@ export default function HomePage() {
               <ArrowRight size={14} />
             </div>
           </Link>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          4. WHY VIETNAMESE LEARNERS EXCEL: 3 Visual Infographic Cards (Zero Essays)
-          ========================================================================= */}
-      <section className="glass-panel" style={{ padding: '28px 32px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-          <Lightbulb size={20} color="#f59e0b" />
-          <h2 style={{ fontSize: '1.3rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-            Tại sao người Việt học tiếng Trung nhanh nhất?
-          </h2>
-        </div>
-
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '16px',
-          }}
-        >
-          {/* Card 1 */}
-          <div
-            style={{
-              padding: '18px',
-              background: 'var(--bg-tertiary)',
-              borderRadius: '14px',
-              border: '1px solid var(--border-subtle)',
-            }}
-          >
-            <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '6px' }}>
-              💡 70% Từ vựng đồng âm Hán - Việt
-            </div>
-            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.45', marginBottom: '10px' }}>
-              Bạn đã biết sẵn nghĩa của hàng ngàn từ vựng trước khi bắt đầu học:
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.8rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 8px', background: 'var(--bg-card)', borderRadius: '6px' }}>
-                <span style={{ fontWeight: '700', color: 'var(--accent-crimson)' }}>国家 (Guójiā)</span>
-                <span style={{ color: 'var(--text-primary)' }}>➔ Quốc gia</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 8px', background: 'var(--bg-card)', borderRadius: '6px' }}>
-                <span style={{ fontWeight: '700', color: 'var(--accent-crimson)' }}>准备 (Zhǔnbèi)</span>
-                <span style={{ color: 'var(--text-primary)' }}>➔ Chuẩn bị</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 8px', background: 'var(--bg-card)', borderRadius: '6px' }}>
-                <span style={{ fontWeight: '700', color: 'var(--accent-crimson)' }}>态度 (Tàidù)</span>
-                <span style={{ color: 'var(--text-primary)' }}>➔ Thái độ</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div
-            style={{
-              padding: '18px',
-              background: 'var(--bg-tertiary)',
-              borderRadius: '14px',
-              border: '1px solid var(--border-subtle)',
-            }}
-          >
-            <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '6px' }}>
-              🧩 Chiết tự bộ thủ hình tượng
-            </div>
-            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.45', marginBottom: '10px' }}>
-              Mỗi chữ Hán là một câu chuyện logic trực quan, không phải các nét rời rạc:
-            </p>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                padding: '14px 8px',
-                background: 'var(--bg-card)',
-                borderRadius: '8px',
-                fontSize: '1rem',
-                fontWeight: '700',
-              }}
-            >
-              <span style={{ color: '#10b981' }}>亻 (Người)</span>
-              <span>+</span>
-              <span style={{ color: '#0ea5e9' }}>木 (Cây)</span>
-              <span>=</span>
-              <span style={{ color: 'var(--accent-crimson)', fontSize: '1.2rem' }}>休 (Nghỉ ngơi)</span>
-            </div>
-            <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', textAlign: 'center', marginTop: '8px' }}>
-              "Người đứng tựa vào gốc cây để nghỉ ngơi"
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div
-            style={{
-              padding: '18px',
-              background: 'var(--bg-tertiary)',
-              borderRadius: '14px',
-              border: '1px solid var(--border-subtle)',
-            }}
-          >
-            <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '6px' }}>
-              🧠 Ghi nhớ ngắt quãng SM-2 (SRS)
-            </div>
-            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.45', marginBottom: '10px' }}>
-              Thuật toán tự động tính toán thời điểm vàng ôn tập trước khi não bộ quên:
-            </p>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '12px 10px',
-                background: 'var(--bg-card)',
-                borderRadius: '8px',
-                fontSize: '0.78rem',
-                fontWeight: '700',
-                color: 'var(--text-primary)',
-              }}
-            >
-              <span style={{ color: '#ef4444' }}>Ngày 1</span>
-              <span>➔</span>
-              <span style={{ color: '#f59e0b' }}>Ngày 3</span>
-              <span>➔</span>
-              <span style={{ color: '#0ea5e9' }}>Ngày 7</span>
-              <span>➔</span>
-              <span style={{ color: '#10b981' }}>Trí nhớ dài hạn</span>
-            </div>
-            <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', textAlign: 'center', marginTop: '8px' }}>
-              Tiết kiệm 70% thời gian ôn luyện từ vựng mỗi ngày
-            </div>
-          </div>
         </div>
       </section>
     </div>
