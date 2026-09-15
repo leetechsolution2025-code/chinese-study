@@ -20,6 +20,7 @@ import confetti from 'canvas-confetti';
 import { Lesson } from '@/types';
 import { AudioButton } from '@/components/common/AudioButton';
 import { useSpeech } from '@/hooks/useSpeech';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface LessonWorkspaceProps {
   params: Promise<{ courseId: string; lessonId: string }>;
@@ -27,6 +28,9 @@ interface LessonWorkspaceProps {
 
 export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
   const { courseId, lessonId } = use(params);
+  const { language, t } = useLanguage();
+  const isEn = language === 'en';
+
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [activeTab, setActiveTab] = useState<'dialogue' | 'vocab' | 'grammar' | 'quiz'>('dialogue');
   const [showPinyin, setShowPinyin] = useState(true);
@@ -101,9 +105,9 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
   if (!lesson && !loading) {
     return (
       <div style={{ maxWidth: '800px', margin: '40px auto', textAlign: 'center' }}>
-        <h2>Không tìm thấy bài học</h2>
+        <h2>{isEn ? 'Lesson not found' : 'Không tìm thấy bài học'}</h2>
         <Link href={`/courses/${courseId}`} className="btn-secondary" style={{ marginTop: '16px', display: 'inline-flex' }}>
-          Quay lại danh sách bài học
+          {isEn ? 'Back to course overview' : 'Quay lại danh sách bài học'}
         </Link>
       </div>
     );
@@ -124,13 +128,13 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
           }}
         >
           <ArrowLeft size={16} />
-          <span>Lộ trình {courseId.toUpperCase()}</span>
+          <span>{isEn ? `Course ${courseId.toUpperCase()}` : `Lộ trình ${courseId.toUpperCase()}`}</span>
         </Link>
 
         {lesson?.completed && (
           <span className="badge badge-emerald">
             <CheckCircle2 size={13} />
-            <span>Đã hoàn thành ({lesson.score}đ)</span>
+            <span>{isEn ? `Completed (${lesson.score} pts)` : `Đã hoàn thành (${lesson.score}đ)`}</span>
           </span>
         )}
       </div>
@@ -149,8 +153,12 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
       >
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-            <span className="badge badge-crimson">Bài {lesson?.lessonNumber}</span>
-            <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>Giáo trình Chuẩn HSK</span>
+            <span className="badge badge-crimson">
+              {isEn ? `Lesson ${lesson?.lessonNumber}` : `Bài ${lesson?.lessonNumber}`}
+            </span>
+            <span style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+              {isEn ? 'HSK Standard Curriculum' : 'Giáo trình Chuẩn HSK'}
+            </span>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
@@ -170,7 +178,7 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
                 {lesson?.titlePinyin}
               </div>
               <div style={{ fontSize: '0.95rem', color: 'var(--text-secondary)' }}>
-                {lesson?.titleVi}
+                {isEn ? (lesson?.titleEn || lesson?.titleVi) : lesson?.titleVi}
               </div>
             </div>
             {lesson && <AudioButton text={lesson.titleHanzi} size={20} />}
@@ -180,10 +188,10 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
         {/* Tab Switcher Buttons */}
         <div style={{ display: 'flex', gap: '6px', background: 'var(--bg-tertiary)', padding: '4px', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
           {[
-            { id: 'dialogue', label: 'Bài khóa (课文)' },
-            { id: 'vocab', label: `Từ vựng (${lesson?.vocabularies?.length || 0})` },
-            { id: 'grammar', label: 'Ngữ pháp (语法)' },
-            { id: 'quiz', label: 'Luyện tập (练习)' },
+            { id: 'dialogue', label: isEn ? 'Dialogue (课文)' : 'Bài khóa (课文)' },
+            { id: 'vocab', label: isEn ? `Vocabulary (${lesson?.vocabularies?.length || 0})` : `Từ vựng (${lesson?.vocabularies?.length || 0})` },
+            { id: 'grammar', label: isEn ? 'Grammar (语法)' : 'Ngữ pháp (语法)' },
+            { id: 'quiz', label: isEn ? 'Practice (练习)' : 'Luyện tập (练习)' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -211,7 +219,9 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
       {activeTab === 'dialogue' && lesson && (
         <div className="glass-panel" style={{ padding: '28px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: '700' }}>Hội thoại tình huống</h3>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: '700' }}>
+              {isEn ? 'Situational Dialogue' : 'Hội thoại tình huống'}
+            </h3>
 
             <div style={{ display: 'flex', gap: '8px' }}>
               <button
@@ -221,7 +231,11 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
                 style={{ padding: '6px 12px', fontSize: '0.8rem' }}
               >
                 {showPinyin ? <EyeOff size={14} /> : <Eye size={14} />}
-                <span>{showPinyin ? 'Ẩn Pinyin' : 'Hiện Pinyin'}</span>
+                <span>
+                  {showPinyin
+                    ? (isEn ? 'Hide Pinyin' : 'Ẩn Pinyin')
+                    : (isEn ? 'Show Pinyin' : 'Hiện Pinyin')}
+                </span>
               </button>
 
               <button
@@ -230,7 +244,11 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
                 className="btn-secondary"
                 style={{ padding: '6px 12px', fontSize: '0.8rem' }}
               >
-                <span>{showTranslation ? 'Ẩn dịch nghĩa' : 'Hiện dịch nghĩa'}</span>
+                <span>
+                  {showTranslation
+                    ? (isEn ? 'Hide Meaning' : 'Ẩn dịch nghĩa')
+                    : (isEn ? 'Show Meaning' : 'Hiện dịch nghĩa')}
+                </span>
               </button>
 
               <button
@@ -240,7 +258,7 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
                 style={{ padding: '6px 14px', fontSize: '0.8rem' }}
               >
                 <Volume2 size={14} />
-                <span>Nghe toàn bài</span>
+                <span>{isEn ? 'Listen All' : 'Nghe toàn bài'}</span>
               </button>
             </div>
           </div>
@@ -297,7 +315,7 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
 
                     {showTranslation && (
                       <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-                        {line.vi}
+                        {isEn ? (line.en || line.vi) : line.vi}
                       </div>
                     )}
                   </div>
@@ -314,7 +332,9 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
       {activeTab === 'vocab' && lesson && (
         <div className="glass-panel" style={{ padding: '28px' }}>
           <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '18px' }}>
-            Từ vựng mới bài học ({lesson.vocabularies.length} từ)
+            {isEn
+              ? `Lesson Vocabulary (${lesson.vocabularies.length} words)`
+              : `Từ vựng mới bài học (${lesson.vocabularies.length} từ)`}
           </h3>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '14px' }}>
@@ -347,9 +367,15 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
                         <div style={{ fontSize: '1.1rem', fontWeight: '700', color: 'var(--text-primary)' }}>
                           {vocab.pinyin}
                         </div>
-                        <span className="badge badge-gold" style={{ fontSize: '0.7rem', padding: '1px 6px' }}>
-                          Hán-Việt: {vocab.hanviet}
-                        </span>
+                        {isEn ? (
+                          <span className="badge badge-gold" style={{ fontSize: '0.7rem', padding: '1px 6px' }}>
+                            Radical: {vocab.radical || 'General'}
+                          </span>
+                        ) : (
+                          <span className="badge badge-gold" style={{ fontSize: '0.7rem', padding: '1px 6px' }}>
+                            Hán-Việt: {vocab.hanviet}
+                          </span>
+                        )}
                       </div>
                     </div>
 
@@ -357,13 +383,15 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
                   </div>
 
                   <div style={{ fontSize: '0.9rem', color: '#10b981', fontWeight: '600', marginTop: '10px' }}>
-                    {vocab.meaning}
+                    {isEn ? (vocab.meaningEn || vocab.meaning) : vocab.meaning}
                   </div>
 
                   {vocab.exampleHanzi && (
                     <div style={{ marginTop: '10px', padding: '8px 10px', background: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)', borderRadius: '8px', fontSize: '0.78rem' }}>
                       <div style={{ color: 'var(--text-primary)' }}>{vocab.exampleHanzi}</div>
-                      <div style={{ color: 'var(--text-secondary)', marginTop: '2px' }}>{vocab.exampleMeaning}</div>
+                      <div style={{ color: 'var(--text-secondary)', marginTop: '2px' }}>
+                        {isEn ? (vocab.exampleMeaningEn || vocab.exampleMeaning) : vocab.exampleMeaning}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -380,7 +408,7 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
                     }}
                   >
                     <PenTool size={12} />
-                    <span>Tập viết chữ</span>
+                    <span>{isEn ? 'Practice Writing' : 'Tập viết chữ'}</span>
                   </Link>
 
                   <Link
@@ -395,7 +423,7 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
                     }}
                   >
                     <Layers size={12} />
-                    <span>Thêm vào SRS</span>
+                    <span>{isEn ? 'Add to SRS' : 'Thêm vào SRS'}</span>
                   </Link>
                 </div>
               </div>
@@ -410,7 +438,9 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
           {lesson.grammarPoints.map((gp, idx) => (
             <div key={idx} className="glass-panel" style={{ padding: '24px 28px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                <span className="badge badge-crimson">Ngữ pháp {idx + 1}</span>
+                <span className="badge badge-crimson">
+                  {isEn ? `Grammar ${idx + 1}` : `Ngữ pháp ${idx + 1}`}
+                </span>
                 <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--text-primary)' }}>
                   {gp.title}
                 </h3>
@@ -430,7 +460,7 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
                     display: 'inline-block',
                   }}
                 >
-                  Cấu trúc: {gp.structure}
+                  {isEn ? `Structure: ${gp.structure}` : `Cấu trúc: ${gp.structure}`}
                 </div>
               )}
 
@@ -475,12 +505,14 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
         <div className="glass-panel" style={{ padding: '28px', maxWidth: '720px', margin: '0 auto', width: '100%' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
             <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-              Bài tập củng cố kiến thức ({lesson.quizData.length} câu)
+              {isEn
+                ? `Review Quiz (${lesson.quizData.length} questions)`
+                : `Bài tập củng cố kiến thức (${lesson.quizData.length} câu)`}
             </h3>
 
             {quizSubmitted && (
               <span className="badge badge-gold" style={{ fontSize: '0.85rem', padding: '4px 12px' }}>
-                Điểm số: {quizScore} / 100
+                {isEn ? `Score: ${quizScore} / 100` : `Điểm số: ${quizScore} / 100`}
               </span>
             )}
           </div>
@@ -501,7 +533,7 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
                   }}
                 >
                   <div style={{ fontSize: '1rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '14px' }}>
-                    Câu {qIndex + 1}: {q.question}
+                    {isEn ? `Question ${qIndex + 1}:` : `Câu ${qIndex + 1}:`} {q.question}
                   </div>
 
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '8px' }}>
@@ -557,7 +589,7 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
 
                   {quizSubmitted && (
                     <div style={{ marginTop: '10px', fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
-                      💡 <strong>Giải thích:</strong> {q.explanation}
+                      💡 <strong>{isEn ? 'Explanation:' : 'Giải thích:'}</strong> {q.explanation}
                     </div>
                   )}
                 </div>
@@ -571,15 +603,15 @@ export default function LessonWorkspacePage({ params }: LessonWorkspaceProps) {
                 className="btn-primary"
                 style={{ padding: '14px', fontSize: '1rem' }}
               >
-                <span>Nộp bài & Chấm điểm</span>
+                <span>{isEn ? 'Submit & Grade Quiz' : 'Nộp bài & Chấm điểm'}</span>
               </button>
             ) : (
               <div style={{ textAlign: 'center', marginTop: '10px' }}>
                 <div style={{ fontSize: '1.1rem', fontWeight: '700', color: '#34d399', marginBottom: '8px' }}>
-                  ✓ Đã lưu tiến độ hoàn thành bài học vào SQLite
+                  {isEn ? '✓ Progress successfully recorded' : '✓ Đã lưu tiến độ hoàn thành bài học vào SQLite'}
                 </div>
                 <Link href={`/courses/${courseId}`} className="btn-secondary">
-                  <span>Xem các bài học tiếp theo</span>
+                  <span>{isEn ? 'View upcoming lessons' : 'Xem các bài học tiếp theo'}</span>
                   <ArrowRight size={16} />
                 </Link>
               </div>

@@ -12,6 +12,7 @@ import {
   Award,
 } from 'lucide-react';
 import { Course, Lesson } from '@/types';
+import { useLanguage } from '@/context/LanguageContext';
 import coursesData from '@/data/courses.json';
 
 interface CoursePageProps {
@@ -20,6 +21,8 @@ interface CoursePageProps {
 
 export default function CourseLessonsPage({ params }: CoursePageProps) {
   const { courseId } = use(params);
+  const { language } = useLanguage();
+  const isEn = language === 'en';
   const [course, setCourse] = useState<Course | null>(null);
   const [lessons, setLessons] = useState<Lesson[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,9 +43,9 @@ export default function CourseLessonsPage({ params }: CoursePageProps) {
   if (!course && !loading) {
     return (
       <div style={{ maxWidth: '800px', margin: '40px auto', textAlign: 'center' }}>
-        <h2>Không tìm thấy khóa học</h2>
+        <h2>{isEn ? 'Course Not Found' : 'Không tìm thấy khóa học'}</h2>
         <Link href="/courses" className="btn-secondary" style={{ marginTop: '16px', display: 'inline-flex' }}>
-          Quay lại danh sách lớp học
+          {isEn ? 'Back to Courses' : 'Quay lại danh sách lớp học'}
         </Link>
       </div>
     );
@@ -66,7 +69,7 @@ export default function CourseLessonsPage({ params }: CoursePageProps) {
           }}
         >
           <ArrowLeft size={16} />
-          <span>Danh sách lớp học</span>
+          <span>{isEn ? 'Back to Courses' : 'Danh sách lớp học'}</span>
         </Link>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
@@ -80,17 +83,17 @@ export default function CourseLessonsPage({ params }: CoursePageProps) {
                   border: `1px solid ${currentCourse?.color || '#e11d48'}50`,
                 }}
               >
-                Cấp độ HSK {currentCourse?.level}
+                {isEn ? `HSK Level ${currentCourse?.level}` : `Cấp độ HSK ${currentCourse?.level}`}
               </span>
               <span className="badge badge-gold">
-                {currentCourse?.completedLessons || 0} / {currentCourse?.totalLessons} bài hoàn thành
+                {currentCourse?.completedLessons || 0} / {currentCourse?.totalLessons} {isEn ? 'lessons completed' : 'bài hoàn thành'}
               </span>
             </div>
             <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>
-              {currentCourse?.title}
+              {isEn && currentCourse?.titleEn ? currentCourse.titleEn : currentCourse?.title}
             </h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginTop: '4px' }}>
-              {currentCourse?.description}
+              {isEn && currentCourse?.descriptionEn ? currentCourse.descriptionEn : currentCourse?.description}
             </p>
           </div>
         </div>
@@ -135,7 +138,7 @@ export default function CourseLessonsPage({ params }: CoursePageProps) {
                     flexShrink: 0,
                   }}
                 >
-                  {isCompleted ? <CheckCircle2 size={22} /> : `B${lesson.lessonNumber}`}
+                  {isCompleted ? <CheckCircle2 size={22} /> : (isEn ? `L${lesson.lessonNumber}` : `B${lesson.lessonNumber}`)}
                 </div>
 
                 {/* Lesson title & objectives */}
@@ -155,12 +158,14 @@ export default function CourseLessonsPage({ params }: CoursePageProps) {
                       {lesson.titlePinyin}
                     </span>
                     <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                      • {lesson.titleVi}
+                      {isEn && lesson.titleEn ? `• ${lesson.titleEn}` : (lesson.titleVi ? `• ${lesson.titleVi}` : '')}
                     </span>
                   </div>
 
                   <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-                    {lesson.objectives?.[0] || 'Luyện nghe nói, từ vựng và ngữ pháp trọng tâm'}
+                    {isEn && lesson.objectivesEn?.[0]
+                      ? lesson.objectivesEn[0]
+                      : (lesson.objectives?.[0] || (isEn ? 'Core listening, vocabulary & grammar' : 'Luyện nghe nói, từ vựng và ngữ pháp trọng tâm'))}
                   </div>
                 </div>
               </div>
@@ -169,7 +174,7 @@ export default function CourseLessonsPage({ params }: CoursePageProps) {
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 {isCompleted ? (
                   <span className="badge badge-emerald" style={{ fontSize: '0.8rem', padding: '6px 12px' }}>
-                    Đã hoàn thành ({lesson.score}đ)
+                    {isEn ? `Completed (${lesson.score} pts)` : `Đã hoàn thành (${lesson.score}đ)`}
                   </span>
                 ) : (
                   <button
@@ -178,7 +183,7 @@ export default function CourseLessonsPage({ params }: CoursePageProps) {
                     style={{ padding: '8px 16px', fontSize: '0.85rem' }}
                   >
                     <PlayCircle size={15} />
-                    <span>Học bài này</span>
+                    <span>{isEn ? 'Start Lesson' : 'Học bài này'}</span>
                   </button>
                 )}
               </div>

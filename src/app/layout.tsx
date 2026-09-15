@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     'Luyện 4 kỹ năng Nghe - Nói - Đọc - Viết tiếng Trung tối ưu cho người Việt: Bộ thủ, Chiết tự, Âm Hán-Việt, Biểu đồ thanh điệu và Flashcard SRS.',
 };
 
+import { LanguageProvider } from '@/context/LanguageContext';
+
 export default function RootLayout({
   children,
 }: {
@@ -31,6 +33,11 @@ export default function RootLayout({
                   } else {
                     document.documentElement.setAttribute('data-theme', 'dark');
                   }
+
+                  var savedLang = localStorage.getItem('app_language');
+                  if (savedLang === 'en' || savedLang === 'vi') {
+                    document.documentElement.lang = savedLang;
+                  }
                 } catch (e) {}
               })();
             `,
@@ -38,10 +45,12 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning={true}>
-        <Navbar />
-        <main style={{ minHeight: 'calc(100vh - 70px)', padding: '24px 16px' }}>
-          {children}
-        </main>
+        <LanguageProvider>
+          <Navbar />
+          <main style={{ minHeight: 'calc(100vh - 70px)', padding: '24px 16px' }}>
+            {children}
+          </main>
+        </LanguageProvider>
       </body>
     </html>
   );

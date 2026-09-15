@@ -12,9 +12,12 @@ import {
   Award,
 } from 'lucide-react';
 import { Course } from '@/types';
+import { useLanguage } from '@/context/LanguageContext';
 import coursesData from '@/data/courses.json';
 
 export default function CoursesPage() {
+  const { language } = useLanguage();
+  const isEn = language === 'en';
   const [courses, setCourses] = useState<Course[]>(coursesData.courses as Course[]);
   const [loading, setLoading] = useState(true);
 
@@ -35,14 +38,22 @@ export default function CoursesPage() {
       {/* Page Header */}
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-          <span className="badge badge-crimson">Chương trình giáo trình chuẩn</span>
+          <span className="badge badge-crimson">
+            {isEn ? 'Official Standard Curriculum' : 'Chương trình giáo trình chuẩn'}
+          </span>
           <span className="badge badge-gold">HSK Standard Course</span>
         </div>
         <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>
-          Lớp học theo giáo trình <span className="gradient-text">chuẩn HSK 1 - HSK 6</span>
+          {isEn ? (
+            <>Standard <span className="gradient-text">HSK 1 - HSK 6 Courses</span></>
+          ) : (
+            <>Lớp học theo giáo trình <span className="gradient-text">chuẩn HSK 1 - HSK 6</span></>
+          )}
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginTop: '4px' }}>
-          Lộ trình học tập bài bản 6 cấp độ từ nhập môn đến cao cấp và tinh thông, tích hợp bài khóa hội thoại, phân tích âm Hán - Việt và bài tập tự chấm điểm.
+          {isEn
+            ? 'Structured 6-level curriculum from absolute beginner to advanced fluency, integrating audio dialogues, vocabulary analysis, and auto-graded exercises.'
+            : 'Lộ trình học tập bài bản 6 cấp độ từ nhập môn đến cao cấp và tinh thông, tích hợp bài khóa hội thoại, phân tích âm Hán - Việt và bài tập tự chấm điểm.'}
         </p>
       </div>
 
@@ -95,19 +106,19 @@ export default function CoursesPage() {
                       fontSize: '0.72rem',
                     }}
                   >
-                    Cấp độ HSK {course.level}
+                    {isEn ? `HSK Level ${course.level}` : `Cấp độ HSK ${course.level}`}
                   </span>
                   <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                    {course.totalLessons} bài học
+                    {course.totalLessons} {isEn ? 'lessons' : 'bài học'}
                   </div>
                 </div>
 
                 <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '8px' }}>
-                  {course.title}
+                  {isEn && course.titleEn ? course.titleEn : course.title}
                 </h3>
 
                 <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '18px' }}>
-                  {course.description}
+                  {isEn && course.descriptionEn ? course.descriptionEn : course.description}
                 </p>
 
                 {/* Key Course Stats */}
@@ -125,15 +136,15 @@ export default function CoursesPage() {
                   }}
                 >
                   <div>
-                    <div style={{ color: 'var(--text-muted)' }}>Mục tiêu từ vựng</div>
+                    <div style={{ color: 'var(--text-muted)' }}>{isEn ? 'Target Vocab' : 'Mục tiêu từ vựng'}</div>
                     <div style={{ fontWeight: '700', color: 'var(--text-primary)', marginTop: '2px' }}>
-                      {course.targetVocab} từ
+                      {course.targetVocab} {isEn ? 'words' : 'từ'}
                     </div>
                   </div>
                   <div>
-                    <div style={{ color: 'var(--text-muted)' }}>Tiến độ hoàn thành</div>
+                    <div style={{ color: 'var(--text-muted)' }}>{isEn ? 'Progress' : 'Tiến độ hoàn thành'}</div>
                     <div style={{ fontWeight: '700', color: course.color, marginTop: '2px' }}>
-                      {completed} / {course.totalLessons} bài ({percent}%)
+                      {completed} / {course.totalLessons} {isEn ? 'lessons' : 'bài'} ({percent}%)
                     </div>
                   </div>
                 </div>
@@ -162,7 +173,7 @@ export default function CoursesPage() {
                   background: `linear-gradient(135deg, ${course.color}, #991b1b)`,
                 }}
               >
-                <span>Vào lớp học</span>
+                <span>{isEn ? 'Enter Course' : 'Vào lớp học'}</span>
                 <ArrowRight size={16} />
               </Link>
             </div>
@@ -184,22 +195,40 @@ export default function CoursesPage() {
         <div>
           <div className="badge badge-emerald" style={{ marginBottom: '10px' }}>
             <Award size={14} />
-            <span>Phương pháp đào tạo chuẩn hóa</span>
+            <span>{isEn ? 'Standardized Learning Methodology' : 'Phương pháp đào tạo chuẩn hóa'}</span>
           </div>
           <h2 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '8px', color: 'var(--text-primary)' }}>
-            Mô hình bài học 4 bước toàn diện
+            {isEn ? 'Comprehensive 4-Step Learning Cycle' : 'Mô hình bài học 4 bước toàn diện'}
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
-            Mỗi bài học được thiết kế khép kín theo chu trình: <strong>Nghe hội thoại</strong> ➔ <strong>Phân tích từ vựng & âm Hán - Việt</strong> ➔ <strong>Nắm chắc ngữ pháp</strong> ➔ <strong>Luyện tập củng cố</strong>, giúp người học ghi nhớ sâu và ứng dụng được ngay.
+            {isEn
+              ? 'Every lesson follows a proven immersion loop: Listen to dialogue ➔ Break down vocabulary ➔ Master grammar rules ➔ Reinforce through self-graded quiz.'
+              : 'Mỗi bài học được thiết kế khép kín theo chu trình: Nghe hội thoại ➔ Phân tích từ vựng & âm Hán - Việt ➔ Nắm chắc ngữ pháp ➔ Luyện tập củng cố, giúp người học ghi nhớ sâu và ứng dụng được ngay.'}
           </p>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {[
-            { step: '01', title: 'Bài khóa tương tác (课文)', desc: 'Luyện nghe phản xạ có audio giọng bản xứ, tùy chọn ẩn/hiện Pinyin và dịch nghĩa.' },
-            { step: '02', title: 'Bẻ khóa từ vựng (生词)', desc: 'Gắn liền chữ Hán với âm Hán - Việt, kết nối trực tiếp với Hanzi Writer và thẻ SRS.' },
-            { step: '03', title: 'Điểm ngữ pháp thực hành (语法)', desc: 'Diễn giải trực quan cấu trúc câu bằng tiếng Việt kèm mẫu câu ví dụ sinh động.' },
-            { step: '04', title: 'Bài tập trắc nghiệm (练习)', desc: 'Tự kiểm tra độ hiểu bài với phản hồi tức thì và lưu trữ tiến độ vào SQLite.' },
+            {
+              step: '01',
+              title: isEn ? 'Interactive Dialogue (课文)' : 'Bài khóa tương tác (课文)',
+              desc: isEn ? 'Native audio listening practice with toggleable Pinyin and translations.' : 'Luyện nghe phản xạ có audio giọng bản xứ, tùy chọn ẩn/hiện Pinyin và dịch nghĩa.'
+            },
+            {
+              step: '02',
+              title: isEn ? 'Vocabulary Breakdown (生词)' : 'Bẻ khóa từ vựng (生词)',
+              desc: isEn ? 'Connect Hanzi with radicals and definitions, directly linked with Hanzi Writer and SRS cards.' : 'Gắn liền chữ Hán với âm Hán - Việt, kết nối trực tiếp với Hanzi Writer và thẻ SRS.'
+            },
+            {
+              step: '03',
+              title: isEn ? 'Practical Grammar (语法)' : 'Điểm ngữ pháp thực hành (语法)',
+              desc: isEn ? 'Clear explanations of sentence structures with lively practical examples.' : 'Diễn giải trực quan cấu trúc câu bằng tiếng Việt kèm mẫu câu ví dụ sinh động.'
+            },
+            {
+              step: '04',
+              title: isEn ? 'Self-Graded Quiz (练习)' : 'Bài tập trắc nghiệm (练习)',
+              desc: isEn ? 'Test comprehension with instant feedback and automatic SQLite progress tracking.' : 'Tự kiểm tra độ hiểu bài với phản hồi tức thì và lưu trữ tiến độ vào SQLite.'
+            },
           ].map((item, idx) => (
             <div
               key={idx}

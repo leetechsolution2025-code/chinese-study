@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -22,9 +22,29 @@ import {
   Moon,
 } from 'lucide-react';
 import { storage, UserStats } from '@/lib/storage';
+import { useLanguage } from '@/context/LanguageContext';
+
+interface DropdownItem {
+  title: string;
+  desc: string;
+  href: string;
+  icon: any;
+  color: string;
+}
+
+interface NavCategory {
+  id: string;
+  label: string;
+  href: string;
+  icon: any;
+  isActive: (path: string) => boolean;
+  badge?: string;
+  items?: DropdownItem[];
+}
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
+  const { language, toggleLanguage, t } = useLanguage();
   const [stats, setStats] = useState<UserStats>({
     streak: 1,
     lastStudyDate: '',
@@ -69,66 +89,68 @@ export const Navbar: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const navCategories = [
+  const isEn = language === 'en';
+
+  const navCategories: NavCategory[] = useMemo(() => [
     {
       id: 'home',
-      label: 'Trang chủ',
+      label: isEn ? 'Home' : 'Trang chủ',
       href: '/',
       icon: Home,
       isActive: (path: string) => path === '/',
     },
     {
       id: 'courses',
-      label: 'Lớp học',
+      label: isEn ? 'Courses' : 'Lớp học',
       href: '/courses',
       icon: GraduationCap,
       isActive: (path: string) => path.startsWith('/courses'),
       items: [
         {
-          title: 'Tất cả lớp học',
-          desc: 'Tổng quan lộ trình chuẩn HSK 1 - HSK 6',
+          title: isEn ? 'All Courses' : 'Tất cả lớp học',
+          desc: isEn ? 'Standard HSK 1 - HSK 6 curriculum roadmap' : 'Tổng quan lộ trình chuẩn HSK 1 - HSK 6',
           href: '/courses',
           icon: GraduationCap,
           color: '#e11d48',
         },
         {
-          title: 'Lớp HSK 1 - Nhập môn',
-          desc: '15 bài học, phát âm Pinyin & 150 từ vựng cơ bản',
+          title: isEn ? 'HSK 1 - Beginner' : 'Lớp HSK 1 - Nhập môn',
+          desc: isEn ? '15 lessons, Pinyin pronunciation & 150 core words' : '15 bài học, phát âm Pinyin & 150 từ vựng cơ bản',
           href: '/courses/hsk1',
           icon: BookMarked,
           color: '#e11d48',
         },
         {
-          title: 'Lớp HSK 2 - Sơ cấp',
-          desc: '15 bài học, giao tiếp đời sống & 300 từ vựng',
+          title: isEn ? 'HSK 2 - Elementary' : 'Lớp HSK 2 - Sơ cấp',
+          desc: isEn ? '15 lessons, daily communication & 300 words' : '15 bài học, giao tiếp đời sống & 300 từ vựng',
           href: '/courses/hsk2',
           icon: BookMarked,
           color: '#0ea5e9',
         },
         {
-          title: 'Lớp HSK 3 - Sơ - Trung cấp',
-          desc: '20 bài học, ngữ pháp chữ 把 & câu so sánh',
+          title: isEn ? 'HSK 3 - Intermediate' : 'Lớp HSK 3 - Sơ - Trung cấp',
+          desc: isEn ? '20 lessons, bǎ structure & comparisons' : '20 bài học, ngữ pháp chữ 把 & câu so sánh',
           href: '/courses/hsk3',
           icon: BookMarked,
           color: '#f59e0b',
         },
         {
-          title: 'Lớp HSK 4 - Trung cấp',
-          desc: '20 bài học, thảo luận xã hội & 1200 từ vựng',
+          title: isEn ? 'HSK 4 - Upper-Intermediate' : 'Lớp HSK 4 - Trung cấp',
+          desc: isEn ? '20 lessons, social discussions & 1200 words' : '20 bài học, thảo luận xã hội & 1200 từ vựng',
           href: '/courses/hsk4',
           icon: BookMarked,
           color: '#10b981',
         },
         {
-          title: 'Lớp HSK 5 - Cao cấp',
-          desc: '36 bài học, đọc báo, phim ảnh & 2500 từ vựng',
+          title: isEn ? 'HSK 5 - Advanced' : 'Lớp HSK 5 - Cao cấp',
+          desc: isEn ? '36 lessons, news, films & 2500 words' : '36 bài học, đọc báo, phim ảnh & 2500 từ vựng',
           href: '/courses/hsk5',
           icon: BookMarked,
           color: '#8b5cf6',
         },
         {
-          title: 'Lớp HSK 6 - Tinh thông',
-          desc: '40 bài học, ngôn ngữ học thuật & 5000 từ vựng',
+          title: isEn ? 'HSK 6 - Mastery' : 'Lớp HSK 6 - Tinh thông',
+          desc: isEn ? '40 lessons, academic language & 5000 words' : '40 bài học, ngôn ngữ học thuật & 5000 từ vựng',
           href: '/courses/hsk6',
           icon: BookMarked,
           color: '#ec4899',
@@ -137,7 +159,7 @@ export const Navbar: React.FC = () => {
     },
     {
       id: 'practice',
-      label: 'Luyện tập',
+      label: isEn ? 'Practice' : 'Luyện tập',
       href: '/practice',
       icon: Target,
       isActive: (path: string) =>
@@ -149,43 +171,43 @@ export const Navbar: React.FC = () => {
         path.startsWith('/tutor'),
       items: [
         {
-          title: 'Trung tâm luyện tập',
-          desc: 'Tổng hợp 5 kỹ năng Nghe - Nói - Đọc - Viết',
+          title: isEn ? 'Practice Center' : 'Trung tâm luyện tập',
+          desc: isEn ? 'Master Listening, Speaking, Reading & Writing' : 'Tổng hợp 5 kỹ năng Nghe - Nói - Đọc - Viết',
           href: '/practice',
           icon: Target,
           color: '#0ea5e9',
         },
         {
-          title: 'Tập viết chữ Hán & chiết tự',
-          desc: 'Canvas vẽ nét 笔顺, 214 bộ thủ & âm Hán - Việt',
+          title: isEn ? 'Hanzi Writing & Radicals' : 'Tập viết chữ Hán & chiết tự',
+          desc: isEn ? 'Stroke order canvas, 214 radicals & roots' : 'Canvas vẽ nét 笔顺, 214 bộ thủ & âm Hán - Việt',
           href: '/writing',
           icon: PenTool,
           color: '#fb7185',
         },
         {
-          title: 'Luyện 4 thanh điệu & cao độ',
-          desc: 'Biểu đồ 5 bậc trực quan & luyện nghe đoán âm',
+          title: isEn ? '4 Tones & Pitch Practice' : 'Luyện 4 thanh điệu & cao độ',
+          desc: isEn ? '5-level pitch graphs & ear training' : 'Biểu đồ 5 bậc trực quan & luyện nghe đoán âm',
           href: '/tones',
           icon: Volume2,
           color: '#38bdf8',
         },
         {
-          title: 'Flashcard SRS ngắt quãng',
-          desc: 'Ôn 150 từ vựng HSK 1 với thuật toán SM-2',
+          title: isEn ? 'SRS Spaced Flashcards' : 'Flashcard SRS ngắt quãng',
+          desc: isEn ? 'Review HSK 1 vocabulary with SM-2 algorithm' : 'Ôn 150 từ vựng HSK 1 với thuật toán SM-2',
           href: '/flashcards',
           icon: Layers,
           color: '#fbbf24',
         },
         {
-          title: 'Đọc tương tác Graded Reader',
-          desc: 'Truyện song ngữ, công tắc Pinyin, tra từ 1-click',
+          title: isEn ? 'Graded Interactive Reader' : 'Đọc tương tác Graded Reader',
+          desc: isEn ? 'Bilingual stories with Pinyin toggle and lookup' : 'Truyện song ngữ, công tắc Pinyin, tra từ 1-click',
           href: '/reader',
           icon: BookOpen,
           color: '#34d399',
         },
         {
-          title: 'AI Tutor đàm thoại thực chiến',
-          desc: 'Khẩu ngữ phản xạ theo tình huống đời sống',
+          title: isEn ? 'AI Conversational Tutor' : 'AI Tutor đàm thoại thực chiến',
+          desc: isEn ? 'Real-time conversational practice with AI' : 'Khẩu ngữ phản xạ theo tình huống đời sống',
           href: '/tutor',
           icon: MessageSquare,
           color: '#a78bfa',
@@ -194,64 +216,64 @@ export const Navbar: React.FC = () => {
     },
     {
       id: 'exams',
-      label: 'Luyện thi',
+      label: isEn ? 'Mock Exams' : 'Luyện thi',
       href: '/exams',
       icon: Trophy,
-      badge: 'MỚI',
+      badge: isEn ? 'NEW' : 'MỚI',
       isActive: (path: string) => path.startsWith('/exams'),
       items: [
         {
-          title: 'Phòng thi thử HSK',
-          desc: 'Tổng quan sảnh thi & lịch sử kết quả làm bài',
+          title: isEn ? 'HSK Exam Room' : 'Phòng thi thử HSK',
+          desc: isEn ? 'Exam hub overview & attempt history' : 'Tổng quan sảnh thi & lịch sử kết quả làm bài',
           href: '/exams',
           icon: Trophy,
           color: '#fbbf24',
         },
         {
-          title: 'Đề thi thử HSK 1',
-          desc: 'Mô phỏng 35 phút (Nghe hiểu & Đọc hiểu)',
+          title: isEn ? 'HSK 1 Mock Exam' : 'Đề thi thử HSK 1',
+          desc: isEn ? '35 mins simulation (Listening & Reading)' : 'Mô phỏng 35 phút (Nghe hiểu & Đọc hiểu)',
           href: '/exams/hsk1',
           icon: FileText,
           color: '#e11d48',
         },
         {
-          title: 'Đề thi thử HSK 2',
-          desc: 'Mô phỏng 50 phút (Nghe hiểu & Đọc hiểu)',
+          title: isEn ? 'HSK 2 Mock Exam' : 'Đề thi thử HSK 2',
+          desc: isEn ? '50 mins simulation (Listening & Reading)' : 'Mô phỏng 50 phút (Nghe hiểu & Đọc hiểu)',
           href: '/exams/hsk2',
           icon: FileText,
           color: '#0ea5e9',
         },
         {
-          title: 'Đề thi thử HSK 3',
-          desc: 'Mô phỏng 85 phút (Nghe hiểu & Đọc hiểu)',
+          title: isEn ? 'HSK 3 Mock Exam' : 'Đề thi thử HSK 3',
+          desc: isEn ? '85 mins simulation (Listening & Reading)' : 'Mô phỏng 85 phút (Nghe hiểu & Đọc hiểu)',
           href: '/exams/hsk3',
           icon: FileText,
           color: '#f59e0b',
         },
         {
-          title: 'Đề thi thử HSK 4',
-          desc: 'Mô phỏng 100 phút (Nghe hiểu & Đọc hiểu)',
+          title: isEn ? 'HSK 4 Mock Exam' : 'Đề thi thử HSK 4',
+          desc: isEn ? '100 mins simulation (Listening & Reading)' : 'Mô phỏng 100 phút (Nghe hiểu & Đọc hiểu)',
           href: '/exams/hsk4',
           icon: FileText,
           color: '#10b981',
         },
         {
-          title: 'Đề thi thử HSK 5',
-          desc: 'Mô phỏng 120 phút (Nghe hiểu & Đọc hiểu chuyên sâu)',
+          title: isEn ? 'HSK 5 Mock Exam' : 'Đề thi thử HSK 5',
+          desc: isEn ? '120 mins simulation (Listening & Reading)' : 'Mô phỏng 120 phút (Nghe hiểu & Đọc hiểu chuyên sâu)',
           href: '/exams/hsk5',
           icon: FileText,
           color: '#8b5cf6',
         },
         {
-          title: 'Đề thi thử HSK 6',
-          desc: 'Mô phỏng 135 phút (Nghe hiểu & Đọc hiểu học thuật)',
+          title: isEn ? 'HSK 6 Mock Exam' : 'Đề thi thử HSK 6',
+          desc: isEn ? '135 mins simulation (Listening & Reading)' : 'Mô phỏng 135 phút (Nghe hiểu & Đọc hiểu học thuật)',
           href: '/exams/hsk6',
           icon: FileText,
           color: '#ec4899',
         },
       ],
     },
-  ];
+  ], [isEn]);
 
   return (
     <header className="nav-container" ref={navRef}>
@@ -283,14 +305,14 @@ export const Navbar: React.FC = () => {
               <span className="badge badge-crimson" style={{ fontSize: '0.62rem', padding: '1px 5px', height: '17px' }}>HSK</span>
             </div>
             <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', marginTop: '2px', whiteSpace: 'nowrap' }}>
-              Học tiếng Trung toàn diện
+              {isEn ? 'Master Chinese' : 'Học tiếng Trung toàn diện'}
             </div>
           </div>
         </Link>
 
         {/* Primary Navigation Links (Only 4 Clean Columns) */}
         <nav className="nav-links">
-          {navCategories.map((cat) => {
+          {navCategories.map((cat: NavCategory) => {
             const Icon = cat.icon;
             const active = cat.isActive(pathname);
             const hasItems = cat.items && cat.items.length > 0;
@@ -320,42 +342,33 @@ export const Navbar: React.FC = () => {
                   href={cat.href}
                   className={`nav-link ${active ? 'active' : ''}`}
                   onClick={(e) => {
-                    // Click navigates directly to the hub page
-                    setActiveDropdown(null);
+                    // Cho phép click để đóng/mở dropdown trên mobile
+                    if (window.innerWidth <= 768) {
+                      e.preventDefault();
+                      setActiveDropdown(isOpen ? null : cat.id);
+                    }
                   }}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}
                 >
                   <Icon size={15} style={{ flexShrink: 0 }} />
                   <span>{cat.label}</span>
                   {cat.badge && (
-                    <span
-                      style={{
-                        background: '#e11d48',
-                        color: '#ffffff',
-                        fontSize: '0.58rem',
-                        fontWeight: '800',
-                        padding: '1px 5px',
-                        borderRadius: '4px',
-                        lineHeight: 1.2,
-                        marginLeft: '2px',
-                      }}
-                    >
+                    <span className="badge badge-crimson" style={{ fontSize: '0.62rem', padding: '0 4px', height: '16px' }}>
                       {cat.badge}
                     </span>
                   )}
                   <ChevronDown
-                    size={13}
+                    size={12}
                     style={{
-                      opacity: 0.6,
+                      transition: 'transform 0.2s ease',
                       transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                      transition: 'transform 0.18s ease',
+                      opacity: 0.7,
                     }}
                   />
                 </Link>
 
-                {/* Dropdown Menu */}
+                {/* Dropdown Menu Modal */}
                 <div className="nav-dropdown-menu">
-                  {cat.items.map((item) => {
+                  {cat.items?.map((item: DropdownItem) => {
                     const ItemIcon = item.icon;
                     const isItemActive = pathname === item.href;
 
@@ -389,14 +402,35 @@ export const Navbar: React.FC = () => {
           })}
         </nav>
 
-        {/* User Streak & Level badge + Theme Toggle */}
+        {/* Controls: Language Switcher, Theme Toggle, Streak, Level */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+          {/* Language Switcher Toggle */}
+          <button
+            onClick={toggleLanguage}
+            className="theme-toggle-btn"
+            title={language === 'vi' ? 'Switch to English learning mode' : 'Chuyển sang học bằng tiếng Việt'}
+            aria-label="Toggle study language"
+            type="button"
+            style={{
+              padding: '5px 10px',
+              gap: '6px',
+              fontWeight: 700,
+              fontSize: '0.78rem',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+            }}
+          >
+            <span style={{ fontSize: '1rem', lineHeight: 1 }}>{language === 'vi' ? '🇻🇳' : '🇬🇧'}</span>
+            <span>{language === 'vi' ? 'VI' : 'EN'}</span>
+          </button>
+
           {/* Theme Toggle Button */}
           <button
             onClick={toggleTheme}
             className="theme-toggle-btn"
-            title={theme === 'dark' ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối'}
-            aria-label="Chuyển đổi giao diện sáng tối"
+            title={theme === 'dark' ? (isEn ? 'Switch to light mode' : 'Chuyển sang giao diện sáng') : (isEn ? 'Switch to dark mode' : 'Chuyển sang giao diện tối')}
+            aria-label="Toggle theme"
             type="button"
           >
             <span className="theme-toggle-icon">
@@ -406,16 +440,16 @@ export const Navbar: React.FC = () => {
                 <Moon size={14} style={{ color: '#6366f1' }} />
               )}
             </span>
-            <span>{theme === 'dark' ? 'Sáng' : 'Tối'}</span>
+            <span>{theme === 'dark' ? (isEn ? 'Light' : 'Sáng') : (isEn ? 'Dark' : 'Tối')}</span>
           </button>
 
           <div
             className="badge badge-gold"
-            title="Chuỗi ngày học liên tục"
+            title={isEn ? 'Continuous Study Streak' : 'Chuỗi ngày học liên tục'}
             style={{ padding: '5px 10px', fontSize: '0.78rem', whiteSpace: 'nowrap' }}
           >
             <Flame size={14} />
-            <span>{stats.streak} ngày</span>
+            <span>{stats.streak} {isEn ? 'days' : 'ngày'}</span>
           </div>
 
           <div

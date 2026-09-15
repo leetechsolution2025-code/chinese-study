@@ -3,60 +3,72 @@
     {
       "id": "hsk1",
       "title": "Lớp học HSK 1 - Nhập môn",
+      "titleEn": "HSK 1 - Beginner Course",
       "level": 1,
       "totalLessons": 15,
       "targetVocab": 150,
       "description": "Làm quen với bảng chữ cái Pinyin, 4 thanh điệu, quy tắc viết chữ Hán và 150 từ vựng giao tiếp cơ bản nhất trong đời sống.",
+      "descriptionEn": "Master Pinyin pronunciation, 4 tones, stroke order rules, and 150 essential everyday words.",
       "color": "#e11d48",
       "badgeClass": "badge-crimson"
     },
     {
       "id": "hsk2",
       "title": "Lớp học HSK 2 - Sơ cấp",
+      "titleEn": "HSK 2 - Elementary Course",
       "level": 2,
       "totalLessons": 15,
       "targetVocab": 300,
       "description": "Nâng cao vốn từ vựng lên 300 từ. Làm chủ các chủ đề: thời tiết, sức khỏe, giao thông, mua sắm và thói quen sinh hoạt hàng ngày.",
+      "descriptionEn": "Expand vocabulary to 300 words. Master daily life topics: weather, health, transit, and shopping.",
       "color": "#0ea5e9",
       "badgeClass": "badge-sky"
     },
     {
       "id": "hsk3",
       "title": "Lớp học HSK 3 - Sơ - Trung cấp",
+      "titleEn": "HSK 3 - Intermediate Course",
       "level": 3,
       "totalLessons": 20,
       "targetVocab": 600,
       "description": "Mở rộng 600 từ vựng. Nắm vững câu chữ 把, câu so sánh 比, câu phức liên từ, tự tin giao tiếp khi đi du lịch và làm việc cơ bản.",
+      "descriptionEn": "Expand to 600 words. Master bǎ sentences, bǐ comparisons, conjunctions, and travel communication.",
       "color": "#f59e0b",
       "badgeClass": "badge-gold"
     },
     {
       "id": "hsk4",
       "title": "Lớp học HSK 4 - Trung cấp",
+      "titleEn": "HSK 4 - Upper-Intermediate Course",
       "level": 4,
       "totalLessons": 20,
       "targetVocab": 1200,
       "description": "Làm chủ 1200 từ vựng và ngữ pháp nâng cao. Có khả năng thảo luận trôi chảy về các chủ đề văn hóa, xã hội, công việc và tình cảm.",
+      "descriptionEn": "Master 1200 words and advanced grammar. Discuss culture, society, career, and emotions fluently.",
       "color": "#10b981",
       "badgeClass": "badge-emerald"
     },
     {
       "id": "hsk5",
       "title": "Lớp học HSK 5 - Cao cấp",
+      "titleEn": "HSK 5 - Advanced Course",
       "level": 5,
       "totalLessons": 36,
       "targetVocab": 2500,
       "description": "Chinh phục 2500 từ vựng và ngữ pháp cao cấp. Đọc hiểu báo chí, xem phim ảnh Trung Quốc, thuyết trình và viết bài luận học thuật chuyên sâu.",
+      "descriptionEn": "Conquer 2500 words and complex syntax. Read news, watch films, and write academic essays.",
       "color": "#8b5cf6",
       "badgeClass": "badge-indigo"
     },
     {
       "id": "hsk6",
       "title": "Lớp học HSK 6 - Tinh thông",
+      "titleEn": "HSK 6 - Mastery Course",
       "level": 6,
       "totalLessons": 40,
       "targetVocab": 5000,
       "description": "Làm chủ 5000+ từ vựng và thành ngữ (成语) bốn chữ kinh điển. Diễn đạt lưu loát như người bản xứ, đọc hiểu tác phẩm văn học và phân tích chuyên đề xã hội phức tạp.",
+      "descriptionEn": "Master 5000+ words and classical chengyu idioms. Express ideas with native-level precision.",
       "color": "#ec4899",
       "badgeClass": "badge-crimson"
     }

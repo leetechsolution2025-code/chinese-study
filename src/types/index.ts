@@ -4,6 +4,7 @@ export interface VocabItem {
   pinyin: string;
   hanviet: string;        // Âm Hán Việt - Vũ khí ghi nhớ người Việt
   meaning: string;        // Nghĩa tiếng Việt
+  meaningEn?: string;     // English definition for English-medium learners
   level: number;          // HSK level (1-6)
   partOfSpeech: string;   // Từ loại (danh từ, động từ...)
   strokes?: number;       // Số nét vẽ
@@ -11,6 +12,7 @@ export interface VocabItem {
   exampleHanzi: string;   // Câu ví dụ chữ Hán
   examplePinyin: string;  // Pinyin câu ví dụ
   exampleMeaning: string; // Nghĩa tiếng Việt câu ví dụ
+  exampleMeaningEn?: string; // English meaning of example
 }
 
 export interface RadicalItem {
@@ -18,8 +20,10 @@ export interface RadicalItem {
   pinyin: string;
   hanviet: string;
   meaning: string;
+  meaningEn?: string;
   strokes: number;
   mnemonic: string;       // Câu chuyện chiết tự ghi nhớ
+  mnemonicEn?: string;
   examples: string[];
 }
 
@@ -63,12 +67,14 @@ export interface ReaderArticle {
 }
 
 export interface Course {
-  id: string; // 'hsk1', 'hsk2', 'hsk3', 'hsk4'
+  id: string; // 'hsk1', 'hsk2', 'hsk3', 'hsk4', 'hsk5', 'hsk6'
   title: string;
+  titleEn?: string;
   level: number;
   totalLessons: number;
   targetVocab: number;
   description: string;
+  descriptionEn?: string;
   color: string;
   badgeClass?: string;
   completedLessons?: number;
@@ -80,17 +86,21 @@ export interface DialogueLine {
   hanzi: string;
   pinyin: string;
   vi: string;
+  en?: string;
   audioText?: string;
 }
 
 export interface GrammarPoint {
   title: string;
+  titleEn?: string;
   explanation: string;
+  explanationEn?: string;
   structure?: string;
   examples: {
     hanzi: string;
     pinyin: string;
     vi: string;
+    en?: string;
   }[];
 }
 
@@ -109,7 +119,9 @@ export interface Lesson {
   titleHanzi: string;
   titlePinyin: string;
   titleVi: string;
+  titleEn?: string;
   objectives: string[];
+  objectivesEn?: string[];
   dialogue: DialogueLine[];
   vocabularies: VocabItem[];
   grammarPoints: GrammarPoint[];
@@ -148,7 +160,9 @@ export interface MockExam {
   id: string;
   level: number;
   title: string;
+  titleEn?: string;
   description: string;
+  descriptionEn?: string;
   totalTimeMinutes: number;
   totalQuestions: number;
   maxScore: number;

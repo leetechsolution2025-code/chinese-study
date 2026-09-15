@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MessageSquare, Send, Volume2, Sparkles, Bot, User, Utensils, Compass, ShoppingBag, Smile, AlertCircle, Lightbulb } from 'lucide-react';
 import { AudioButton } from '@/components/common/AudioButton';
 import { useSpeech } from '@/hooks/useSpeech';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface Message {
   sender: 'ai' | 'user';
@@ -16,6 +17,9 @@ interface Message {
 
 export default function TutorPage() {
   const { speak } = useSpeech();
+  const { language, t } = useLanguage();
+  const isEn = language === 'en';
+
   const [selectedScenario, setSelectedScenario] = useState('greeting');
   const [inputVal, setInputVal] = useState('');
   const [messages, setMessages] = useState<Message[]>([
@@ -23,16 +27,54 @@ export default function TutorPage() {
       sender: 'ai',
       hanzi: '你好！很高兴认识你。你是学生吗？',
       pinyin: 'Nǐ hǎo! Hěn gāoxìng rènshi nǐ. Nǐ shì xuésheng ma?',
-      vi: 'Chào bạn! Rất vui được quen biết bạn. Bạn là học sinh phải không?',
+      vi: isEn
+        ? 'Hello! Nice to meet you. Are you a student?'
+        : 'Chào bạn! Rất vui được quen biết bạn. Bạn là học sinh phải không?',
     },
   ]);
-  const [showHelper, setShowHelper] = useState(true);
+
+  // Synchronize initial greeting when language changes if only 1 message
+  useEffect(() => {
+    setMessages((prev) => {
+      if (prev.length === 1 && prev[0].sender === 'ai') {
+        return [
+          {
+            ...prev[0],
+            vi: isEn
+              ? 'Hello! Nice to meet you. Are you a student?'
+              : 'Chào bạn! Rất vui được quen biết bạn. Bạn là học sinh phải không?',
+          },
+        ];
+      }
+      return prev;
+    });
+  }, [isEn]);
 
   const scenarios = [
-    { id: 'greeting', label: 'Chào hỏi và làm quen', icon: Smile, prompt: '你好！' },
-    { id: 'order_food', label: 'Gọi món ở nhà hàng', icon: Utensils, prompt: '服务员，我想点菜。' },
-    { id: 'shopping', label: 'Mua sắm và trả giá', icon: ShoppingBag, prompt: '这个多少钱？' },
-    { id: 'directions', label: 'Hỏi đường đi', icon: Compass, prompt: '请问，地铁站在哪儿？' },
+    {
+      id: 'greeting',
+      label: isEn ? 'Greetings & Intro' : 'Chào hỏi và làm quen',
+      icon: Smile,
+      prompt: '你好！',
+    },
+    {
+      id: 'order_food',
+      label: isEn ? 'Ordering at Restaurant' : 'Gọi món ở nhà hàng',
+      icon: Utensils,
+      prompt: '服务员，我想点菜。',
+    },
+    {
+      id: 'shopping',
+      label: isEn ? 'Shopping & Bargaining' : 'Mua sắm và trả giá',
+      icon: ShoppingBag,
+      prompt: '这个多少钱？',
+    },
+    {
+      id: 'directions',
+      label: isEn ? 'Asking for Directions' : 'Hỏi đường đi',
+      icon: Compass,
+      prompt: '请问，地铁站在哪儿？',
+    },
   ];
 
   const suggestedReplies = [
@@ -54,7 +96,7 @@ export default function TutorPage() {
       const res = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, scenario: selectedScenario }),
+        body: JSON.stringify({ message: text, scenario: selectedScenario, language }),
       });
       const data = await res.json();
       if (data.success && data.reply) {
@@ -62,7 +104,7 @@ export default function TutorPage() {
           sender: 'ai',
           hanzi: data.reply.hanzi,
           pinyin: data.reply.pinyin,
-          vi: data.reply.vi,
+          vi: isEn ? (data.reply.en || data.reply.vi) : data.reply.vi,
           correction: data.reply.correction,
           tip: data.reply.tip,
         };
@@ -77,7 +119,9 @@ export default function TutorPage() {
           sender: 'ai',
           hanzi: '你说得很好！我们继续练习吧。',
           pinyin: 'Nǐ shuō de hěn hǎo! Wǒmen jìxù liànxí ba.',
-          vi: 'Bạn nói rất tốt! Chúng ta tiếp tục luyện tập nhé.',
+          vi: isEn
+            ? 'You spoke very well! Let us continue practicing.'
+            : 'Bạn nói rất tốt! Chúng ta tiếp tục luyện tập nhé.',
         },
       ]);
     }
@@ -91,7 +135,9 @@ export default function TutorPage() {
           sender: 'ai',
           hanzi: '欢迎光临！请问您几位？想吃点什么？',
           pinyin: 'Huānyíng guānglín! Qǐngwèn nín jǐ wèi? Xiǎng chī diǎnr shénme?',
-          vi: 'Kính chào quý khách! Xin hỏi quý khách đi mấy người? Muốn ăn món gì ạ?',
+          vi: isEn
+            ? 'Welcome! How many guests in your party? What would you like to order?'
+            : 'Kính chào quý khách! Xin hỏi quý khách đi mấy người? Muốn ăn món gì ạ?',
         },
       ]);
     } else if (scenarioId === 'shopping') {
@@ -100,7 +146,9 @@ export default function TutorPage() {
           sender: 'ai',
           hanzi: '你好，你想买什么？这件衣服今天打八折。',
           pinyin: 'Nǐ hǎo, nǐ xiǎng mǎi shénme? Zhè jiàn yīfu jīntiān dǎ bā zhé.',
-          vi: 'Chào bạn, bạn muốn mua gì? Chiếc áo này hôm nay giảm giá 20%.',
+          vi: isEn
+            ? 'Hello! What are you looking to buy? This item is 20% off today.'
+            : 'Chào bạn, bạn muốn mua gì? Chiếc áo này hôm nay giảm giá 20%.',
         },
       ]);
     } else if (scenarioId === 'directions') {
@@ -109,7 +157,9 @@ export default function TutorPage() {
           sender: 'ai',
           hanzi: '你好，请问你需要帮忙吗？你要去哪儿？',
           pinyin: 'Nǐ hǎo, qǐngwèn nǐ xūyào bāngmáng ma? Nǐ yào qù nǎr?',
-          vi: 'Chào bạn, bạn cần giúp đỡ không? Bạn muốn đi đâu?',
+          vi: isEn
+            ? 'Hello! Do you need some assistance? Where would you like to go?'
+            : 'Chào bạn, bạn cần giúp đỡ không? Bạn muốn đi đâu?',
         },
       ]);
     } else {
@@ -118,7 +168,9 @@ export default function TutorPage() {
           sender: 'ai',
           hanzi: '你好！很高兴认识你。你是学生吗？',
           pinyin: 'Nǐ hǎo! Hěn gāoxìng rènshi nǐ. Nǐ shì xuésheng ma?',
-          vi: 'Chào bạn! Rất vui được quen biết bạn. Bạn là học sinh phải không?',
+          vi: isEn
+            ? 'Hello! Nice to meet you. Are you a student?'
+            : 'Chào bạn! Rất vui được quen biết bạn. Bạn là học sinh phải không?',
         },
       ]);
     }
@@ -130,16 +182,24 @@ export default function TutorPage() {
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
           <span className="badge badge-crimson">AI Speaking Partner</span>
-          <span className="badge badge-emerald">Khẩu ngữ thực chiến</span>
+          <span className="badge badge-emerald">{isEn ? 'Spoken Chinese Fluency' : 'Khẩu ngữ thực chiến'}</span>
           <span className="badge badge-gold" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
             <Sparkles size={11} /> Gemini 2.5 Flash
           </span>
         </div>
         <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>
-          Đối thoại khẩu ngữ <span className="gradient-text">cùng AI Tutor</span>
+          {isEn ? (
+            <>
+              Interactive Spoken Chinese <span className="gradient-text">with AI Tutor</span>
+            </>
+          ) : (
+            <>
+              Đối thoại khẩu ngữ <span className="gradient-text">cùng AI Tutor</span>
+            </>
+          )}
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginTop: '4px' }}>
-          Luyện phản xạ giao tiếp theo các tình huống đời sống hàng ngày, kèm phiên âm Pinyin và bản dịch trợ giúp.
+          {t('tutor.desc')}
         </p>
       </div>
 
@@ -275,7 +335,7 @@ export default function TutorPage() {
                   >
                     <AlertCircle size={14} style={{ flexShrink: 0, marginTop: '2px' }} />
                     <div>
-                      <strong>Góp ý ngữ pháp:</strong> {msg.correction}
+                      <strong>{isEn ? 'Grammar Feedback:' : 'Góp ý ngữ pháp:'}</strong> {msg.correction}
                     </div>
                   </div>
                 )}
@@ -298,14 +358,14 @@ export default function TutorPage() {
                   >
                     <Lightbulb size={14} style={{ flexShrink: 0, marginTop: '2px' }} />
                     <div>
-                      <strong>Mẹo giao tiếp:</strong> {msg.tip}
+                      <strong>{isEn ? 'Speaking Tip:' : 'Mẹo giao tiếp:'}</strong> {msg.tip}
                     </div>
                   </div>
                 )}
 
                 {msg.sender === 'ai' && (
                   <div style={{ marginTop: '6px' }}>
-                    <AudioButton text={msg.hanzi} size={14} label="Nghe đọc" />
+                    <AudioButton text={msg.hanzi} size={14} label={isEn ? 'Listen' : 'Nghe đọc'} />
                   </div>
                 )}
               </div>
@@ -362,7 +422,11 @@ export default function TutorPage() {
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Nhập câu trả lời bằng chữ Hán hoặc Pinyin (ví dụ: 你好, 我是学生)..."
+            placeholder={
+              isEn
+                ? 'Type reply in Chinese Hanzi or Pinyin (e.g., 你好, 我是学生)...'
+                : 'Nhập câu trả lời bằng chữ Hán hoặc Pinyin (ví dụ: 你好, 我是学生)...'
+            }
             style={{
               flex: 1,
               background: 'var(--bg-tertiary)',

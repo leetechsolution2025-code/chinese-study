@@ -16,8 +16,11 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { MockExam, ExamResult } from '@/types';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ExamsHubPage() {
+  const { language } = useLanguage();
+  const isEn = language === 'en';
   const [exams, setExams] = useState<(MockExam & { bestScore?: number; totalAttempts?: number })[]>([]);
   const [history, setHistory] = useState<ExamResult[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -80,35 +83,41 @@ export default function ExamsHubPage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
           <span className="badge badge-crimson">
             <Trophy size={13} />
-            Phòng luyện thi thử HSK chuẩn hóa
+            {isEn ? 'Standard HSK Mock Exam Hall' : 'Phòng luyện thi thử HSK chuẩn hóa'}
           </span>
           <span className="badge badge-gold">
             <Sparkles size={12} />
-            Mô phỏng 100% đề thi thật
+            {isEn ? '100% Real Exam Format Simulation' : 'Mô phỏng 100% đề thi thật'}
           </span>
         </div>
 
         <h1 style={{ fontSize: '2.4rem', fontWeight: '800', lineHeight: 1.25, marginBottom: '14px' }}>
-          Chinh phục chứng chỉ <span className="gradient-text">HSK 1 đến HSK 6</span>
+          {isEn ? (
+            <>Achieve Your <span className="gradient-text">HSK 1 to HSK 6 Certification</span></>
+          ) : (
+            <>Chinh phục chứng chỉ <span className="gradient-text">HSK 1 đến HSK 6</span></>
+          )}
         </h1>
 
         <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.6, maxWidth: '780px', marginBottom: '20px' }}>
-          Đề thi mô phỏng định dạng chuẩn của tổ chức Hanban / CTI: phân chia 2 phần Nghe hiểu (听力) và Đọc hiểu (阅读), đồng hồ đếm ngược áp lực phòng thi, chấm điểm tự động và xếp loại Đạt/Chưa đạt tức thì.
+          {isEn
+            ? 'Exact simulation of official Hanban / CTI examinations: Listening (听力) and Reading (阅读) sections, strict countdown timer, auto-scoring, and immediate pass/fail certification status.'
+            : 'Đề thi mô phỏng định dạng chuẩn của tổ chức Hanban / CTI: phân chia 2 phần Nghe hiểu (听力) và Đọc hiểu (阅读), đồng hồ đếm ngược áp lực phòng thi, chấm điểm tự động và xếp loại Đạt/Chưa đạt tức thì.'}
         </p>
 
         {/* Highlights */}
         <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', borderTop: '1px solid var(--border-subtle)', paddingTop: '18px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: 'var(--text-primary)' }}>
             <Headphones size={17} style={{ color: '#0ea5e9' }} />
-            <span>Âm thanh phát câu hỏi bản xứ</span>
+            <span>{isEn ? 'Native audio question playback' : 'Âm thanh phát câu hỏi bản xứ'}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: 'var(--text-primary)' }}>
             <Clock size={17} style={{ color: '#f59e0b' }} />
-            <span>Đồng hồ bấm giờ chuẩn phòng thi</span>
+            <span>{isEn ? 'Strict exam countdown timer' : 'Đồng hồ bấm giờ chuẩn phòng thi'}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: 'var(--text-primary)' }}>
             <Award size={17} style={{ color: '#10b981' }} />
-            <span>Lưu điểm & lịch sử vào SQLite</span>
+            <span>{isEn ? 'Instant scoring & SQLite history' : 'Lưu điểm & lịch sử vào SQLite'}</span>
           </div>
         </div>
       </section>
@@ -117,15 +126,17 @@ export default function ExamsHubPage() {
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
           <h2 style={{ fontSize: '1.4rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)' }}>
-            <span>Danh sách đề thi theo cấp độ</span>
+            <span>{isEn ? 'Mock Exams by HSK Level' : 'Danh sách đề thi theo cấp độ'}</span>
           </h2>
           <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-            4 cấp độ sẵn sàng làm bài
+            {isEn ? '6 levels ready for test' : '6 cấp độ sẵn sàng làm bài'}
           </span>
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '60px', color: 'var(--text-secondary)' }}>Đang tải danh sách đề thi...</div>
+          <div style={{ textAlign: 'center', padding: '60px', color: 'var(--text-secondary)' }}>
+            {isEn ? 'Loading mock exams...' : 'Đang tải danh sách đề thi...'}
+          </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '22px' }}>
             {exams.map((exam) => {
@@ -155,17 +166,17 @@ export default function ExamsHubPage() {
                       {exam.bestScore !== undefined && (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', color: '#f59e0b', fontWeight: '700' }}>
                           <Award size={15} />
-                          <span>Điểm cao nhất: {exam.bestScore}/{exam.maxScore}</span>
+                          <span>{isEn ? `Best: ${exam.bestScore}/${exam.maxScore}` : `Điểm cao nhất: ${exam.bestScore}/${exam.maxScore}`}</span>
                         </div>
                       )}
                     </div>
 
                     <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>
-                      {exam.title}
+                      {isEn && exam.titleEn ? exam.titleEn : exam.title}
                     </h3>
 
                     <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '20px' }}>
-                      {exam.description}
+                      {isEn && exam.descriptionEn ? exam.descriptionEn : exam.description}
                     </p>
 
                     {/* Meta Specs */}
@@ -184,27 +195,31 @@ export default function ExamsHubPage() {
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)' }}>
                         <Clock size={15} style={{ color }} />
-                        <span>{exam.totalTimeMinutes} phút</span>
+                        <span>{exam.totalTimeMinutes} {isEn ? 'mins' : 'phút'}</span>
                       </div>
 
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)' }}>
                         <HelpCircle size={15} style={{ color }} />
-                        <span>{exam.totalQuestions} câu trắc nghiệm</span>
+                        <span>{exam.totalQuestions} {isEn ? 'questions' : 'câu trắc nghiệm'}</span>
                       </div>
 
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)' }}>
                         <Headphones size={15} style={{ color }} />
-                        <span>Nghe: {exam.listeningQuestionsCount} câu</span>
+                        <span>{isEn ? `Listening: ${exam.listeningQuestionsCount} q` : `Nghe: ${exam.listeningQuestionsCount} câu`}</span>
                       </div>
 
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)' }}>
                         <BookOpen size={15} style={{ color }} />
-                        <span>Đọc: {exam.readingQuestionsCount} câu</span>
+                        <span>{isEn ? `Reading: ${exam.readingQuestionsCount} q` : `Đọc: ${exam.readingQuestionsCount} câu`}</span>
                       </div>
                     </div>
 
                     <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '18px' }}>
-                      Điểm chuẩn đỗ: <strong style={{ color: '#10b981' }}>{exam.passingScore}</strong> / {exam.maxScore} điểm
+                      {isEn ? (
+                        <>Passing mark: <strong style={{ color: '#10b981' }}>{exam.passingScore}</strong> / {exam.maxScore} pts</>
+                      ) : (
+                        <>Điểm chuẩn đỗ: <strong style={{ color: '#10b981' }}>{exam.passingScore}</strong> / {exam.maxScore} điểm</>
+                      )}
                     </div>
                   </div>
 
@@ -218,7 +233,7 @@ export default function ExamsHubPage() {
                       boxShadow: `0 4px 14px ${color}33`,
                     }}
                   >
-                    <span>Vào phòng thi ngay</span>
+                    <span>{isEn ? 'Start Mock Exam' : 'Vào phòng thi ngay'}</span>
                     <ArrowRight size={16} />
                   </Link>
                 </div>
@@ -234,14 +249,16 @@ export default function ExamsHubPage() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
             <h2 style={{ fontSize: '1.25rem', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)' }}>
               <Calendar size={18} style={{ color: '#f59e0b' }} />
-              <span>Lịch sử các lần thi thử gần đây</span>
+              <span>{isEn ? 'Recent Exam Attempt History' : 'Lịch sử các lần thi thử gần đây'}</span>
             </h2>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Lưu trữ trong SQLite</span>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              {isEn ? 'Stored in SQLite' : 'Lưu trữ trong SQLite'}
+            </span>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {history.map((attempt) => {
-              const dateStr = new Date(attempt.completedAt).toLocaleString('vi-VN');
+              const dateStr = new Date(attempt.completedAt).toLocaleString(isEn ? 'en-US' : 'vi-VN');
               const minutes = Math.floor(attempt.timeSpentSeconds / 60);
               const seconds = attempt.timeSpentSeconds % 60;
 
@@ -268,10 +285,12 @@ export default function ExamsHubPage() {
                     )}
                     <div>
                       <div style={{ fontWeight: '700', fontSize: '0.95rem' }}>
-                        Đề thi HSK {attempt.level} — {attempt.passed ? 'ĐẠT (Passed)' : 'CHƯA ĐẠT (Not Passed)'}
+                        {isEn
+                          ? `HSK ${attempt.level} Mock Exam — ${attempt.passed ? 'PASSED' : 'NOT PASSED'}`
+                          : `Đề thi HSK ${attempt.level} — ${attempt.passed ? 'ĐẠT (Passed)' : 'CHƯA ĐẠT (Not Passed)'}`}
                       </div>
                       <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                        {dateStr} • Thời gian làm bài: {minutes} phút {seconds} giây
+                        {dateStr} • {isEn ? `Time: ${minutes}m ${seconds}s` : `Thời gian làm bài: ${minutes} phút ${seconds} giây`}
                       </div>
                     </div>
                   </div>
@@ -282,7 +301,7 @@ export default function ExamsHubPage() {
                         {attempt.score} / {attempt.maxScore}
                       </div>
                       <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
-                        Nghe: {attempt.listeningScore} | Đọc: {attempt.readingScore}
+                        {isEn ? `Listening: ${attempt.listeningScore} | Reading: ${attempt.readingScore}` : `Nghe: ${attempt.listeningScore} | Đọc: ${attempt.readingScore}`}
                       </div>
                     </div>
 
@@ -291,7 +310,7 @@ export default function ExamsHubPage() {
                       className="btn-secondary"
                       style={{ padding: '6px 12px', fontSize: '0.8rem' }}
                     >
-                      Thi lại
+                      {isEn ? 'Retake' : 'Thi lại'}
                     </Link>
                   </div>
                 </div>

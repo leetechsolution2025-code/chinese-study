@@ -5,13 +5,15 @@
     "pinyin": "nǐ",
     "hanviet": "Nhĩ",
     "meaning": "Bạn, anh, chị (ngôi thứ 2)",
+    "meaningEn": "You (singular)",
     "level": 1,
     "partOfSpeech": "Đại từ",
     "strokes": 7,
     "radical": "亻",
     "exampleHanzi": "你好！",
     "examplePinyin": "Nǐ hǎo!",
-    "exampleMeaning": "Chào bạn!"
+    "exampleMeaning": "Chào bạn!",
+    "exampleMeaningEn": "Hello!"
   },
   {
     "id": "hsk1-002",
@@ -19,13 +21,15 @@
     "pinyin": "hǎo",
     "hanviet": "Hảo",
     "meaning": "Tốt, đẹp, khỏe, được",
+    "meaningEn": "Good, fine, well",
     "level": 1,
     "partOfSpeech": "Tính từ",
     "strokes": 6,
     "radical": "女",
     "exampleHanzi": "今天天气很好。",
     "examplePinyin": "Jīntiān tiānqì hěn hǎo.",
-    "exampleMeaning": "Hôm nay thời tiết rất tốt."
+    "exampleMeaning": "Hôm nay thời tiết rất tốt.",
+    "exampleMeaningEn": "The weather is very good today."
   },
   {
     "id": "hsk1-003",
@@ -33,13 +37,15 @@
     "pinyin": "wǒ",
     "hanviet": "Ngã",
     "meaning": "Tôi, tao, tớ (ngôi thứ 1)",
+    "meaningEn": "I, me",
     "level": 1,
     "partOfSpeech": "Đại từ",
     "strokes": 7,
     "radical": "戈",
     "exampleHanzi": "我是学生。",
     "examplePinyin": "Wǒ shì xuésheng.",
-    "exampleMeaning": "Tôi là học sinh."
+    "exampleMeaning": "Tôi là học sinh.",
+    "exampleMeaningEn": "I am a student."
   },
   {
     "id": "hsk1-004",
@@ -47,13 +53,15 @@
     "pinyin": "tā",
     "hanviet": "Tha",
     "meaning": "Anh ấy, ông ấy, hắn (ngôi thứ 3 nam)",
+    "meaningEn": "He, him",
     "level": 1,
     "partOfSpeech": "Đại từ",
     "strokes": 5,
     "radical": "亻",
     "exampleHanzi": "他是我的老师。",
     "examplePinyin": "Tā shì wǒ de lǎoshī.",
-    "exampleMeaning": "Anh ấy là giáo viên của tôi."
+    "exampleMeaning": "Anh ấy là giáo viên của tôi.",
+    "exampleMeaningEn": "He is my teacher."
   },
   {
     "id": "hsk1-005",
@@ -61,13 +69,15 @@
     "pinyin": "tā",
     "hanviet": "Tha",
     "meaning": "Cô ấy, bà ấy, chị ấy (ngôi thứ 3 nữ)",
+    "meaningEn": "She, her",
     "level": 1,
     "partOfSpeech": "Đại từ",
     "strokes": 6,
     "radical": "女",
     "exampleHanzi": "她是我的朋友。",
     "examplePinyin": "Tā shì wǒ de péngyou.",
-    "exampleMeaning": "Cô ấy là bạn của tôi."
+    "exampleMeaning": "Cô ấy là bạn của tôi.",
+    "exampleMeaningEn": "She is my friend."
   },
   {
     "id": "hsk1-006",
@@ -75,13 +85,15 @@
     "pinyin": "rén",
     "hanviet": "Nhân",
     "meaning": "Người",
+    "meaningEn": "Person, people",
     "level": 1,
     "partOfSpeech": "Danh từ",
     "strokes": 2,
     "radical": "人",
     "exampleHanzi": "他是中国人。",
     "examplePinyin": "Tā shì Zhōngguó rén.",
-    "exampleMeaning": "Anh ấy là người Trung Quốc."
+    "exampleMeaning": "Anh ấy là người Trung Quốc.",
+    "exampleMeaningEn": "He is Chinese."
   },
   {
     "id": "hsk1-007",
@@ -89,13 +101,15 @@
     "pinyin": "xué",
     "hanviet": "Học",
     "meaning": "Học, học tập",
+    "meaningEn": "Study, learn",
     "level": 1,
     "partOfSpeech": "Động từ",
     "strokes": 8,
     "radical": "子",
     "exampleHanzi": "我喜欢学汉语。",
     "examplePinyin": "Wǒ xǐhuan xué Hànyǔ.",
-    "exampleMeaning": "Tôi thích học tiếng Trung."
+    "exampleMeaning": "Tôi thích học tiếng Trung.",
+    "exampleMeaningEn": "I like learning Chinese."
   },
   {
     "id": "hsk1-008",
@@ -103,13 +117,15 @@
     "pinyin": "ài",
     "hanviet": "Ái",
     "meaning": "Yêu, thương",
+    "meaningEn": "Love, like",
     "level": 1,
     "partOfSpeech": "Động từ",
     "strokes": 10,
     "radical": "爫",
     "exampleHanzi": "我爱你。",
     "examplePinyin": "Wǒ ài nǐ.",
-    "exampleMeaning": "Anh yêu em / Tôi yêu bạn."
+    "exampleMeaning": "Anh yêu em / Tôi yêu bạn.",
+    "exampleMeaningEn": "I love you."
   },
   {
     "id": "hsk1-009",
@@ -117,13 +133,15 @@
     "pinyin": "dà",
     "hanviet": "Đại",
     "meaning": "To, lớn",
+    "meaningEn": "Big, large",
     "level": 1,
     "partOfSpeech": "Tính từ",
     "strokes": 3,
     "radical": "大",
     "exampleHanzi": "这个苹果很大。",
     "examplePinyin": "Zhège píngguǒ hěn dà.",
-    "exampleMeaning": "Quả táo này rất to."
+    "exampleMeaning": "Quả táo này rất to.",
+    "exampleMeaningEn": "This apple is very big."
   },
   {
     "id": "hsk1-010",
@@ -131,13 +149,15 @@
     "pinyin": "xiǎo",
     "hanviet": "Tiểu",
     "meaning": "Nhỏ, bé",
+    "meaningEn": "Small, little",
     "level": 1,
     "partOfSpeech": "Tính từ",
     "strokes": 3,
     "radical": "小",
     "exampleHanzi": "这只猫很小。",
     "examplePinyin": "Zhè zhī māo hěn xiǎo.",
-    "exampleMeaning": "Con mèo này rất nhỏ."
+    "exampleMeaning": "Con mèo này rất nhỏ.",
+    "exampleMeaningEn": "This cat is very small."
   },
   {
     "id": "hsk1-011",
@@ -145,13 +165,15 @@
     "pinyin": "shuǐ",
     "hanviet": "Thủy",
     "meaning": "Nước",
+    "meaningEn": "Water",
     "level": 1,
     "partOfSpeech": "Danh từ",
     "strokes": 4,
     "radical": "水",
     "exampleHanzi": "我想喝水。",
     "examplePinyin": "Wǒ xiǎng hē shuǐ.",
-    "exampleMeaning": "Tôi muốn uống nước."
+    "exampleMeaning": "Tôi muốn uống nước.",
+    "exampleMeaningEn": "I want to drink water."
   },
   {
     "id": "hsk1-012",
@@ -159,13 +181,15 @@
     "pinyin": "chī",
     "hanviet": "Ngật",
     "meaning": "Ăn",
+    "meaningEn": "Eat",
     "level": 1,
     "partOfSpeech": "Động từ",
     "strokes": 6,
     "radical": "口",
     "exampleHanzi": "你想吃什么？",
     "examplePinyin": "Nǐ xiǎng chī shénme?",
-    "exampleMeaning": "Bạn muốn ăn gì?"
+    "exampleMeaning": "Bạn muốn ăn gì?",
+    "exampleMeaningEn": "What do you want to eat?"
   },
   {
     "id": "hsk1-013",
@@ -173,13 +197,15 @@
     "pinyin": "hē",
     "hanviet": "Hát",
     "meaning": "Uống",
+    "meaningEn": "Drink",
     "level": 1,
     "partOfSpeech": "Động từ",
     "strokes": 12,
     "radical": "口",
     "exampleHanzi": "请喝茶。",
     "examplePinyin": "Qǐng hē chá.",
-    "exampleMeaning": "Mời uống trà."
+    "exampleMeaning": "Mời uống trà.",
+    "exampleMeaningEn": "Please drink tea."
   },
   {
     "id": "hsk1-014",
@@ -187,13 +213,15 @@
     "pinyin": "jiā",
     "hanviet": "Gia",
     "meaning": "Nhà, gia đình",
+    "meaningEn": "Home, family",
     "level": 1,
     "partOfSpeech": "Danh từ",
     "strokes": 10,
     "radical": "宀",
     "exampleHanzi": "我家在北京。",
     "examplePinyin": "Wǒ jiā zài Běijīng.",
-    "exampleMeaning": "Nhà tôi ở Bắc Kinh."
+    "exampleMeaning": "Nhà tôi ở Bắc Kinh.",
+    "exampleMeaningEn": "My home is in Beijing."
   },
   {
     "id": "hsk1-015",
@@ -201,13 +229,15 @@
     "pinyin": "kàn",
     "hanviet": "Khán",
     "meaning": "Xem, nhìn, đọc",
+    "meaningEn": "Look, see, watch, read",
     "level": 1,
     "partOfSpeech": "Động từ",
     "strokes": 9,
     "radical": "目",
     "exampleHanzi": "我看了一本书。",
     "examplePinyin": "Wǒ kànle yī běn shū.",
-    "exampleMeaning": "Tôi đã đọc một cuốn sách."
+    "exampleMeaning": "Tôi đã đọc một cuốn sách.",
+    "exampleMeaningEn": "I read a book."
   },
   {
     "id": "hsk1-016",
@@ -215,13 +245,15 @@
     "pinyin": "tīng",
     "hanviet": "Thính",
     "meaning": "Nghe",
+    "meaningEn": "Listen, hear",
     "level": 1,
     "partOfSpeech": "Động từ",
     "strokes": 7,
     "radical": "口",
     "exampleHanzi": "你听音乐吗？",
     "examplePinyin": "Nǐ tīng yīnyuè ma?",
-    "exampleMeaning": "Bạn có nghe nhạc không?"
+    "exampleMeaning": "Bạn có nghe nhạc không?",
+    "exampleMeaningEn": "Do you listen to music?"
   },
   {
     "id": "hsk1-017",
@@ -229,13 +261,15 @@
     "pinyin": "shuō",
     "hanviet": "Thuyết",
     "meaning": "Nói",
+    "meaningEn": "Speak, say",
     "level": 1,
     "partOfSpeech": "Động từ",
     "strokes": 9,
     "radical": "讠",
     "exampleHanzi": "你会说中文吗？",
     "examplePinyin": "Nǐ huì shuō Zhōngwén ma?",
-    "exampleMeaning": "Bạn biết nói tiếng Trung không?"
+    "exampleMeaning": "Bạn biết nói tiếng Trung không?",
+    "exampleMeaningEn": "Can you speak Chinese?"
   },
   {
     "id": "hsk1-018",
@@ -243,13 +277,15 @@
     "pinyin": "xiě",
     "hanviet": "Tả",
     "meaning": "Viết",
+    "meaningEn": "Write",
     "level": 1,
     "partOfSpeech": "Động từ",
     "strokes": 5,
     "radical": "冖",
     "exampleHanzi": "我会写汉字。",
     "examplePinyin": "Wǒ huì xiě hànzì.",
-    "exampleMeaning": "Tôi biết viết chữ Hán."
+    "exampleMeaning": "Tôi biết viết chữ Hán.",
+    "exampleMeaningEn": "I can write Chinese characters."
   },
   {
     "id": "hsk1-019",
@@ -257,13 +293,15 @@
     "pinyin": "zhōng",
     "hanviet": "Trung",
     "meaning": "Giữa, trung tâm, Trung Quốc",
+    "meaningEn": "Middle, center, China",
     "level": 1,
     "partOfSpeech": "Danh từ",
     "strokes": 4,
     "radical": "丨",
     "exampleHanzi": "中国很大。",
     "examplePinyin": "Zhōngguó hěn dà.",
-    "exampleMeaning": "Trung Quốc rất lớn."
+    "exampleMeaning": "Trung Quốc rất lớn.",
+    "exampleMeaningEn": "China is very big."
   },
   {
     "id": "hsk1-020",
@@ -271,12 +309,14 @@
     "pinyin": "yǒu",
     "hanviet": "Hữu",
     "meaning": "Bạn bè",
+    "meaningEn": "Friend, companion",
     "level": 1,
     "partOfSpeech": "Danh từ",
     "strokes": 4,
     "radical": "又",
     "exampleHanzi": "朋友",
     "examplePinyin": "péngyou",
-    "exampleMeaning": "Bạn bè"
+    "exampleMeaning": "Bạn bè",
+    "exampleMeaningEn": "Friend"
   }
 ]

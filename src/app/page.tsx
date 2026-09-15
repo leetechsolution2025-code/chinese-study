@@ -19,9 +19,13 @@ import {
 } from 'lucide-react';
 import { AudioButton } from '@/components/common/AudioButton';
 import { storage, UserStats } from '@/lib/storage';
+import { useLanguage } from '@/context/LanguageContext';
 import hsk1Data from '@/data/hsk1_vocab.json';
 
 export default function HomePage() {
+  const { language, t } = useLanguage();
+  const isEn = language === 'en';
+
   const [stats, setStats] = useState<UserStats>({
     streak: 3,
     lastStudyDate: '',
@@ -35,16 +39,28 @@ export default function HomePage() {
   }, []);
 
   // Chữ Hán tiêu biểu hôm nay: Học (xué)
-  const wordOfDay = hsk1Data[6] || {
+  const wordOfDay = (hsk1Data as Array<{
+    hanzi: string;
+    pinyin: string;
+    hanviet: string;
+    meaning: string;
+    meaningEn?: string;
+    partOfSpeech?: string;
+    exampleHanzi: string;
+    examplePinyin: string;
+    exampleMeaning: string;
+    exampleMeaningEn?: string;
+  }>)[6] || {
     hanzi: '学',
     pinyin: 'xué',
     hanviet: 'HỌC',
     meaning: 'Học, học tập, bắt chước',
-    radical: '子',
-    strokes: 8,
+    meaningEn: 'Study, learn, imitate',
+    partOfSpeech: 'Động từ',
     exampleHanzi: '我在学中文。',
     examplePinyin: 'Wǒ zài xué Zhōngwén.',
     exampleMeaning: 'Tôi đang học tiếng Trung.',
+    exampleMeaningEn: 'I am learning Chinese.',
   };
 
   const vocabProgressPercent = Math.min(100, Math.round((stats.totalWordsLearned / 150) * 100));
@@ -62,11 +78,11 @@ export default function HomePage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
               <span className="badge badge-crimson" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
                 <Sparkles size={12} />
-                <span>Phương pháp tối ưu cho người Việt</span>
+                <span>{isEn ? 'Standard HSK Curriculum' : 'Phương pháp tối ưu cho người Việt'}</span>
               </span>
               <span className="badge badge-gold" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                 <Flame size={12} />
-                <span>Chuỗi {stats.streak} ngày</span>
+                <span>{isEn ? `${stats.streak}-Day Streak` : `Chuỗi ${stats.streak} ngày`}</span>
               </span>
             </div>
 
@@ -79,8 +95,10 @@ export default function HomePage() {
                 color: 'var(--text-primary)',
               }}
             >
-              Học tiếng Trung chuẩn <br />
-              <span className="gradient-text">từ âm Hán - Việt & chiết tự</span>
+              {isEn ? 'Master Mandarin Chinese' : 'Học tiếng Trung chuẩn'} <br />
+              <span className="gradient-text">
+                {isEn ? 'from Core Radicals & Pinyin' : 'từ âm Hán - Việt & chiết tự'}
+              </span>
             </h1>
 
             <p
@@ -91,25 +109,27 @@ export default function HomePage() {
                 maxWidth: '520px',
               }}
             >
-              Bẻ khóa nghĩa chữ Hán qua 214 bộ thủ, chuẩn hóa cao độ 4 thanh điệu và luyện đàm thoại phản xạ cùng AI.
+              {isEn
+                ? 'Unlock Hanzi characters via 214 core radicals, perfect your 4 tones with visual pitch contours, and practice real-life dialogues with AI.'
+                : 'Bẻ khóa nghĩa chữ Hán qua 214 bộ thủ, chuẩn hóa cao độ 4 thanh điệu và luyện đàm thoại phản xạ cùng AI.'}
             </p>
 
             {/* Action Buttons */}
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '6px' }}>
               <Link href="/courses" className="btn-primary" style={{ padding: '12px 24px' }}>
                 <GraduationCap size={18} />
-                <span>Vào lớp học HSK</span>
+                <span>{isEn ? 'Explore HSK Courses' : 'Vào lớp học HSK'}</span>
                 <ArrowRight size={16} />
               </Link>
 
               <Link href="/exams" className="btn-gold" style={{ padding: '12px 20px' }}>
                 <Trophy size={18} />
-                <span>Thi thử HSK</span>
+                <span>{isEn ? 'Mock Exams' : 'Thi thử HSK'}</span>
               </Link>
 
               <Link href="/practice" className="btn-secondary" style={{ padding: '12px 18px' }}>
                 <Target size={18} />
-                <span>Luyện tập</span>
+                <span>{isEn ? 'Practice' : 'Luyện tập'}</span>
               </Link>
             </div>
 
@@ -125,13 +145,13 @@ export default function HomePage() {
               }}
             >
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                <CheckCircle2 size={14} color="#10b981" /> 146 bài học HSK 1 - 6
+                <CheckCircle2 size={14} color="#10b981" /> {isEn ? '146 lessons across HSK 1 - 6' : '146 bài học HSK 1 - 6'}
               </span>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                <CheckCircle2 size={14} color="#10b981" /> Lưới điền chữ 田字格
+                <CheckCircle2 size={14} color="#10b981" /> {isEn ? 'Tian Zi Ge Stroke Grid' : 'Lưới điền chữ 田字格'}
               </span>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                <CheckCircle2 size={14} color="#10b981" /> Trợ lý đối thoại Gemini AI
+                <CheckCircle2 size={14} color="#10b981" /> {isEn ? 'Gemini AI Speaking Partner' : 'Trợ lý đối thoại Gemini AI'}
               </span>
             </div>
           </div>
@@ -140,10 +160,10 @@ export default function HomePage() {
           <div className="live-hanzi-card">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
               <span className="badge badge-gold" style={{ fontSize: '0.72rem' }}>
-                <Sparkles size={11} /> Chữ Hán tiêu biểu hôm nay
+                <Sparkles size={11} /> {isEn ? 'Character of the Day' : 'Chữ Hán tiêu biểu hôm nay'}
               </span>
               <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)' }}>
-                HSK 1 • 8 nét
+                HSK 1 • 8 {isEn ? 'strokes' : 'nét'}
               </span>
             </div>
 
@@ -178,12 +198,18 @@ export default function HomePage() {
                     {wordOfDay.pinyin}
                   </div>
                   <div style={{ display: 'inline-block', marginTop: '2px' }}>
-                    <span className="badge badge-gold" style={{ fontSize: '0.72rem', padding: '1px 6px' }}>
-                      Hán-Việt: {wordOfDay.hanviet}
-                    </span>
+                    {!isEn ? (
+                      <span className="badge badge-gold" style={{ fontSize: '0.72rem', padding: '1px 6px' }}>
+                        Hán-Việt: {wordOfDay.hanviet}
+                      </span>
+                    ) : (
+                      <span className="badge badge-sky" style={{ fontSize: '0.72rem', padding: '1px 6px' }}>
+                        {wordOfDay.partOfSpeech || 'Verb'} • HSK 1
+                      </span>
+                    )}
                   </div>
                   <div style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
-                    {wordOfDay.meaning}
+                    {isEn ? (wordOfDay.meaningEn || wordOfDay.meaning) : wordOfDay.meaning}
                   </div>
                 </div>
               </div>
@@ -209,7 +235,7 @@ export default function HomePage() {
                 {wordOfDay.examplePinyin}
               </div>
               <div style={{ color: 'var(--text-secondary)', fontSize: '0.78rem', marginTop: '1px' }}>
-                {wordOfDay.exampleMeaning}
+                {isEn ? (wordOfDay.exampleMeaningEn || wordOfDay.exampleMeaning) : wordOfDay.exampleMeaning}
               </div>
             </div>
 
@@ -233,7 +259,7 @@ export default function HomePage() {
               }}
             >
               <PenTool size={14} />
-              <span>Tập viết chữ này trên Canvas 田字格</span>
+              <span>{isEn ? 'Practice writing this on Tian Zi Ge' : 'Tập viết chữ này trên Canvas 田字格'}</span>
               <ChevronRight size={14} />
             </Link>
           </div>
@@ -254,7 +280,7 @@ export default function HomePage() {
         <div className="stat-bento-tile">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
-              Chuỗi học liên tục
+              {isEn ? 'Study Streak' : 'Chuỗi học liên tục'}
             </div>
             <div
               style={{
@@ -274,10 +300,10 @@ export default function HomePage() {
 
           <div style={{ marginTop: '6px' }}>
             <div style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-              {stats.streak} <span style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)' }}>ngày</span>
+              {stats.streak} <span style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)' }}>{isEn ? 'days' : 'ngày'}</span>
             </div>
             <div style={{ display: 'flex', gap: '5px', marginTop: '8px' }}>
-              {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((day, idx) => (
+              {(isEn ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] : ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN']).map((day, idx) => (
                 <div
                   key={day}
                   style={{
@@ -291,7 +317,7 @@ export default function HomePage() {
               ))}
             </div>
             <div style={{ fontSize: '0.74rem', color: '#10b981', fontWeight: '600', marginTop: '6px' }}>
-              ✓ Mục tiêu hôm nay đã đạt
+              {isEn ? '✓ Today\'s goal completed' : '✓ Mục tiêu hôm nay đã đạt'}
             </div>
           </div>
         </div>
@@ -300,7 +326,7 @@ export default function HomePage() {
         <div className="stat-bento-tile">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
-              Từ vựng HSK 1
+              {isEn ? 'HSK 1 Vocabulary' : 'Từ vựng HSK 1'}
             </div>
             <div
               style={{
@@ -320,14 +346,14 @@ export default function HomePage() {
 
           <div style={{ marginTop: '6px' }}>
             <div style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-              {stats.totalWordsLearned} <span style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)' }}>/ 150 từ</span>
+              {stats.totalWordsLearned} <span style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)' }}>/ 150 {isEn ? 'words' : 'từ'}</span>
             </div>
             {/* Progress bar */}
             <div style={{ width: '100%', height: '6px', background: 'var(--border-subtle)', borderRadius: '3px', overflow: 'hidden', marginTop: '8px' }}>
               <div style={{ width: `${vocabProgressPercent}%`, height: '100%', background: 'linear-gradient(90deg, #e11d48, #fb7185)', borderRadius: '3px' }} />
             </div>
             <Link href="/flashcards" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.74rem', color: 'var(--accent-crimson)', fontWeight: '600', marginTop: '6px' }}>
-              <span>Ôn tập Flashcard SRS</span>
+              <span>{isEn ? 'Review SRS Flashcards' : 'Ôn tập Flashcard SRS'}</span>
               <ChevronRight size={12} />
             </Link>
           </div>
@@ -337,7 +363,7 @@ export default function HomePage() {
         <div className="stat-bento-tile">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
-              Tập viết chữ Hán
+              {isEn ? 'Hanzi Writing' : 'Tập viết chữ Hán'}
             </div>
             <div
               style={{
@@ -357,14 +383,14 @@ export default function HomePage() {
 
           <div style={{ marginTop: '6px' }}>
             <div style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-              {stats.charactersWritten} <span style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)' }}>/ 150 chữ</span>
+              {stats.charactersWritten} <span style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)' }}>/ 150 {isEn ? 'chars' : 'chữ'}</span>
             </div>
             {/* Progress bar */}
             <div style={{ width: '100%', height: '6px', background: 'var(--border-subtle)', borderRadius: '3px', overflow: 'hidden', marginTop: '8px' }}>
               <div style={{ width: `${writingProgressPercent}%`, height: '100%', background: 'linear-gradient(90deg, #10b981, #34d399)', borderRadius: '3px' }} />
             </div>
             <Link href="/writing" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.74rem', color: '#10b981', fontWeight: '600', marginTop: '6px' }}>
-              <span>Đồ nét trên Canvas</span>
+              <span>{isEn ? 'Stroke Canvas' : 'Đồ nét trên Canvas'}</span>
               <ChevronRight size={12} />
             </Link>
           </div>
@@ -374,7 +400,7 @@ export default function HomePage() {
         <div className="stat-bento-tile">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
-              Thi thử HSK chuẩn
+              {isEn ? 'HSK Mock Exams' : 'Thi thử HSK chuẩn'}
             </div>
             <div
               style={{
@@ -397,10 +423,10 @@ export default function HomePage() {
               HSK 1 - 6
             </div>
             <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-              Đề thi 35 - 135 phút (Nghe & Đọc)
+              {isEn ? '35 - 135 mins (Listening & Reading)' : 'Đề thi 35 - 135 phút (Nghe & Đọc)'}
             </div>
             <Link href="/exams" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.74rem', color: '#0ea5e9', fontWeight: '600', marginTop: '8px' }}>
-              <span>Vào sảnh thi thử</span>
+              <span>{isEn ? 'Enter exam hall' : 'Vào sảnh thi thử'}</span>
               <ChevronRight size={12} />
             </Link>
           </div>
@@ -414,10 +440,10 @@ export default function HomePage() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '16px' }}>
           <div>
             <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-              Các tính năng chính
+              {isEn ? 'Core Learning Pillars' : 'Các tính năng chính'}
             </h2>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-              Chọn phân hệ bạn muốn khám phá và bắt đầu rèn luyện
+              {isEn ? 'Select a module to start mastering Chinese step-by-step' : 'Chọn phân hệ bạn muốn khám phá và bắt đầu rèn luyện'}
             </p>
           </div>
         </div>
@@ -442,43 +468,47 @@ export default function HomePage() {
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                 <span className="badge badge-crimson">
-                  <GraduationCap size={13} /> Lộ trình chuẩn hóa
+                  <GraduationCap size={13} /> {isEn ? 'Standard Curriculum' : 'Lộ trình chuẩn hóa'}
                 </span>
-                <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>146 bài học trọn vẹn</span>
+                <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                  {isEn ? '146 Complete Lessons' : '146 bài học trọn vẹn'}
+                </span>
               </div>
 
               <h3 style={{ fontSize: '1.35rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '6px' }}>
-                Lớp học giáo trình chuẩn HSK 1 - HSK 6
+                {isEn ? 'Standard HSK 1 - HSK 6 Courses' : 'Lớp học giáo trình chuẩn HSK 1 - HSK 6'}
               </h3>
               <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '16px' }}>
-                Chu trình 4 bước: Nghe bài khóa hội thoại ➔ Học từ vựng & âm Hán-Việt ➔ Nắm chắc ngữ pháp ➔ Luyện trắc nghiệm tự chấm điểm.
+                {isEn
+                  ? '4-step structured cycle: Listen to dialogues ➔ Master vocabulary ➔ Understand essential grammar ➔ Test your skills with auto-graded quizzes.'
+                  : 'Chu trình 4 bước: Nghe bài khóa hội thoại ➔ Học từ vựng & âm Hán-Việt ➔ Nắm chắc ngữ pháp ➔ Luyện trắc nghiệm tự chấm điểm.'}
               </p>
 
               {/* 6 Level Pills */}
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 <span style={{ padding: '4px 10px', background: 'rgba(225, 29, 72, 0.1)', color: '#e11d48', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
-                  HSK 1 (15 bài)
+                  HSK 1 ({isEn ? '15 lessons' : '15 bài'})
                 </span>
                 <span style={{ padding: '4px 10px', background: 'rgba(14, 165, 233, 0.1)', color: '#0ea5e9', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
-                  HSK 2 (15 bài)
+                  HSK 2 ({isEn ? '15 lessons' : '15 bài'})
                 </span>
                 <span style={{ padding: '4px 10px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
-                  HSK 3 (20 bài)
+                  HSK 3 ({isEn ? '20 lessons' : '20 bài'})
                 </span>
                 <span style={{ padding: '4px 10px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
-                  HSK 4 (20 bài)
+                  HSK 4 ({isEn ? '20 lessons' : '20 bài'})
                 </span>
                 <span style={{ padding: '4px 10px', background: 'rgba(139, 92, 246, 0.1)', color: '#8b5cf6', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
-                  HSK 5 (36 bài)
+                  HSK 5 ({isEn ? '36 lessons' : '36 bài'})
                 </span>
                 <span style={{ padding: '4px 10px', background: 'rgba(236, 72, 153, 0.1)', color: '#ec4899', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
-                  HSK 6 (40 bài)
+                  HSK 6 ({isEn ? '40 lessons' : '40 bài'})
                 </span>
               </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#e11d48', fontWeight: '700', fontSize: '0.88rem', marginTop: '18px' }}>
-              <span>Vào xem toàn bộ lớp học</span>
+              <span>{isEn ? 'Explore all courses' : 'Vào xem toàn bộ lớp học'}</span>
               <ArrowRight size={16} />
             </div>
           </Link>
@@ -496,26 +526,28 @@ export default function HomePage() {
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                 <span className="badge badge-gold">
-                  <Trophy size={13} /> Phòng thi mô phỏng
+                  <Trophy size={13} /> {isEn ? 'Exam Simulation' : 'Phòng thi mô phỏng'}
                 </span>
-                <span className="badge badge-crimson" style={{ fontSize: '0.65rem' }}>MỚI</span>
+                <span className="badge badge-crimson" style={{ fontSize: '0.65rem' }}>{isEn ? 'NEW' : 'MỚI'}</span>
               </div>
 
               <h3 style={{ fontSize: '1.35rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '6px' }}>
-                Thi thử HSK chuẩn format
+                {isEn ? 'HSK Standard Mock Exams' : 'Thi thử HSK chuẩn format'}
               </h3>
               <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '14px' }}>
-                Bộ đề thi phân tách rõ Nghe hiểu & Đọc hiểu, có đồng hồ đếm ngược, tự động chấm điểm và đánh giá Đạt/Chưa đạt.
+                {isEn
+                  ? 'Separate Listening & Reading sections, countdown timer, auto-graded scoring and pass/fail evaluation.'
+                  : 'Bộ đề thi phân tách rõ Nghe hiểu & Đọc hiểu, có đồng hồ đếm ngược, tự động chấm điểm và đánh giá Đạt/Chưa đạt.'}
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                <span>• Audio giọng Bắc Kinh</span>
-                <span>• Lưu lịch sử SQLite</span>
+                <span>{isEn ? '• Standard Beijing audio' : '• Audio giọng Bắc Kinh'}</span>
+                <span>{isEn ? '• SQLite history' : '• Lưu lịch sử SQLite'}</span>
               </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#f59e0b', fontWeight: '700', fontSize: '0.88rem', marginTop: '18px' }}>
-              <span>Bắt đầu thi thử</span>
+              <span>{isEn ? 'Start mock exam' : 'Bắt đầu thi thử'}</span>
               <ArrowRight size={16} />
             </div>
           </Link>
@@ -532,25 +564,27 @@ export default function HomePage() {
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                 <span className="badge badge-crimson">
-                  <PenTool size={13} /> Canvas 笔顺
+                  <PenTool size={13} /> {isEn ? 'Stroke Canvas' : 'Canvas 笔顺'}
                 </span>
               </div>
 
               <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '6px' }}>
-                Tập viết chữ Hán & bộ thủ
+                {isEn ? 'Hanzi Writing & Radicals' : 'Tập viết chữ Hán & bộ thủ'}
               </h3>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '14px' }}>
-                Quan sát mô phỏng thứ tự từng nét vẽ, tự đồ nét trên lưới điền (田字格) và giải nghĩa 214 bộ thủ chiết tự.
+                {isEn
+                  ? 'Trace animated stroke orders, practice on Tian Zi Ge grid, and explore 214 radicals.'
+                  : 'Quan sát mô phỏng thứ tự từng nét vẽ, tự đồ nét trên lưới điền (田字格) và giải nghĩa 214 bộ thủ chiết tự.'}
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                <span className="badge badge-gold" style={{ fontSize: '0.7rem' }}>214 Bộ thủ</span>
-                <span>Chấm điểm nét vẽ</span>
+                <span className="badge badge-gold" style={{ fontSize: '0.7rem' }}>{isEn ? '214 Radicals' : '214 Bộ thủ'}</span>
+                <span>{isEn ? 'Stroke Evaluation' : 'Chấm điểm nét vẽ'}</span>
               </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#fb7185', fontWeight: '700', fontSize: '0.85rem', marginTop: '16px' }}>
-              <span>Luyện viết ngay</span>
+              <span>{isEn ? 'Practice writing' : 'Luyện viết ngay'}</span>
               <ArrowRight size={14} />
             </div>
           </Link>
@@ -567,25 +601,27 @@ export default function HomePage() {
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                 <span className="badge badge-sky">
-                  <Volume2 size={13} /> Cao độ 5 bậc
+                  <Volume2 size={13} /> {isEn ? '5 Pitch Levels' : 'Cao độ 5 bậc'}
                 </span>
               </div>
 
               <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '6px' }}>
-                Luyện 4 thanh điệu chuẩn
+                {isEn ? 'Master 4 Chinese Tones' : 'Luyện 4 thanh điệu chuẩn'}
               </h3>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '14px' }}>
-                Hiểu bản chất âm vực qua biểu đồ (55, 35, 214, 51), phân biệt rõ thanh 1 với thanh 4 qua trắc nghiệm thính giác.
+                {isEn
+                  ? 'Visualize tonal contours (55, 35, 214, 51) and sharpen listening perception with audio quizzes.'
+                  : 'Hiểu bản chất âm vực qua biểu đồ (55, 35, 214, 51), phân biệt rõ thanh 1 với thanh 4 qua trắc nghiệm thính giác.'}
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                <span className="badge badge-sky" style={{ fontSize: '0.7rem' }}>Biểu đồ trực quan</span>
-                <span>Đoán âm thanh</span>
+                <span className="badge badge-sky" style={{ fontSize: '0.7rem' }}>{isEn ? 'Visual Pitch Graphs' : 'Biểu đồ trực quan'}</span>
+                <span>{isEn ? 'Tone Ear Training' : 'Đoán âm thanh'}</span>
               </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#0ea5e9', fontWeight: '700', fontSize: '0.85rem', marginTop: '16px' }}>
-              <span>Luyện thanh điệu</span>
+              <span>{isEn ? 'Practice tones' : 'Luyện thanh điệu'}</span>
               <ArrowRight size={14} />
             </div>
           </Link>
@@ -602,25 +638,27 @@ export default function HomePage() {
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                 <span className="badge badge-indigo">
-                  <MessageSquare size={13} /> AI Gemini 2.5
+                  <MessageSquare size={13} /> {isEn ? 'Gemini 2.5 Flash' : 'AI Gemini 2.5'}
                 </span>
               </div>
 
               <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '6px' }}>
-                AI Tutor đàm thoại thực chiến
+                {isEn ? 'AI Conversational Tutor' : 'AI Tutor đàm thoại thực chiến'}
               </h3>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '14px' }}>
-                Đối thoại phản xạ 4 tình huống đời sống (chào hỏi, gọi món, mua sắm, hỏi đường) có chữa lỗi ngữ pháp và gợi ý mẹo nói.
+                {isEn
+                  ? 'Real-life scenario roleplay (greetings, dining, shopping, directions) with smart grammar correction.'
+                  : 'Đối thoại phản xạ 4 tình huống đời sống (chào hỏi, gọi món, mua sắm, hỏi đường) có chữa lỗi ngữ pháp và gợi ý mẹo nói.'}
               </p>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                <span className="badge badge-emerald" style={{ fontSize: '0.7rem' }}>Sửa ngữ pháp</span>
-                <span>Phát âm bản xứ</span>
+                <span className="badge badge-emerald" style={{ fontSize: '0.7rem' }}>{isEn ? 'Grammar Correction' : 'Sửa ngữ pháp'}</span>
+                <span>{isEn ? 'Native Accent' : 'Phát âm bản xứ'}</span>
               </div>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#a855f7', fontWeight: '700', fontSize: '0.85rem', marginTop: '16px' }}>
-              <span>Trò chuyện cùng AI</span>
+              <span>{isEn ? 'Chat with AI' : 'Trò chuyện cùng AI'}</span>
               <ArrowRight size={14} />
             </div>
           </Link>

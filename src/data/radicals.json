@@ -4,8 +4,10 @@
     "pinyin": "rén",
     "hanviet": "Nhân (bộ nhân đứng)",
     "meaning": "Người",
+    "meaningEn": "Person, human",
     "strokes": 2,
     "mnemonic": "Hình tượng một người đang đứng nghiêng mình. Các chữ liên quan đến con người, hành vi xã hội.",
+    "mnemonicEn": "Depicts a person standing in profile. Characters relate to human beings and social activities.",
     "examples": ["你", "他", "休", "体", "做"]
   },
   {
@@ -13,8 +15,10 @@
     "pinyin": "nǚ",
     "hanviet": "Nữ",
     "meaning": "Phụ nữ, con gái",
+    "meaningEn": "Woman, female",
     "strokes": 3,
     "mnemonic": "Hình người phụ nữ đoan trang quỳ gối chắp tay. Các chữ liên quan đến phái nữ, gia đình, tình cảm.",
+    "mnemonicEn": "Depicts a graceful woman kneeling. Characters relate to women, family, and feelings.",
     "examples": ["好", "她", "妈", "妹", "姐"]
   },
   {
@@ -22,8 +26,10 @@
     "pinyin": "kǒu",
     "hanviet": "Khẩu",
     "meaning": "Miệng, mồm, lối vào",
+    "meaningEn": "Mouth, opening",
     "strokes": 3,
     "mnemonic": "Hình cái miệng há rộng. Các chữ liên quan đến ăn uống, nói năng, gọi kêu, âm thanh.",
+    "mnemonicEn": "Depicts an open mouth. Characters relate to eating, speaking, sounds, and openings.",
     "examples": ["吃", "喝", "叫", "听", "问"]
   },
   {
@@ -31,8 +37,10 @@
     "pinyin": "shuǐ",
     "hanviet": "Thủy (bộ ba chấm thủy)",
     "meaning": "Nước, chất lỏng",
+    "meaningEn": "Water, liquid",
     "strokes": 3,
     "mnemonic": "Ba giọt nước bắn tung tóe. Các chữ liên quan đến sông hồ, biển cả, nước, độ ẩm.",
+    "mnemonicEn": "Three splashes of water droplets. Characters relate to water, rivers, seas, and moisture.",
     "examples": ["江", "河", "海", "洗", "渴"]
   },
   {
@@ -40,8 +48,10 @@
     "pinyin": "mù",
     "hanviet": "Mộc",
     "meaning": "Cây cối, gỗ",
+    "meaningEn": "Tree, wood",
     "strokes": 4,
     "mnemonic": "Hình một thân cây có cành phía trên và rễ phía dưới. Các chữ liên quan đến cây cối, rừng rậm, đồ gỗ.",
+    "mnemonicEn": "Depicts a trunk with branches above and roots below. Characters relate to plants, forests, and wood.",
     "examples": ["林", "森", "本", "桥", "杯"]
   },
   {
@@ -49,8 +59,10 @@
     "pinyin": "xīn",
     "hanviet": "Tâm",
     "meaning": "Trái tim, tấm lòng, cảm xúc",
+    "meaningEn": "Heart, mind, emotion",
     "strokes": 4,
     "mnemonic": "Hình trái tim và mạch máu. Các chữ liên quan đến suy nghĩ, tâm trạng, tình cảm.",
+    "mnemonicEn": "Depicts the human heart. Characters relate to thoughts, moods, and feelings.",
     "examples": ["想", "忘", "怕", "情", "快"]
   },
   {
@@ -58,8 +70,10 @@
     "pinyin": "yán",
     "hanviet": "Ngôn",
     "meaning": "Lời nói, ngôn ngữ",
+    "meaningEn": "Speech, words",
     "strokes": 2,
     "mnemonic": "Lời nói phát ra từ miệng. Các chữ liên quan đến nói chuyện, ngôn ngữ, thảo luận.",
+    "mnemonicEn": "Sound waves or speech radiating from the mouth. Characters relate to language and discussion.",
     "examples": ["说", "话", "语", "请", "读"]
   },
   {
@@ -67,8 +81,10 @@
     "pinyin": "mián",
     "hanviet": "Miên",
     "meaning": "Mái nhà, nóc nhà",
+    "meaningEn": "Roof, shelter",
     "strokes": 3,
     "mnemonic": "Hình mái hiên nhà che chở mưa nắng. Các chữ liên quan đến phòng ốc, nơi cư trú, an toàn.",
+    "mnemonicEn": "Depicts the sheltering eaves of a house. Characters relate to rooms, residence, and safety.",
     "examples": ["家", "字", "安", "室", "客"]
   }
 ]

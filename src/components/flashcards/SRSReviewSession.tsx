@@ -7,12 +7,15 @@ import { VocabItem, SRSItem, SRSRating } from '@/types';
 import { AudioButton } from '@/components/common/AudioButton';
 import { calculateNextReview, initializeSRSItem } from '@/lib/srs';
 import { storage } from '@/lib/storage';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface SRSReviewSessionProps {
   vocabList: VocabItem[];
 }
 
 export const SRSReviewSession: React.FC<SRSReviewSessionProps> = ({ vocabList }) => {
+  const { language } = useLanguage();
+  const isEn = language === 'en';
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [showPinyinHint, setShowPinyinHint] = useState(false);
@@ -121,10 +124,12 @@ export const SRSReviewSession: React.FC<SRSReviewSessionProps> = ({ vocabList })
         </div>
 
         <h2 style={{ fontSize: '1.6rem', fontWeight: '800', marginBottom: '8px' }}>
-          Hoàn thành buổi ôn tập!
+          {isEn ? 'Review Session Completed!' : 'Hoàn thành buổi ôn tập!'}
         </h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', fontSize: '0.95rem' }}>
-          Bạn đã hoàn thành ghi nhớ {reviewedCount} từ vựng theo thuật toán FSRS / SM-2. Các từ sẽ được lên lịch tự động ôn lại đúng thời điểm tối ưu.
+          {isEn
+            ? `You have reviewed ${reviewedCount} vocabulary words with FSRS / SM-2. Cards are scheduled for future review at the optimal time.`
+            : `Bạn đã hoàn thành ghi nhớ ${reviewedCount} từ vựng theo thuật toán FSRS / SM-2. Các từ sẽ được lên lịch tự động ôn lại đúng thời điểm tối ưu.`}
         </p>
 
         <button
@@ -134,7 +139,7 @@ export const SRSReviewSession: React.FC<SRSReviewSessionProps> = ({ vocabList })
           style={{ padding: '12px 28px', fontSize: '1rem' }}
         >
           <RotateCw size={18} />
-          <span>Ôn tập lại từ đầu</span>
+          <span>{isEn ? 'Restart Session' : 'Ôn tập lại từ đầu'}</span>
         </button>
       </div>
     );
@@ -252,18 +257,24 @@ export const SRSReviewSession: React.FC<SRSReviewSessionProps> = ({ vocabList })
               {currentVocab.pinyin}
             </div>
 
-            {/* Sino-Vietnamese Emphasis */}
+            {/* Sino-Vietnamese or Radical */}
             <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '12px' }}>
-              <span className="badge badge-gold" style={{ fontSize: '0.85rem', padding: '4px 12px' }}>
-                Âm Hán-Việt: {currentVocab.hanviet}
-              </span>
+              {!isEn ? (
+                <span className="badge badge-gold" style={{ fontSize: '0.85rem', padding: '4px 12px' }}>
+                  Âm Hán-Việt: {currentVocab.hanviet}
+                </span>
+              ) : (
+                <span className="badge badge-sky" style={{ fontSize: '0.85rem', padding: '4px 12px' }}>
+                  Radical: {currentVocab.radical || 'HSK 1'}
+                </span>
+              )}
               <span className="badge badge-indigo" style={{ fontSize: '0.85rem' }}>
                 {currentVocab.partOfSpeech}
               </span>
             </div>
 
             <div style={{ fontSize: '1.2rem', fontWeight: '600', color: '#10b981', marginTop: '14px' }}>
-              {currentVocab.meaning}
+              {isEn ? (currentVocab.meaningEn || currentVocab.meaning) : currentVocab.meaning}
             </div>
 
             {/* Example sentence */}
@@ -287,7 +298,7 @@ export const SRSReviewSession: React.FC<SRSReviewSessionProps> = ({ vocabList })
                 {currentVocab.examplePinyin}
               </div>
               <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-                {currentVocab.exampleMeaning}
+                {isEn ? (currentVocab.exampleMeaningEn || currentVocab.exampleMeaning) : currentVocab.exampleMeaning}
               </div>
             </div>
           </div>
@@ -303,12 +314,12 @@ export const SRSReviewSession: React.FC<SRSReviewSessionProps> = ({ vocabList })
             className="btn-primary"
             style={{ width: '100%', padding: '14px', fontSize: '1rem' }}
           >
-            <span>Hiển thị đáp án (Lật thẻ)</span>
+            <span>{isEn ? 'Show Answer (Flip Card)' : 'Hiển thị đáp án (Lật thẻ)'}</span>
           </button>
         ) : (
           <div>
             <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'center', marginBottom: '8px' }}>
-              Mức độ ghi nhớ của bạn đối với từ này:
+              {isEn ? 'How well did you recall this word?' : 'Mức độ ghi nhớ của bạn đối với từ này:'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
               <button
@@ -326,8 +337,8 @@ export const SRSReviewSession: React.FC<SRSReviewSessionProps> = ({ vocabList })
                   textAlign: 'center',
                 }}
               >
-                <div>Quên</div>
-                <div style={{ fontSize: '0.65rem', opacity: 0.8, marginTop: '2px' }}>Lặp lại ngay</div>
+                <div>{isEn ? 'Again' : 'Quên'}</div>
+                <div style={{ fontSize: '0.65rem', opacity: 0.8, marginTop: '2px' }}>{isEn ? 'Repeat now' : 'Lặp lại ngay'}</div>
               </button>
 
               <button
@@ -345,8 +356,8 @@ export const SRSReviewSession: React.FC<SRSReviewSessionProps> = ({ vocabList })
                   textAlign: 'center',
                 }}
               >
-                <div>Khó</div>
-                <div style={{ fontSize: '0.65rem', opacity: 0.8, marginTop: '2px' }}>+1 ngày</div>
+                <div>{isEn ? 'Hard' : 'Khó'}</div>
+                <div style={{ fontSize: '0.65rem', opacity: 0.8, marginTop: '2px' }}>{isEn ? '+1 day' : '+1 ngày'}</div>
               </button>
 
               <button
@@ -364,8 +375,8 @@ export const SRSReviewSession: React.FC<SRSReviewSessionProps> = ({ vocabList })
                   textAlign: 'center',
                 }}
               >
-                <div>Nhớ tốt</div>
-                <div style={{ fontSize: '0.65rem', opacity: 0.8, marginTop: '2px' }}>+3 ngày</div>
+                <div>{isEn ? 'Good' : 'Nhớ tốt'}</div>
+                <div style={{ fontSize: '0.65rem', opacity: 0.8, marginTop: '2px' }}>{isEn ? '+3 days' : '+3 ngày'}</div>
               </button>
 
               <button
@@ -383,8 +394,8 @@ export const SRSReviewSession: React.FC<SRSReviewSessionProps> = ({ vocabList })
                   textAlign: 'center',
                 }}
               >
-                <div>Rất dễ</div>
-                <div style={{ fontSize: '0.65rem', opacity: 0.8, marginTop: '2px' }}>+5 ngày</div>
+                <div>{isEn ? 'Easy' : 'Rất dễ'}</div>
+                <div style={{ fontSize: '0.65rem', opacity: 0.8, marginTop: '2px' }}>{isEn ? '+5 days' : '+5 ngày'}</div>
               </button>
             </div>
           </div>

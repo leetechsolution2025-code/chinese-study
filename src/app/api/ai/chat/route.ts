@@ -3,7 +3,7 @@ import { chatWithGemini } from '@/lib/ai/gemini';
 
 export async function POST(req: NextRequest) {
   try {
-    const { message, scenario, history } = await req.json();
+    const { message, scenario, history, language } = await req.json();
 
     if (!message || typeof message !== 'string') {
       return NextResponse.json(
@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
       message,
       scenario,
       history,
+      language: language === 'en' ? 'en' : 'vi',
     });
 
     return NextResponse.json({

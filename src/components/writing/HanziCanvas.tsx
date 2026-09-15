@@ -5,6 +5,7 @@ import { Play, RotateCcw, Edit3, Eye, EyeOff, CheckCircle2, Sparkles } from 'luc
 import confetti from 'canvas-confetti';
 import { AudioButton } from '@/components/common/AudioButton';
 import { storage } from '@/lib/storage';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface HanziCanvasProps {
   character: string;
@@ -23,6 +24,8 @@ export const HanziCanvas: React.FC<HanziCanvasProps> = ({
   radical,
   onCharacterCompleted,
 }) => {
+  const { language } = useLanguage();
+  const isEn = language === 'en';
   const containerRef = useRef<HTMLDivElement>(null);
   const writerRef = useRef<any>(null);
   const [isQuizMode, setIsQuizMode] = useState(false);
@@ -170,19 +173,23 @@ export const HanziCanvas: React.FC<HanziCanvasProps> = ({
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '6px' }}>
-            <span className="badge badge-gold" title="Âm Hán Việt tương ứng">
-              Hán-Việt: {hanviet}
-            </span>
+            {!isEn && (
+              <span className="badge badge-gold" title="Âm Hán Việt tương ứng">
+                Hán-Việt: {hanviet}
+              </span>
+            )}
             {radical && (
-              <span className="badge badge-emerald" title="Bộ thủ chính">
-                Bộ thủ: {radical}
+              <span className="badge badge-emerald" title={isEn ? 'Primary Radical' : 'Bộ thủ chính'}>
+                {isEn ? `Radical: ${radical}` : `Bộ thủ: ${radical}`}
               </span>
             )}
           </div>
         </div>
 
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Nghĩa tiếng Việt</div>
+          <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+            {isEn ? 'Meaning' : 'Nghĩa tiếng Việt'}
+          </div>
           <div style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '1.05rem', marginTop: '2px' }}>
             {meaning}
           </div>
@@ -226,17 +233,17 @@ export const HanziCanvas: React.FC<HanziCanvasProps> = ({
             }}
           >
             <CheckCircle2 size={16} />
-            <span>Xuất sắc! Viết đúng thứ tự nét</span>
+            <span>{isEn ? 'Excellent! Correct stroke order' : 'Xuất sắc! Viết đúng thứ tự nét'}</span>
           </div>
         )}
 
         {isQuizMode && (
           <div style={{ marginTop: '10px', fontSize: '0.85rem', color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '6px' }}>
             <Edit3 size={14} />
-            <span>Dùng chuột hoặc ngón tay để đồ theo thứ tự từng nét</span>
+            <span>{isEn ? 'Trace strokes in correct order' : 'Dùng chuột hoặc ngón tay để đồ theo thứ tự từng nét'}</span>
             {strokeMistakes > 0 && (
               <span style={{ color: '#f43f5e', marginLeft: '6px' }}>
-                (Lỗi nét: {strokeMistakes})
+                ({isEn ? `Mistakes: ${strokeMistakes}` : `Lỗi nét: ${strokeMistakes}`})
               </span>
             )}
           </div>
@@ -258,10 +265,10 @@ export const HanziCanvas: React.FC<HanziCanvasProps> = ({
           disabled={isAnimating}
           className="btn-secondary"
           style={{ padding: '8px 12px', fontSize: '0.85rem' }}
-          title="Xem lại mô phỏng thứ tự nét vẽ"
+          title={isEn ? 'Watch stroke order animation' : 'Xem lại mô phỏng thứ tự nét vẽ'}
         >
           <Play size={15} />
-          <span>Vẽ nét</span>
+          <span>{isEn ? 'Animate' : 'Vẽ nét'}</span>
         </button>
 
         <button
@@ -275,10 +282,14 @@ export const HanziCanvas: React.FC<HanziCanvasProps> = ({
               ? 'linear-gradient(135deg, #0284c7, #0369a1)'
               : 'linear-gradient(135deg, var(--accent-crimson), #be123c)',
           }}
-          title="Bật chế độ tự luyện viết và chấm điểm nét"
+          title={isEn ? 'Practice writing character strokes' : 'Bật chế độ tự luyện viết và chấm điểm nét'}
         >
           <Edit3 size={15} />
-          <span>{isQuizMode ? 'Đang viết...' : 'Tập viết'}</span>
+          <span>
+            {isQuizMode
+              ? (isEn ? 'Writing...' : 'Đang viết...')
+              : (isEn ? 'Practice' : 'Tập viết')}
+          </span>
         </button>
 
         <button
@@ -286,10 +297,14 @@ export const HanziCanvas: React.FC<HanziCanvasProps> = ({
           onClick={toggleOutline}
           className="btn-secondary"
           style={{ padding: '8px 12px', fontSize: '0.85rem' }}
-          title="Bật/tắt nét mờ gợi ý"
+          title={isEn ? 'Toggle background stroke guide' : 'Bật/tắt nét mờ gợi ý'}
         >
           {showOutline ? <EyeOff size={15} /> : <Eye size={15} />}
-          <span>{showOutline ? 'Ẩn nét' : 'Hiện nét'}</span>
+          <span>
+            {showOutline
+              ? (isEn ? 'Hide Guide' : 'Ẩn nét')
+              : (isEn ? 'Show Guide' : 'Hiện nét')}
+          </span>
         </button>
 
         <button
@@ -297,10 +312,10 @@ export const HanziCanvas: React.FC<HanziCanvasProps> = ({
           onClick={handleReset}
           className="btn-secondary"
           style={{ padding: '8px 12px', fontSize: '0.85rem' }}
-          title="Xóa và vẽ lại từ đầu"
+          title={isEn ? 'Clear canvas and restart' : 'Xóa và vẽ lại từ đầu'}
         >
           <RotateCcw size={15} />
-          <span>Làm lại</span>
+          <span>{isEn ? 'Reset' : 'Làm lại'}</span>
         </button>
       </div>
     </div>
