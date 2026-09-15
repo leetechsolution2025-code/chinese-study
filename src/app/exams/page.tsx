@@ -45,6 +45,10 @@ export default function ExamsHubPage() {
         return '#f59e0b'; // Gold
       case 4:
         return '#10b981'; // Emerald
+      case 5:
+        return '#8b5cf6'; // Indigo
+      case 6:
+        return '#ec4899'; // Crimson Pink
       default:
         return '#6366f1';
     }
@@ -60,6 +64,10 @@ export default function ExamsHubPage() {
         return 'badge-gold';
       case 4:
         return 'badge-emerald';
+      case 5:
+        return 'badge-indigo';
+      case 6:
+        return 'badge-crimson';
       default:
         return 'badge-crimson';
     }
@@ -81,7 +89,7 @@ export default function ExamsHubPage() {
         </div>
 
         <h1 style={{ fontSize: '2.4rem', fontWeight: '800', lineHeight: 1.25, marginBottom: '14px' }}>
-          Chinh phục chứng chỉ <span className="gradient-text">HSK 1 đến HSK 4</span>
+          Chinh phục chứng chỉ <span className="gradient-text">HSK 1 đến HSK 6</span>
         </h1>
 
         <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.6, maxWidth: '780px', marginBottom: '20px' }}>

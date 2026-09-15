@@ -488,5 +488,219 @@
         "points": 50
       }
     ]
+  },
+  {
+    "id": "hsk5-mock-01",
+    "level": 5,
+    "title": "Đề thi thử HSK 5 - Đề số 01",
+    "description": "Đề thi thử mô phỏng cấu trúc HSK 5 chuẩn quốc tế gồm 2 phần: Nghe hiểu và Đọc hiểu. Thời gian làm bài 120 phút.",
+    "totalTimeMinutes": 120,
+    "totalQuestions": 6,
+    "maxScore": 300,
+    "passingScore": 180,
+    "listeningQuestionsCount": 3,
+    "readingQuestionsCount": 3,
+    "questions": [
+      {
+        "id": "hsk5-q1",
+        "section": "listening",
+        "questionNumber": 1,
+        "prompt": "Nghe đoạn đối thoại phỏng vấn và chọn câu trả lời đúng nhất:",
+        "audioPrompt": "女：李教授，您认为现代年轻人在职业规划中最应该克服的心理误区是什么？\n男：我觉得最普遍的问题是急功近利。很多年轻人希望在一年半载内就获得巨大的成功，缺乏沉下心来积累经验的定力。",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "Quá chú trọng lợi ích trước mắt, thiếu sự kiên trì tích lũy.", "pinyin": "" },
+          { "id": "B", "text": "Không đủ tự tin vào năng lực bản thân.", "pinyin": "" },
+          { "id": "C", "text": "Thiếu mục tiêu nghề nghiệp rõ ràng.", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Giáo sư Lý nêu rõ vấn đề phổ biến là '急功近利' (nóng vội vì lợi ích trước mắt) và thiếu sự '沉下心来积累' (lắng đọng kiên trì tích lũy).",
+        "points": 50
+      },
+      {
+        "id": "hsk5-q2",
+        "section": "listening",
+        "questionNumber": 2,
+        "prompt": "Nghe thông báo và trả lời câu hỏi: Người nói khuyên điều gì?",
+        "audioPrompt": "各位旅客请注意，由于暴雨天气导致航路气象恶劣，原定于14:20飞往上海的MU518航班暂时无法起飞。请各位旅客前往A区休息室领取饮水和餐食。",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "Chuyến bay đã bị hủy bỏ vĩnh viễn.", "pinyin": "" },
+          { "id": "B", "text": "Hành khách đến khu vực phòng chờ A nhận nước uống và đồ ăn nhẹ.", "pinyin": "" },
+          { "id": "C", "text": "Hành khách lập tức đổi sang đi tàu cao tốc.", "pinyin": "" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "Thông báo nói rõ: '请各位旅客前往A区休息室领取饮水和餐食' (Mời hành khách tới phòng chờ A nhận nước và bữa ăn).",
+        "points": 50
+      },
+      {
+        "id": "hsk5-q3",
+        "section": "listening",
+        "questionNumber": 3,
+        "prompt": "Nghe đoạn chia sẻ ngắn về quản trị thời gian và chọn ý đúng:",
+        "audioPrompt": "很多人抱怨时间不够用，但实际上，我们浪费在无意义的信息浏览上的碎片时间令人震惊。学会分清事情的轻重缓急，才是提高效率的关键。",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "Cần làm việc không nghỉ ngơi suốt cả ngày.", "pinyin": "" },
+          { "id": "B", "text": "Biết phân biệt việc quan trọng và khẩn cấp (轻重缓急) là mấu chốt để nâng cao hiệu suất.", "pinyin": "" },
+          { "id": "C", "text": "Mỗi người đều có thời gian như nhau nên không cần quản lý.", "pinyin": "" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "Người nói đúc kết: '学会分清事情的轻重缓急，才是提高效率的关键' (Học cách phân biệt việc khẩn cấp quan trọng là mấu chốt tăng hiệu suất).",
+        "points": 50
+      },
+      {
+        "id": "hsk5-q4",
+        "section": "reading",
+        "questionNumber": 4,
+        "prompt": "Chọn từ thích hợp điền vào chỗ trống: 面对日益激烈的国际竞争，人才是企业最宝贵的财富，培养高素质人才更是刻不______。",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "容缓 (rónghuǎn - không thể trì hoãn một khắc)", "pinyin": "" },
+          { "id": "B", "text": "得已 (déyǐ)", "pinyin": "" },
+          { "id": "C", "text": "理喻 (lǐyù)", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Thành ngữ chuẩn HSK 5: 刻不容缓 (Kè bù róng huǎn - Vô cùng cấp bách, không thể chậm trễ một khắc nào).",
+        "points": 50
+      },
+      {
+        "id": "hsk5-q5",
+        "section": "reading",
+        "questionNumber": 5,
+        "prompt": "Đọc đoạn văn ngắn và rút ra bài học: 心理学家研究发现，长期的焦虑往往源于人们对未来的过度预测和对当下的控制力不足。专注做好眼前的一件小事，往往是打破焦虑怪圈的最佳途径。",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "Tập trung giải quyết tốt từng việc nhỏ trước mắt giúp giảm bớt lo âu.", "pinyin": "" },
+          { "id": "B", "text": "Tương lai luôn luôn tồi tệ và không thể đoán trước.", "pinyin": "" },
+          { "id": "C", "text": "Lo âu là điều không có cách nào khắc phục được.", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Đoạn văn kết luận: '专注做好眼前的一件小事，往往是打破焦虑怪圈的最佳途径' (Tập trung làm tốt một việc nhỏ trước mắt là cách tốt nhất phá vỡ vòng luẩn quẩn lo âu).",
+        "points": 50
+      },
+      {
+        "id": "hsk5-q6",
+        "section": "reading",
+        "questionNumber": 6,
+        "prompt": "Sắp xếp lại các câu sau thành đoạn văn mạch lạc:\n(1) 这种自律不仅体现在学习和工作中\n(2) 真正优秀的人，往往具有极强的自我约束力\n(3) 更体现在对情绪的克制和对健康生活方式的坚守",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "(2) - (1) - (3)", "pinyin": "" },
+          { "id": "B", "text": "(1) - (3) - (2)", "pinyin": "" },
+          { "id": "C", "text": "(3) - (2) - (1)", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Câu (2) nêu chủ đề tổng quát (Người ưu tú có kỷ luật tự giác cao) -> (1) liên từ '不仅体现在...' (không chỉ thể hiện ở...) -> (3) '更体现在...' (mà còn thể hiện ở...). Thứ tự đúng: 2 - 1 - 3.",
+        "points": 50
+      }
+    ]
+  },
+  {
+    "id": "hsk6-mock-01",
+    "level": 6,
+    "title": "Đề thi thử HSK 6 - Đề số 01",
+    "description": "Đề thi thử mô phỏng HSK 6 đỉnh cao gồm 2 phần: Nghe hiểu học thuật & Đọc hiểu tác phẩm văn học nghệ thuật. Thời gian làm bài 135 phút.",
+    "totalTimeMinutes": 135,
+    "totalQuestions": 6,
+    "maxScore": 300,
+    "passingScore": 180,
+    "listeningQuestionsCount": 3,
+    "readingQuestionsCount": 3,
+    "questions": [
+      {
+        "id": "hsk6-q1",
+        "section": "listening",
+        "questionNumber": 1,
+        "prompt": "Nghe đoạn trích bài giảng triết học và chọn quan điểm của diễn giả:",
+        "audioPrompt": "中国古代哲学讲求“天人合一”，强调人不是自然的征服者，而是大自然生命共同体中休戚与共的组成部分。丧失对自然的敬畏，终将遭受自然规律的惩罚。",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "Con người cần chinh phục và cải tạo toàn bộ thiên nhiên.", "pinyin": "" },
+          { "id": "B", "text": "Con người và thiên nhiên là chỉnh thể cộng sinh gắn kết, cần giữ lòng kính sợ tự nhiên.", "pinyin": "" },
+          { "id": "C", "text": "Quy luật tự nhiên hoàn toàn do con người định đoạt.", "pinyin": "" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "Diễn giả nhấn mạnh triết lý '天人合一' (Thiên nhân hợp nhất), con người là một phần gắn bó '休戚与共' với tự nhiên và cần giữ lòng kính sợ '敬畏'.",
+        "points": 50
+      },
+      {
+        "id": "hsk6-q2",
+        "section": "listening",
+        "questionNumber": 2,
+        "prompt": "Nghe tọa đàm kinh tế và phân tích xu hướng thị trường:",
+        "audioPrompt": "在全球产业链深度重构的背景下，单纯依靠低成本劳动力的粗放型增长模式已难以为继。唯有向价值链中高端攀升，方能构筑起持久的核心壁垒。",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "Tiếp tục duy trì ưu thế nhân công giá rẻ bằng mọi giá.", "pinyin": "" },
+          { "id": "B", "text": "Chuyển dịch lên phân khúc giá trị cao hơn để tạo rào cản cốt lõi bền vững.", "pinyin": "" },
+          { "id": "C", "text": "Thu hẹp quy mô sản xuất và ngừng đổi mới sáng tạo.", "pinyin": "" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "Chuyên gia nhận định mô hình nhân công rẻ đã lỗi thời, '唯有向价值链中高端攀升，方能构筑起持久的核心壁垒' (chỉ có bước lên chuỗi giá trị trung-cao mới tạo thành lũy cốt lõi).",
+        "points": 50
+      },
+      {
+        "id": "hsk6-q3",
+        "section": "listening",
+        "questionNumber": 3,
+        "prompt": "Nghe nhận định về ngôn ngữ học và chọn luận điểm chuẩn xác:",
+        "audioPrompt": "语言绝非单纯的交际工具，它更是一个民族历史积淀与集体无意识的活化石。成语更是汉字文化圈精神家园的高度凝练。",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "Ngôn ngữ chỉ đơn thuần là công cụ trao đổi thông tin hằng ngày.", "pinyin": "" },
+          { "id": "B", "text": "Ngôn ngữ và thành ngữ chứa đựng bề dày lịch sử và linh hồn văn hóa của cả dân tộc.", "pinyin": "" },
+          { "id": "C", "text": "Thành ngữ đã không còn giá trị trong xã hội hiện đại.", "pinyin": "" }
+        ],
+        "correctAnswer": "B",
+        "explanation": "Đoạn ghi âm nhấn mạnh ngôn ngữ là '活化石' (hóa thạch sống) của lịch sử dân tộc và thành ngữ là sự đúc kết tinh hoa '高度凝练'.",
+        "points": 50
+      },
+      {
+        "id": "hsk6-q4",
+        "section": "reading",
+        "questionNumber": 4,
+        "prompt": "Chọn thành ngữ phù hợp điền vào câu sau: 做学问切忌浮躁盲动，必须要有______的精神，耐得住寂寞，十年磨一剑。",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "笃行不怠 (dǔxíng bùdài - kiên định hành động không mỏi mệt)", "pinyin": "" },
+          { "id": "B", "text": "画蛇添足 (huàshétiānzú)", "pinyin": "" },
+          { "id": "C", "text": "掩耳盗铃 (yǎněrdàolíng)", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Thành ngữ '笃行不怠' diễn tả tinh thần học thuật kiên trì, bền chí làm đến cùng, đối lập với '浮躁盲动' (nóng vội hấp tấp).",
+        "points": 50
+      },
+      {
+        "id": "hsk6-q5",
+        "section": "reading",
+        "questionNumber": 5,
+        "prompt": "Đọc đoạn phân tích văn học và chọn ý nghĩa sâu xa: 真正震撼人心的悲剧，不是简单的善恶交锋，而是两种同样具有崇高正义性的力量在特定历史语境下的宿命碰撞。",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "Bi kịch đỉnh cao là sự xung đột tất yếu giữa hai lực lượng cùng đại diện cho lý tưởng chính nghĩa.", "pinyin": "" },
+          { "id": "B", "text": "Bi kịch chỉ là câu chuyện phân chia kẻ tốt và người xấu rõ ràng.", "pinyin": "" },
+          { "id": "C", "text": "Mọi bi kịch đều xuất phát từ sự tình cờ ngẫu nhiên.", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Đoạn văn định nghĩa bi kịch sâu sắc là sự va chạm định mệnh '宿命碰撞' giữa hai lực lượng cùng có tính chính nghĩa cao cả '同样具有崇高正义性'.",
+        "points": 50
+      },
+      {
+        "id": "hsk6-q6",
+        "section": "reading",
+        "questionNumber": 6,
+        "prompt": "Xác định câu có lỗi ngữ pháp (病句):",
+        "pinyin": "",
+        "options": [
+          { "id": "A", "text": "通过这次全方位的实地考察，使大家对生态修复的重要性有了更深层次的认识。", "pinyin": "" },
+          { "id": "B", "text": "我们在追求经济效益的同时，绝不能以牺牲生态环境为代价。", "pinyin": "" },
+          { "id": "C", "text": "唯有不断提升自主创新能力，才能在国际竞争中赢得主动权。", "pinyin": "" }
+        ],
+        "correctAnswer": "A",
+        "explanation": "Câu A là lỗi kinh điển trong bài thi HSK 6: 'thiếu chủ ngữ' do dùng đồng thời '通过……使……'. Cần bỏ '使' để '大家' làm chủ ngữ chính của câu.",
+        "points": 50
+      }
+    ]
   }
 ]

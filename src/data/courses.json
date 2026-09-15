@@ -39,6 +39,26 @@
       "description": "Làm chủ 1200 từ vựng và ngữ pháp nâng cao. Có khả năng thảo luận trôi chảy về các chủ đề văn hóa, xã hội, công việc và tình cảm.",
       "color": "#10b981",
       "badgeClass": "badge-emerald"
+    },
+    {
+      "id": "hsk5",
+      "title": "Lớp học HSK 5 - Cao cấp",
+      "level": 5,
+      "totalLessons": 36,
+      "targetVocab": 2500,
+      "description": "Chinh phục 2500 từ vựng và ngữ pháp cao cấp. Đọc hiểu báo chí, xem phim ảnh Trung Quốc, thuyết trình và viết bài luận học thuật chuyên sâu.",
+      "color": "#8b5cf6",
+      "badgeClass": "badge-indigo"
+    },
+    {
+      "id": "hsk6",
+      "title": "Lớp học HSK 6 - Tinh thông",
+      "level": 6,
+      "totalLessons": 40,
+      "targetVocab": 5000,
+      "description": "Làm chủ 5000+ từ vựng và thành ngữ (成语) bốn chữ kinh điển. Diễn đạt lưu loát như người bản xứ, đọc hiểu tác phẩm văn học và phân tích chuyên đề xã hội phức tạp.",
+      "color": "#ec4899",
+      "badgeClass": "badge-crimson"
     }
   ],
   "lessons": [
@@ -726,6 +746,186 @@
           "options": ["不仅...而且...", "虽然...但是...", "因为...所以...", "只要...就..."],
           "correctIndex": 0,
           "explanation": "Dùng cặp liên từ '不仅...而且...' để biểu thị quan hệ tăng tiến."
+        }
+      ]
+    },
+    {
+      "id": "hsk5-lesson-01",
+      "courseId": "hsk5",
+      "lessonNumber": 1,
+      "titleHanzi": "爱的教育",
+      "titlePinyin": "Ài de jiàoyù",
+      "titleVi": "Giáo dục của tình yêu thương",
+      "objectives": [
+        "Nắm vững các từ vựng cao cấp về tâm lý, giáo dục và phương pháp nuôi dạy con cái.",
+        "Làm chủ cấu trúc liên từ phức: 哪怕……也…… (Cho dù... cũng...).",
+        "Kỹ năng phân tích ngữ pháp câu đa phân vị và diễn đạt tư duy logic."
+      ],
+      "dialogue": [
+        {
+          "speaker": "A",
+          "hanzi": "孩子的成长离不开父母的言传身教。哪怕面对挫折，父母的信任也是他们最大的动力。",
+          "pinyin": "Háizi de chéngzhǎng lí bù kāi fùmǔ de yánchuán shēnjiào. Nǎpà miànduì cuòzhé, fùmǔ de xìnrèn yě shì tāmen zuìdà de dònglì.",
+          "vi": "Sự trưởng thành của con trẻ không thể tách rời việc làm gương của cha mẹ. Cho dù đối mặt với trắc trở, sự tin tưởng của cha mẹ cũng là động lực lớn nhất của chúng."
+        },
+        {
+          "speaker": "B",
+          "hanzi": "你说得非常深刻。现代教育更注重培养孩子的健全人格和独立思考能力，而不仅仅是考试成绩。",
+          "pinyin": "Nǐ shuō de fēicháng shēnkè. Xiàndài jiàoyù gèng zhùzhòng péiyǎng háizi de jiànquán réngé hé dúlì sīkǎo nénglì, ér bù jǐnjǐn shì kǎoshì chéngjì.",
+          "vi": "Bạn nói rất sâu sắc. Giáo dục hiện đại chú trọng bồi dưỡng nhân cách hoàn thiện và năng lực tư duy độc lập của đứa trẻ, chứ không chỉ đơn thuần là điểm số thi cử."
+        }
+      ],
+      "vocabularies": [
+        {
+          "id": "hsk5-shenke",
+          "hanzi": "深刻",
+          "pinyin": "shēnkè",
+          "hanviet": "Thâm khắc",
+          "meaning": "Sâu sắc, khắc sâu",
+          "level": 5,
+          "partOfSpeech": "Tính từ",
+          "strokes": 18,
+          "radical": "氵",
+          "exampleHanzi": "这次经历给我留下了深刻的印象。",
+          "examplePinyin": "Zhè cì jīnglì gěi wǒ liúxià le shēnkè de yìnxiàng.",
+          "exampleMeaning": "Trải nghiệm lần này để lại cho tôi ấn tượng sâu sắc."
+        },
+        {
+          "id": "hsk5-jianquan",
+          "hanzi": "健全",
+          "pinyin": "jiànquán",
+          "hanviet": "Kiện toàn",
+          "meaning": "Hoàn thiện, kiện toàn, lành mạnh",
+          "level": 5,
+          "partOfSpeech": "Tính từ",
+          "strokes": 17,
+          "radical": "亻",
+          "exampleHanzi": "培养孩子健全的心智。",
+          "examplePinyin": "Péiyǎng háizi jiànquán de xīnlǐ.",
+          "exampleMeaning": "Bồi dưỡng tâm lý lành mạnh cho con trẻ."
+        },
+        {
+          "id": "hsk5-cuozhe",
+          "hanzi": "挫折",
+          "pinyin": "cuòzhé",
+          "hanviet": "Tỏa chiết",
+          "meaning": "Trắc trở, thất bại, vấp ngã",
+          "level": 5,
+          "partOfSpeech": "Danh từ",
+          "strokes": 17,
+          "radical": "扌",
+          "exampleHanzi": "人生难免会遇到挫折。",
+          "examplePinyin": "Rénshēng nánmiǎn huì yùdào cuòzhé.",
+          "exampleMeaning": "Đời người khó tránh khỏi gặp phải những trắc trở."
+        }
+      ],
+      "grammarPoints": [
+        {
+          "title": "Cấu trúc nhượng bộ: 哪怕……也…… (Cho dù... cũng...)",
+          "explanation": "Biểu thị giả thiết nhượng bộ ở mức độ cao nhất hoặc tình huống cực đoan, nhưng kết quả phía sau vẫn không thay đổi.",
+          "structure": "哪怕 + [Tình huống giả thiết cực đoan], (Chủ ngữ) + 也 + [Hành động/Kết quả không đổi]",
+          "examples": [
+            { "hanzi": "哪怕希望渺茫，我们也要全力以赴。", "pinyin": "Nǎpà xīwàng miǎománg, wǒmen yě yào quánlì yǐ fù.", "vi": "Cho dù hy vọng mong manh, chúng ta cũng phải dốc toàn lực." }
+          ]
+        }
+      ],
+      "quizData": [
+        {
+          "id": "q-hsk5-1",
+          "question": "Chọn từ điền vào chỗ trống: 面对重重困难，_____只有一线希望，我们_____不能轻言放弃。",
+          "options": ["哪怕...也...", "即使...才...", "无论...都...", "虽然...但..."],
+          "correctIndex": 0,
+          "explanation": "Cặp liên từ biểu thị nhượng bộ giả thiết cực đoan là '哪怕……也……' (Cho dù... cũng...)."
+        }
+      ]
+    },
+    {
+      "id": "hsk6-lesson-01",
+      "courseId": "hsk6",
+      "lessonNumber": 1,
+      "titleHanzi": "人与自然的和谐共生",
+      "titlePinyin": "Rén yǔ zìrán de héxié gòngshēng",
+      "titleVi": "Con người và thiên nhiên cùng chung sống hài hòa",
+      "objectives": [
+        "Làm chủ vốn từ vựng học thuật, thành ngữ 4 chữ về sinh thái, triết học và môi trường.",
+        "Sử dụng thành thạo cấu trúc văn viết: 唯有……方能…… (Chỉ có... mới có thể...).",
+        "Kỹ năng phân tích văn bản nghị luận xã hội và diễn đạt lập luận chặt chẽ."
+      ],
+      "dialogue": [
+        {
+          "speaker": "A",
+          "hanzi": "随着工业文明的高速演进，生态环境遭受了前所未有的挑战。唯有践行绿色发展理念，方能实现可持续发展。",
+          "pinyin": "Suízhe gōngyè wénmíng de gāosù yǎnjìn, shēngtài huánjìng zāoshòu le qiánsuǒwèiyǒu de tiǎozhàn. Wéiyǒu jiànxíng lǜsè fāzhǎn lǐniàn, fāng néng shíxiàn kěchíxù fāzhǎn.",
+          "vi": "Cùng với sự tiến triển vượt bậc của nền văn minh công nghiệp, môi trường sinh thái đã phải gánh chịu những thách thức chưa từng có. Chỉ có kiên định thực thi triết lý phát triển xanh, mới có thể hiện thực hóa sự phát triển bền vững."
+        },
+        {
+          "speaker": "B",
+          "hanzi": "确实如此。古人云“道法自然”，尊重自然规律是人类休养生息的根本基石，绝不可本末倒置。",
+          "pinyin": "Quèshí rúcǐ. Gǔrén yún 'dào fǎ zìrán', zūnzhòng zìrán guīlǜ shì rénlèi xiūyǎng shēngxī de gēnběn jīshí, jué bùkě běnmò dàozhì.",
+          "vi": "Đúng là như vậy. Người xưa có câu 'Đạo noi theo tự nhiên', tôn trọng quy luật tự nhiên chính là nền tảng căn bản để loài người sinh sôi và phát triển, tuyệt đối không được đánh tráo gốc ngọn."
+        }
+      ],
+      "vocabularies": [
+        {
+          "id": "hsk6-hexie",
+          "hanzi": "和谐",
+          "pinyin": "héxié",
+          "hanviet": "Hài hòa",
+          "meaning": "Hài hòa, êm ấm, hòa thuận",
+          "level": 6,
+          "partOfSpeech": "Tính từ",
+          "strokes": 20,
+          "radical": "禾",
+          "exampleHanzi": "构建人与自然和谐共处的美丽中国。",
+          "examplePinyin": "Gòujiàn rén yǔ zìrán héxié gòngchǔ de měilì Zhōngguó.",
+          "exampleMeaning": "Xây dựng một Trung Quốc tươi đẹp nơi con người và thiên nhiên chung sống hài hòa."
+        },
+        {
+          "id": "hsk6-qiansuoweiyou",
+          "hanzi": "前所未有",
+          "pinyin": "qiánsuǒwèiyǒu",
+          "hanviet": "Tiền sở vị hữu",
+          "meaning": "Chưa từng có từ trước đến nay (Thành ngữ)",
+          "level": 6,
+          "partOfSpeech": "Thành ngữ",
+          "strokes": 32,
+          "radical": "刂",
+          "exampleHanzi": "科技迎来了前所未有的繁荣时代。",
+          "examplePinyin": "Kējì yínglái le qiánsuǒwèiyǒu de fánróng shídài.",
+          "exampleMeaning": "Khoa học công nghệ đón chào một thời kỳ phồn vinh chưa từng có."
+        },
+        {
+          "id": "hsk6-jishi",
+          "hanzi": "基石",
+          "pinyin": "jīshí",
+          "hanviet": "Cơ thạch",
+          "meaning": "Đá tảng đặt nền móng, nền tảng cốt lõi",
+          "level": 6,
+          "partOfSpeech": "Danh từ",
+          "strokes": 16,
+          "radical": "土",
+          "exampleHanzi": "信任是人际交往的基石。",
+          "examplePinyin": "Xìnrèn shì rénjì jiāowǎng de jīshí.",
+          "exampleMeaning": "Sự tin tưởng là nền tảng cốt lõi trong giao tiếp giữa người với người."
+        }
+      ],
+      "grammarPoints": [
+        {
+          "title": "Cấu trúc văn ngôn trang trọng: 唯有……方能…… (Duy chỉ có... mới có thể...)",
+          "explanation": "Thường dùng trong văn viết chính luận, học thuật và diễn thuyết trang trọng, biểu thị điều kiện tiên quyết duy nhất để đạt được mục tiêu.",
+          "structure": "唯有 + [Điều kiện duy nhất], 方能 + [Kết quả mong muốn]",
+          "examples": [
+            { "hanzi": "唯有锲而不舍，方能登上成功的巅峰。", "pinyin": "Wéiyǒu qiè'érbùshě, fāng néng dēng shàng chénggōng de diānfēng.", "vi": "Duy chỉ có kiên trì không từ bỏ, mới có thể bước lên đỉnh cao của thành công." }
+          ]
+        }
+      ],
+      "quizData": [
+        {
+          "id": "q-hsk6-1",
+          "question": "Thành ngữ nào phù hợp nhất để chỉ việc 'chú trọng cái phụ mà bỏ quên cái chính'?",
+          "options": ["本末倒置 (Bản mạt đảo trí)", "前所未有 (Tiền sở vị hữu)", "锲而不舍 (Khế nhi bất xả)", "道法自然 (Đạo pháp tự nhiên)"],
+          "correctIndex": 0,
+          "explanation": "Thành ngữ '本末倒置' có nghĩa là đảo ngược gốc (bản) và ngọn (mạt), đánh mất cái căn bản cốt lõi."
         }
       ]
     }

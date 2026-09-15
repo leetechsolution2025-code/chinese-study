@@ -125,7 +125,7 @@ export default function HomePage() {
               }}
             >
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                <CheckCircle2 size={14} color="#10b981" /> 70 bài học HSK 1 - 4
+                <CheckCircle2 size={14} color="#10b981" /> 146 bài học HSK 1 - 6
               </span>
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                 <CheckCircle2 size={14} color="#10b981" /> Lưới điền chữ 田字格
@@ -394,10 +394,10 @@ export default function HomePage() {
 
           <div style={{ marginTop: '6px' }}>
             <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-              HSK 1 - 4
+              HSK 1 - 6
             </div>
             <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-              Đề thi 35 - 100 phút (Nghe & Đọc)
+              Đề thi 35 - 135 phút (Nghe & Đọc)
             </div>
             <Link href="/exams" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.74rem', color: '#0ea5e9', fontWeight: '600', marginTop: '8px' }}>
               <span>Vào sảnh thi thử</span>
@@ -429,7 +429,7 @@ export default function HomePage() {
             gap: '18px',
           }}
         >
-          {/* Bento Card 1 (Span 7 cols): Lớp học HSK 1 - 4 */}
+          {/* Bento Card 1 (Span 7 cols): Lớp học HSK 1 - 6 */}
           <Link
             href="/courses"
             className="bento-interactive-card"
@@ -444,17 +444,17 @@ export default function HomePage() {
                 <span className="badge badge-crimson">
                   <GraduationCap size={13} /> Lộ trình chuẩn hóa
                 </span>
-                <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>70 bài học trọn vẹn</span>
+                <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>146 bài học trọn vẹn</span>
               </div>
 
               <h3 style={{ fontSize: '1.35rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '6px' }}>
-                Lớp học giáo trình chuẩn HSK 1 - HSK 4
+                Lớp học giáo trình chuẩn HSK 1 - HSK 6
               </h3>
               <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '16px' }}>
                 Chu trình 4 bước: Nghe bài khóa hội thoại ➔ Học từ vựng & âm Hán-Việt ➔ Nắm chắc ngữ pháp ➔ Luyện trắc nghiệm tự chấm điểm.
               </p>
 
-              {/* 4 Level Pills */}
+              {/* 6 Level Pills */}
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 <span style={{ padding: '4px 10px', background: 'rgba(225, 29, 72, 0.1)', color: '#e11d48', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
                   HSK 1 (15 bài)
@@ -467,6 +467,12 @@ export default function HomePage() {
                 </span>
                 <span style={{ padding: '4px 10px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
                   HSK 4 (20 bài)
+                </span>
+                <span style={{ padding: '4px 10px', background: 'rgba(139, 92, 246, 0.1)', color: '#8b5cf6', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
+                  HSK 5 (36 bài)
+                </span>
+                <span style={{ padding: '4px 10px', background: 'rgba(236, 72, 153, 0.1)', color: '#ec4899', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
+                  HSK 6 (40 bài)
                 </span>
               </div>
             </div>

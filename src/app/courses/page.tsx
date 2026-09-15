@@ -39,10 +39,10 @@ export default function CoursesPage() {
           <span className="badge badge-gold">HSK Standard Course</span>
         </div>
         <h1 style={{ fontSize: '2.2rem', fontWeight: '800' }}>
-          Lớp học theo giáo trình <span className="gradient-text">chuẩn HSK 1 - HSK 4</span>
+          Lớp học theo giáo trình <span className="gradient-text">chuẩn HSK 1 - HSK 6</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginTop: '4px' }}>
-          Lộ trình học tập bài bản 4 cấp độ từ nhập môn đến trung cấp, tích hợp bài khóa hội thoại, phân tích âm Hán - Việt và bài tập tự chấm điểm.
+          Lộ trình học tập bài bản 6 cấp độ từ nhập môn đến cao cấp và tinh thông, tích hợp bài khóa hội thoại, phân tích âm Hán - Việt và bài tập tự chấm điểm.
         </p>
       </div>
 

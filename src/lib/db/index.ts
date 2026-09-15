@@ -257,57 +257,51 @@ function seedInitialData(db: Database.Database) {
     `).run();
   }
 
-  // Seed Khóa học HSK 1 - 4 nếu bảng courses trống
-  const courseCount = db.prepare('SELECT COUNT(*) as count FROM courses').get() as { count: number };
-  if (courseCount.count === 0) {
-    const insertCourse = db.prepare(`
-      INSERT INTO courses (id, title, level, total_lessons, target_vocab, description, color, badge_class)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `);
+  // Seed Khóa học HSK 1 - 6 (idempotent: INSERT OR REPLACE)
+  const insertCourse = db.prepare(`
+    INSERT OR REPLACE INTO courses (id, title, level, total_lessons, target_vocab, description, color, badge_class)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `);
 
-    for (const c of coursesData.courses) {
-      insertCourse.run(
-        c.id,
-        c.title,
-        c.level,
-        c.totalLessons,
-        c.targetVocab,
-        c.description,
-        c.color,
-        c.badgeClass
-      );
-    }
+  for (const c of coursesData.courses) {
+    insertCourse.run(
+      c.id,
+      c.title,
+      c.level,
+      c.totalLessons,
+      c.targetVocab,
+      c.description,
+      c.color,
+      c.badgeClass
+    );
   }
 
-  // Seed Bài học chi tiết nếu bảng lessons trống
-  const lessonCount = db.prepare('SELECT COUNT(*) as count FROM lessons').get() as { count: number };
-  if (lessonCount.count === 0) {
-    const insertLesson = db.prepare(`
-      INSERT INTO lessons (
-        id, course_id, lesson_number, title_hanzi, title_pinyin, title_vi, objectives, dialogue, vocabularies, grammar_points, quiz_data
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `);
+  // Seed Bài học chi tiết (idempotent: INSERT OR IGNORE)
+  const insertLesson = db.prepare(`
+    INSERT OR IGNORE INTO lessons (
+      id, course_id, lesson_number, title_hanzi, title_pinyin, title_vi, objectives, dialogue, vocabularies, grammar_points, quiz_data
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
 
-    for (const l of coursesData.lessons) {
-      insertLesson.run(
-        l.id,
-        l.courseId,
-        l.lessonNumber,
-        l.titleHanzi,
-        l.titlePinyin,
-        l.titleVi,
-        JSON.stringify(l.objectives),
-        JSON.stringify(l.dialogue),
-        JSON.stringify(l.vocabularies),
-        JSON.stringify(l.grammarPoints),
-        JSON.stringify(l.quizData)
-      );
-    }
+  for (const l of coursesData.lessons) {
+    insertLesson.run(
+      l.id,
+      l.courseId,
+      l.lessonNumber,
+      l.titleHanzi,
+      l.titlePinyin,
+      l.titleVi,
+      JSON.stringify(l.objectives),
+      JSON.stringify(l.dialogue),
+      JSON.stringify(l.vocabularies),
+      JSON.stringify(l.grammarPoints),
+      JSON.stringify(l.quizData)
+    );
+  }
 
     // Đánh dấu hoàn thành thử Bài 1 HSK 1
     db.prepare(`
       INSERT OR REPLACE INTO user_lesson_progress (user_id, lesson_id, course_id, completed, score, last_accessed_at)
       VALUES ('default_user', 'hsk1-lesson-01', 'hsk1', 1, 100, datetime('now'))
     `).run();
-  }
 }
