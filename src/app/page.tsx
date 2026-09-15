@@ -12,10 +12,12 @@ import {
   Flame,
   CheckCircle2,
   Sparkles,
-  TrendingUp,
   GraduationCap,
   Trophy,
   Target,
+  Clock,
+  ChevronRight,
+  Lightbulb,
 } from 'lucide-react';
 import { AudioButton } from '@/components/common/AudioButton';
 import { storage, UserStats } from '@/lib/storage';
@@ -34,401 +36,721 @@ export default function HomePage() {
     setStats(storage.getUserStats());
   }, []);
 
-  // Từ vựng tiêu biểu trong ngày
-  const wordOfDay = hsk1Data[6]; // Học (xué)
+  // Chữ Hán tiêu biểu hôm nay: Học (xué)
+  const wordOfDay = hsk1Data[6] || {
+    hanzi: '学',
+    pinyin: 'xué',
+    hanviet: 'HỌC',
+    meaning: 'Học, học tập, bắt chước',
+    radical: '子',
+    strokes: 8,
+    exampleHanzi: '我在学中文。',
+    examplePinyin: 'Wǒ zài xué Zhōngwén.',
+    exampleMeaning: 'Tôi đang học tiếng Trung.',
+  };
 
-  const skillCards = [
-    {
-      title: 'Lớp học HSK 1 - HSK 4',
-      chineseTitle: '标准教程课堂',
-      desc: 'Giáo trình chuẩn từng bài: hội thoại bài khóa, phân tích ngữ pháp, từ vựng trọng tâm và bài tập củng cố kiến thức.',
-      icon: GraduationCap,
-      href: '/courses',
-      badge: 'Lộ trình chuẩn',
-      badgeClass: 'badge-crimson',
-      color: '#e11d48',
-    },
-    {
-      title: 'Phòng luyện thi thử HSK',
-      chineseTitle: '全真模拟考试',
-      desc: 'Mô phỏng 100% cấu trúc đề thi thật HSK 1 đến HSK 4: phần Nghe & Đọc hiểu, đồng hồ đếm ngược, chấm điểm và xếp loại Đạt/Chưa đạt.',
-      icon: Trophy,
-      href: '/exams',
-      badge: 'Mô phỏng kỳ thi',
-      badgeClass: 'badge-gold',
-      color: '#f59e0b',
-    },
-    {
-      title: 'Trung tâm luyện tập',
-      chineseTitle: '综合技能训练',
-      desc: 'Rèn giũa 4 kỹ năng Nghe - Nói - Đọc - Viết với 5 công cụ: tập viết Canvas, 4 thanh điệu, thẻ SRS, đọc tương tác và AI Tutor.',
-      icon: Target,
-      href: '/practice',
-      badge: '5 kỹ năng',
-      badgeClass: 'badge-sky',
-      color: '#0ea5e9',
-    },
-    {
-      title: 'Kỹ năng viết và bộ thủ',
-      chineseTitle: '汉字与笔顺',
-      desc: 'Tập viết chữ Hán trên Canvas chuẩn thứ tự nét vẽ (笔顺), khám phá 214 bộ thủ và câu chuyện chiết tự.',
-      icon: PenTool,
-      href: '/writing',
-      badge: 'Interactive Canvas',
-      badgeClass: 'badge-crimson',
-      color: '#fb7185',
-    },
-    {
-      title: 'Luyện 4 thanh điệu',
-      chineseTitle: '声调与发音',
-      desc: 'Mô phỏng biểu đồ cao độ (55, 35, 214, 51), đối chiếu mẫu đọc bản xứ và làm chủ thanh điệu.',
-      icon: Volume2,
-      href: '/tones',
-      badge: 'Tone Contour',
-      badgeClass: 'badge-sky',
-      color: '#38bdf8',
-    },
-    {
-      title: 'Flashcard SRS (HSK 1)',
-      chineseTitle: '间隔重复记忆',
-      desc: 'Ghi nhớ 150 từ vựng HSK 1 với thuật toán FSRS/SM-2, tận dụng tối đa lợi thế âm Hán - Việt.',
-      icon: Layers,
-      href: '/flashcards',
-      badge: 'Thuật toán SM-2',
-      badgeClass: 'badge-gold',
-      color: '#fbbf24',
-    },
-  ];
+  const vocabProgressPercent = Math.min(100, Math.round((stats.totalWordsLearned / 150) * 100));
+  const writingProgressPercent = Math.min(100, Math.round((stats.charactersWritten / 150) * 100));
 
   return (
-    <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '36px' }}>
-      {/* Hero Welcome Banner */}
-      <section className="hero-banner">
-        <div style={{ maxWidth: '680px', position: 'relative', zIndex: 2 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-            <span className="badge badge-crimson">Phương pháp học tối ưu cho người Việt</span>
-            <span className="badge badge-gold">
-              <Flame size={12} /> Streak {stats.streak} ngày
-            </span>
-          </div>
-
-          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', lineHeight: '1.2', marginBottom: '14px' }}>
-            Chinh phục tiếng Trung qua <br />
-            <span className="gradient-text">âm Hán - Việt và chiết tự</span>
-          </h1>
-
-          <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '24px' }}>
-            Hệ sinh thái rèn luyện toàn diện 4 kỹ năng Nghe - Nói - Đọc - Viết. Bẻ khóa từng chữ Hán qua thứ tự nét động, trực quan hóa cao độ 4 thanh điệu, ôn tập khoa học với thuật toán SRS và tự tin thi thử HSK.
-          </p>
-
-          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-            <Link href="/courses" className="btn-primary">
-              <GraduationCap size={18} />
-              <span>Vào lớp học HSK 1 - 4</span>
-            </Link>
-
-            <Link href="/exams" className="btn-gold">
-              <Trophy size={18} />
-              <span>Thi thử HSK</span>
-            </Link>
-
-            <Link href="/practice" className="btn-secondary">
-              <Target size={18} />
-              <span>Trung tâm luyện tập</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Decorative Big Hanzi in background */}
-        <div className="watermark-hanzi">
-          学
-        </div>
-      </section>
-
-      {/* Quick Stats Grid */}
-      <section
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '16px',
-        }}
-      >
-        <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div
-            style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '12px',
-              background: 'rgba(225, 29, 72, 0.15)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#e11d48',
-            }}
-          >
-            <Layers size={24} />
-          </div>
-          <div>
-            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-              {stats.totalWordsLearned} / 150
+    <div style={{ maxWidth: '1160px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '32px' }}>
+      {/* =========================================================================
+          1. HERO SECTION: Split-grid, Punchy, Live Hanzi Widget
+          ========================================================================= */}
+      <section className="hero-banner" style={{ padding: '36px 36px' }}>
+        <div className="hero-split-grid">
+          {/* Left Column: Value Proposition & CTAs */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+              <span className="badge badge-crimson" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                <Sparkles size={12} />
+                <span>Phương pháp tối ưu cho người Việt</span>
+              </span>
+              <span className="badge badge-gold" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <Flame size={12} />
+                <span>Chuỗi {stats.streak} ngày</span>
+              </span>
             </div>
-            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Từ HSK 1 đã ghi nhớ</div>
-          </div>
-        </div>
 
-        <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div
-            style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '12px',
-              background: 'rgba(16, 185, 129, 0.15)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#10b981',
-            }}
-          >
-            <PenTool size={24} />
-          </div>
-          <div>
-            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-              {stats.charactersWritten} Chữ
+            <h1
+              style={{
+                fontSize: '2.4rem',
+                fontWeight: '800',
+                lineHeight: '1.2',
+                letterSpacing: '-0.02em',
+                color: 'var(--text-primary)',
+              }}
+            >
+              Học tiếng Trung chuẩn <br />
+              <span className="gradient-text">từ âm Hán - Việt & chiết tự</span>
+            </h1>
+
+            <p
+              style={{
+                fontSize: '1rem',
+                color: 'var(--text-secondary)',
+                lineHeight: '1.55',
+                maxWidth: '520px',
+              }}
+            >
+              Bẻ khóa nghĩa chữ Hán qua 214 bộ thủ, chuẩn hóa cao độ 4 thanh điệu và luyện đàm thoại phản xạ cùng AI.
+            </p>
+
+            {/* Action Buttons */}
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '6px' }}>
+              <Link href="/courses" className="btn-primary" style={{ padding: '12px 24px' }}>
+                <GraduationCap size={18} />
+                <span>Vào lớp học HSK</span>
+                <ArrowRight size={16} />
+              </Link>
+
+              <Link href="/exams" className="btn-gold" style={{ padding: '12px 20px' }}>
+                <Trophy size={18} />
+                <span>Thi thử HSK</span>
+              </Link>
+
+              <Link href="/practice" className="btn-secondary" style={{ padding: '12px 18px' }}>
+                <Target size={18} />
+                <span>Luyện tập</span>
+              </Link>
             </div>
-            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Đã hoàn thành đồ nét</div>
-          </div>
-        </div>
 
-        <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div
-            style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '12px',
-              background: 'rgba(14, 165, 233, 0.15)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#0ea5e9',
-            }}
-          >
-            <Volume2 size={24} />
-          </div>
-          <div>
-            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-              4 / 4 Thanh
+            {/* Quick Value Badges */}
+            <div
+              style={{
+                display: 'flex',
+                gap: '16px',
+                marginTop: '8px',
+                fontSize: '0.8rem',
+                color: 'var(--text-secondary)',
+                flexWrap: 'wrap',
+              }}
+            >
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <CheckCircle2 size={14} color="#10b981" /> 70 bài học HSK 1 - 4
+              </span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <CheckCircle2 size={14} color="#10b981" /> Lưới điền chữ 田字格
+              </span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <CheckCircle2 size={14} color="#10b981" /> Trợ lý đối thoại Gemini AI
+              </span>
             </div>
-            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Cao độ thanh điệu</div>
           </div>
-        </div>
 
-        <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div
-            style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '12px',
-              background: 'rgba(245, 158, 11, 0.15)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#f59e0b',
-            }}
-          >
-            <Flame size={24} />
-          </div>
-          <div>
-            <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-              {stats.streak} Ngày
+          {/* Right Column: Live Interactive Hanzi Card */}
+          <div className="live-hanzi-card">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+              <span className="badge badge-gold" style={{ fontSize: '0.72rem' }}>
+                <Sparkles size={11} /> Chữ Hán tiêu biểu hôm nay
+              </span>
+              <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)' }}>
+                HSK 1 • 8 nét
+              </span>
             </div>
-            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Duy trì học tập liên tục</div>
-          </div>
-        </div>
-      </section>
 
-      {/* Word of the Day & 4 Skills Section */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '24px',
-        }}
-      >
-        {/* Word of the Day Spotlight */}
-        <div className="glass-panel" style={{ padding: '24px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <span className="badge badge-gold">
-              <Sparkles size={12} /> Chữ Hán tiêu biểu hôm nay
-            </span>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>HSK {wordOfDay.level}</span>
-          </div>
+            {/* Hanzi Presentation Center */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '16px',
+                background: 'var(--bg-tertiary)',
+                borderRadius: '14px',
+                border: '1px solid var(--border-subtle)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <div
+                  style={{
+                    fontSize: '3.6rem',
+                    fontWeight: '900',
+                    color: 'var(--accent-crimson)',
+                    fontFamily: 'var(--font-hanzi)',
+                    lineHeight: '1',
+                    filter: 'drop-shadow(0 2px 8px rgba(225, 29, 72, 0.2))',
+                  }}
+                >
+                  {wordOfDay.hanzi}
+                </div>
 
-          <div className="inner-spotlight-box">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
-              <div
-                style={{
-                  fontSize: '3.5rem',
-                  fontWeight: '900',
-                  color: 'var(--accent-crimson)',
-                  fontFamily: 'var(--font-hanzi)',
-                  lineHeight: '1',
-                }}
-              >
-                {wordOfDay.hanzi}
+                <div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+                    {wordOfDay.pinyin}
+                  </div>
+                  <div style={{ display: 'inline-block', marginTop: '2px' }}>
+                    <span className="badge badge-gold" style={{ fontSize: '0.72rem', padding: '1px 6px' }}>
+                      Hán-Việt: {wordOfDay.hanviet}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+                    {wordOfDay.meaning}
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <div style={{ fontSize: '1.3rem', fontWeight: '700', color: 'var(--text-primary)' }}>
-                  {wordOfDay.pinyin}
-                </div>
-                <div style={{ display: 'flex', gap: '6px', marginTop: '4px' }}>
-                  <span className="badge badge-gold" style={{ fontSize: '0.75rem' }}>
-                    Hán-Việt: {wordOfDay.hanviet}
-                  </span>
-                </div>
-                <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
-                  {wordOfDay.meaning}
-                </div>
+              <AudioButton text={wordOfDay.hanzi} size={20} />
+            </div>
+
+            {/* Example sentence */}
+            <div
+              style={{
+                marginTop: '12px',
+                padding: '10px 12px',
+                background: 'rgba(225, 29, 72, 0.05)',
+                border: '1px solid rgba(225, 29, 72, 0.15)',
+                borderRadius: '10px',
+                fontSize: '0.82rem',
+              }}
+            >
+              <div style={{ fontWeight: '700', color: 'var(--text-primary)' }}>
+                {wordOfDay.exampleHanzi}
+              </div>
+              <div style={{ color: 'var(--accent-crimson)', fontSize: '0.78rem', marginTop: '2px' }}>
+                {wordOfDay.examplePinyin}
+              </div>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '0.78rem', marginTop: '1px' }}>
+                {wordOfDay.exampleMeaning}
               </div>
             </div>
 
-            <AudioButton text={wordOfDay.hanzi} size={22} label="Nghe" />
-          </div>
-
-          <div className="feature-bullet-item" style={{ marginTop: '16px', padding: '14px', flexDirection: 'column', gap: '4px', alignItems: 'stretch' }}>
-            <div style={{ fontWeight: '600', color: 'var(--text-primary)' }}>{wordOfDay.exampleHanzi}</div>
-            <div style={{ color: 'var(--accent-crimson)', fontSize: '0.82rem' }}>{wordOfDay.examplePinyin}</div>
-            <div style={{ color: 'var(--text-secondary)', fontSize: '0.82rem' }}>{wordOfDay.exampleMeaning}</div>
-          </div>
-
-          <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'flex-end' }}>
+            {/* Quick Practice Link */}
             <Link
               href="/writing"
               style={{
-                display: 'inline-flex',
+                marginTop: '14px',
+                display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: '6px',
+                padding: '8px 14px',
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '10px',
                 color: 'var(--accent-crimson)',
-                fontSize: '0.9rem',
-                fontWeight: '600',
+                fontSize: '0.82rem',
+                fontWeight: '700',
+                transition: 'all 0.18s ease',
               }}
             >
-              <span>Tập vẽ chữ này trên Canvas</span>
-              <ArrowRight size={15} />
+              <PenTool size={14} />
+              <span>Tập viết chữ này trên Canvas 田字格</span>
+              <ChevronRight size={14} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          2. DASHBOARD PROGRESS STRIP: 4 Interactive Bento Status Tiles
+          ========================================================================= */}
+      <section
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: '16px',
+        }}
+      >
+        {/* Tile 1: Streak */}
+        <div className="stat-bento-tile">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
+              Chuỗi học liên tục
+            </div>
+            <div
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '10px',
+                background: 'rgba(245, 158, 11, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#f59e0b',
+              }}
+            >
+              <Flame size={20} />
+            </div>
+          </div>
+
+          <div style={{ marginTop: '6px' }}>
+            <div style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+              {stats.streak} <span style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)' }}>ngày</span>
+            </div>
+            <div style={{ display: 'flex', gap: '5px', marginTop: '8px' }}>
+              {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((day, idx) => (
+                <div
+                  key={day}
+                  style={{
+                    flex: 1,
+                    height: '6px',
+                    borderRadius: '3px',
+                    background: idx < 3 ? '#f59e0b' : 'var(--border-subtle)',
+                  }}
+                  title={day}
+                />
+              ))}
+            </div>
+            <div style={{ fontSize: '0.74rem', color: '#10b981', fontWeight: '600', marginTop: '6px' }}>
+              ✓ Mục tiêu hôm nay đã đạt
+            </div>
+          </div>
+        </div>
+
+        {/* Tile 2: Vocab Learned */}
+        <div className="stat-bento-tile">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
+              Từ vựng HSK 1
+            </div>
+            <div
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '10px',
+                background: 'rgba(225, 29, 72, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#e11d48',
+              }}
+            >
+              <Layers size={18} />
+            </div>
+          </div>
+
+          <div style={{ marginTop: '6px' }}>
+            <div style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+              {stats.totalWordsLearned} <span style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)' }}>/ 150 từ</span>
+            </div>
+            {/* Progress bar */}
+            <div style={{ width: '100%', height: '6px', background: 'var(--border-subtle)', borderRadius: '3px', overflow: 'hidden', marginTop: '8px' }}>
+              <div style={{ width: `${vocabProgressPercent}%`, height: '100%', background: 'linear-gradient(90deg, #e11d48, #fb7185)', borderRadius: '3px' }} />
+            </div>
+            <Link href="/flashcards" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.74rem', color: 'var(--accent-crimson)', fontWeight: '600', marginTop: '6px' }}>
+              <span>Ôn tập Flashcard SRS</span>
+              <ChevronRight size={12} />
             </Link>
           </div>
         </div>
 
-        {/* Learning Hub Intro */}
-        <div className="glass-panel" style={{ padding: '24px' }}>
-          <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>
-            Vũ khí học tiếng Trung của người Việt
-          </h3>
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '16px' }}>
-            Hơn 70% từ vựng tiếng Việt có nguồn gốc Hán - Việt. Bằng cách nắm vững quy tắc chuyển dịch phụ âm và liên tưởng bộ thủ, bạn có thể đoán nghĩa và ghi nhớ từ vựng tiếng Trung nhanh gấp 3 lần so với người học phương Tây.
-          </p>
+        {/* Tile 3: Characters Written */}
+        <div className="stat-bento-tile">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
+              Tập viết chữ Hán
+            </div>
+            <div
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '10px',
+                background: 'rgba(16, 185, 129, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#10b981',
+              }}
+            >
+              <PenTool size={18} />
+            </div>
+          </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {[
-              {
-                title: 'Bẻ khóa chữ Hán qua bộ thủ (Radicals)',
-                desc: 'Phân tích cấu trúc hình tượng giúp hiểu sâu bản chất chữ thay vì học vẹt nét vẽ.',
-              },
-              {
-                title: 'Trực quan hóa cao độ thanh điệu',
-                desc: 'Khắc phục triệt để lỗi lẫn lộn thanh 1 và thanh 4 hay thanh 2 và thanh 3.',
-              },
-              {
-                title: 'Lặp lại ngắt quãng SM-2 (SRS)',
-                desc: 'Chỉ nhắc nhở bạn ôn lại từ vựng đúng thời điểm trước khi não bộ chuẩn bị quên.',
-              },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="feature-bullet-item"
-              >
-                <CheckCircle2 size={18} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} />
-                <div>
-                  <div style={{ fontSize: '0.88rem', fontWeight: '600', color: 'var(--text-primary)' }}>{item.title}</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '2px' }}>{item.desc}</div>
-                </div>
-              </div>
-            ))}
+          <div style={{ marginTop: '6px' }}>
+            <div style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+              {stats.charactersWritten} <span style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)' }}>/ 150 chữ</span>
+            </div>
+            {/* Progress bar */}
+            <div style={{ width: '100%', height: '6px', background: 'var(--border-subtle)', borderRadius: '3px', overflow: 'hidden', marginTop: '8px' }}>
+              <div style={{ width: `${writingProgressPercent}%`, height: '100%', background: 'linear-gradient(90deg, #10b981, #34d399)', borderRadius: '3px' }} />
+            </div>
+            <Link href="/writing" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.74rem', color: '#10b981', fontWeight: '600', marginTop: '6px' }}>
+              <span>Đồ nét trên Canvas</span>
+              <ChevronRight size={12} />
+            </Link>
           </div>
         </div>
-      </div>
 
-      {/* 4 Skill Modules Grid */}
+        {/* Tile 4: Tone & Exam status */}
+        <div className="stat-bento-tile">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
+              Thi thử HSK chuẩn
+            </div>
+            <div
+              style={{
+                width: '36px',
+                height: '36px',
+                borderRadius: '10px',
+                background: 'rgba(14, 165, 233, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#0ea5e9',
+              }}
+            >
+              <Trophy size={18} />
+            </div>
+          </div>
+
+          <div style={{ marginTop: '6px' }}>
+            <div style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+              HSK 1 - 4
+            </div>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
+              Đề thi 35 - 100 phút (Nghe & Đọc)
+            </div>
+            <Link href="/exams" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.74rem', color: '#0ea5e9', fontWeight: '600', marginTop: '8px' }}>
+              <span>Vào sảnh thi thử</span>
+              <ChevronRight size={12} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          3. CORE 4 PILLARS BENTO GRID: Action-Oriented, High Visuals, Low Text
+          ========================================================================= */}
       <section>
-        <div style={{ marginBottom: '18px' }}>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-primary)' }}>
-            Trung tâm luyện 4 kỹ năng
-          </h2>
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
-            Chọn kỹ năng bạn muốn tập trung phát triển ngay hôm nay
-          </p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '16px' }}>
+          <div>
+            <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+              Các tính năng chính
+            </h2>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
+              Chọn phân hệ bạn muốn khám phá và bắt đầu rèn luyện
+            </p>
+          </div>
         </div>
 
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '20px',
+            gridTemplateColumns: 'repeat(12, 1fr)',
+            gap: '18px',
           }}
         >
-          {skillCards.map((card, idx) => {
-            const Icon = card.icon;
-            return (
-              <Link key={idx} href={card.href} className="glass-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-                    <div
-                      style={{
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: '10px',
-                        background: `${card.color}15`,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: card.color,
-                      }}
-                    >
-                      <Icon size={22} />
-                    </div>
-                    <span className={`badge ${card.badgeClass}`} style={{ fontSize: '0.7rem' }}>
-                      {card.badge}
-                    </span>
-                  </div>
+          {/* Bento Card 1 (Span 7 cols): Lớp học HSK 1 - 4 */}
+          <Link
+            href="/courses"
+            className="bento-interactive-card"
+            style={{
+              gridColumn: 'span 7',
+              minHeight: '220px',
+              borderTop: '3px solid #e11d48',
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <span className="badge badge-crimson">
+                  <GraduationCap size={13} /> Lộ trình chuẩn hóa
+                </span>
+                <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>70 bài học trọn vẹn</span>
+              </div>
 
-                  <div style={{ fontSize: '0.8rem', color: card.color, fontWeight: '600', marginBottom: '4px' }}>
-                    {card.chineseTitle}
-                  </div>
-                  <h3 style={{ fontSize: '1.15rem', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>
-                    {card.title}
-                  </h3>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
-                    {card.desc}
-                  </p>
-                </div>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '6px' }}>
+                Lớp học giáo trình chuẩn HSK 1 - HSK 4
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '16px' }}>
+                Chu trình 4 bước: Nghe bài khóa hội thoại ➔ Học từ vựng & âm Hán-Việt ➔ Nắm chắc ngữ pháp ➔ Luyện trắc nghiệm tự chấm điểm.
+              </p>
 
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    color: card.color,
-                    fontWeight: '600',
-                    fontSize: '0.85rem',
-                    marginTop: '20px',
-                  }}
-                >
-                  <span>Khám phá ngay</span>
-                  <ArrowRight size={14} />
-                </div>
-              </Link>
-            );
-          })}
+              {/* 4 Level Pills */}
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                <span style={{ padding: '4px 10px', background: 'rgba(225, 29, 72, 0.1)', color: '#e11d48', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
+                  HSK 1 (15 bài)
+                </span>
+                <span style={{ padding: '4px 10px', background: 'rgba(14, 165, 233, 0.1)', color: '#0ea5e9', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
+                  HSK 2 (15 bài)
+                </span>
+                <span style={{ padding: '4px 10px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
+                  HSK 3 (20 bài)
+                </span>
+                <span style={{ padding: '4px 10px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', borderRadius: '8px', fontSize: '0.78rem', fontWeight: '700' }}>
+                  HSK 4 (20 bài)
+                </span>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#e11d48', fontWeight: '700', fontSize: '0.88rem', marginTop: '18px' }}>
+              <span>Vào xem toàn bộ lớp học</span>
+              <ArrowRight size={16} />
+            </div>
+          </Link>
+
+          {/* Bento Card 2 (Span 5 cols): Thi thử HSK */}
+          <Link
+            href="/exams"
+            className="bento-interactive-card"
+            style={{
+              gridColumn: 'span 5',
+              minHeight: '220px',
+              borderTop: '3px solid #f59e0b',
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <span className="badge badge-gold">
+                  <Trophy size={13} /> Phòng thi mô phỏng
+                </span>
+                <span className="badge badge-crimson" style={{ fontSize: '0.65rem' }}>MỚI</span>
+              </div>
+
+              <h3 style={{ fontSize: '1.35rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '6px' }}>
+                Thi thử HSK chuẩn format
+              </h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '14px' }}>
+                Bộ đề thi phân tách rõ Nghe hiểu & Đọc hiểu, có đồng hồ đếm ngược, tự động chấm điểm và đánh giá Đạt/Chưa đạt.
+              </p>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                <span>• Audio giọng Bắc Kinh</span>
+                <span>• Lưu lịch sử SQLite</span>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#f59e0b', fontWeight: '700', fontSize: '0.88rem', marginTop: '18px' }}>
+              <span>Bắt đầu thi thử</span>
+              <ArrowRight size={16} />
+            </div>
+          </Link>
+
+          {/* Bento Card 3 (Span 4 cols): Tập viết & Chiết tự */}
+          <Link
+            href="/writing"
+            className="bento-interactive-card"
+            style={{
+              gridColumn: 'span 4',
+              borderTop: '3px solid #fb7185',
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <span className="badge badge-crimson">
+                  <PenTool size={13} /> Canvas 笔顺
+                </span>
+              </div>
+
+              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '6px' }}>
+                Tập viết chữ Hán & bộ thủ
+              </h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '14px' }}>
+                Quan sát mô phỏng thứ tự từng nét vẽ, tự đồ nét trên lưới điền (田字格) và giải nghĩa 214 bộ thủ chiết tự.
+              </p>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                <span className="badge badge-gold" style={{ fontSize: '0.7rem' }}>214 Bộ thủ</span>
+                <span>Chấm điểm nét vẽ</span>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#fb7185', fontWeight: '700', fontSize: '0.85rem', marginTop: '16px' }}>
+              <span>Luyện viết ngay</span>
+              <ArrowRight size={14} />
+            </div>
+          </Link>
+
+          {/* Bento Card 4 (Span 4 cols): Thanh điệu & AI Speaking */}
+          <Link
+            href="/tones"
+            className="bento-interactive-card"
+            style={{
+              gridColumn: 'span 4',
+              borderTop: '3px solid #38bdf8',
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <span className="badge badge-sky">
+                  <Volume2 size={13} /> Cao độ 5 bậc
+                </span>
+              </div>
+
+              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '6px' }}>
+                Luyện 4 thanh điệu chuẩn
+              </h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '14px' }}>
+                Hiểu bản chất âm vực qua biểu đồ (55, 35, 214, 51), phân biệt rõ thanh 1 với thanh 4 qua trắc nghiệm thính giác.
+              </p>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                <span className="badge badge-sky" style={{ fontSize: '0.7rem' }}>Biểu đồ trực quan</span>
+                <span>Đoán âm thanh</span>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#0ea5e9', fontWeight: '700', fontSize: '0.85rem', marginTop: '16px' }}>
+              <span>Luyện thanh điệu</span>
+              <ArrowRight size={14} />
+            </div>
+          </Link>
+
+          {/* Bento Card 5 (Span 4 cols): AI Tutor & Đọc tương tác */}
+          <Link
+            href="/tutor"
+            className="bento-interactive-card"
+            style={{
+              gridColumn: 'span 4',
+              borderTop: '3px solid #a855f7',
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <span className="badge badge-indigo">
+                  <MessageSquare size={13} /> AI Gemini 2.5
+                </span>
+              </div>
+
+              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '6px' }}>
+                AI Tutor đàm thoại thực chiến
+              </h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '14px' }}>
+                Đối thoại phản xạ 4 tình huống đời sống (chào hỏi, gọi món, mua sắm, hỏi đường) có chữa lỗi ngữ pháp và gợi ý mẹo nói.
+              </p>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                <span className="badge badge-emerald" style={{ fontSize: '0.7rem' }}>Sửa ngữ pháp</span>
+                <span>Phát âm bản xứ</span>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#a855f7', fontWeight: '700', fontSize: '0.85rem', marginTop: '16px' }}>
+              <span>Trò chuyện cùng AI</span>
+              <ArrowRight size={14} />
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          4. WHY VIETNAMESE LEARNERS EXCEL: 3 Visual Infographic Cards (Zero Essays)
+          ========================================================================= */}
+      <section className="glass-panel" style={{ padding: '28px 32px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+          <Lightbulb size={20} color="#f59e0b" />
+          <h2 style={{ fontSize: '1.3rem', fontWeight: '800', color: 'var(--text-primary)' }}>
+            Tại sao người Việt học tiếng Trung nhanh nhất?
+          </h2>
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '16px',
+          }}
+        >
+          {/* Card 1 */}
+          <div
+            style={{
+              padding: '18px',
+              background: 'var(--bg-tertiary)',
+              borderRadius: '14px',
+              border: '1px solid var(--border-subtle)',
+            }}
+          >
+            <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '6px' }}>
+              💡 70% Từ vựng đồng âm Hán - Việt
+            </div>
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.45', marginBottom: '10px' }}>
+              Bạn đã biết sẵn nghĩa của hàng ngàn từ vựng trước khi bắt đầu học:
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.8rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 8px', background: 'var(--bg-card)', borderRadius: '6px' }}>
+                <span style={{ fontWeight: '700', color: 'var(--accent-crimson)' }}>国家 (Guójiā)</span>
+                <span style={{ color: 'var(--text-primary)' }}>➔ Quốc gia</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 8px', background: 'var(--bg-card)', borderRadius: '6px' }}>
+                <span style={{ fontWeight: '700', color: 'var(--accent-crimson)' }}>准备 (Zhǔnbèi)</span>
+                <span style={{ color: 'var(--text-primary)' }}>➔ Chuẩn bị</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 8px', background: 'var(--bg-card)', borderRadius: '6px' }}>
+                <span style={{ fontWeight: '700', color: 'var(--accent-crimson)' }}>态度 (Tàidù)</span>
+                <span style={{ color: 'var(--text-primary)' }}>➔ Thái độ</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div
+            style={{
+              padding: '18px',
+              background: 'var(--bg-tertiary)',
+              borderRadius: '14px',
+              border: '1px solid var(--border-subtle)',
+            }}
+          >
+            <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '6px' }}>
+              🧩 Chiết tự bộ thủ hình tượng
+            </div>
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.45', marginBottom: '10px' }}>
+              Mỗi chữ Hán là một câu chuyện logic trực quan, không phải các nét rời rạc:
+            </p>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                padding: '14px 8px',
+                background: 'var(--bg-card)',
+                borderRadius: '8px',
+                fontSize: '1rem',
+                fontWeight: '700',
+              }}
+            >
+              <span style={{ color: '#10b981' }}>亻 (Người)</span>
+              <span>+</span>
+              <span style={{ color: '#0ea5e9' }}>木 (Cây)</span>
+              <span>=</span>
+              <span style={{ color: 'var(--accent-crimson)', fontSize: '1.2rem' }}>休 (Nghỉ ngơi)</span>
+            </div>
+            <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', textAlign: 'center', marginTop: '8px' }}>
+              "Người đứng tựa vào gốc cây để nghỉ ngơi"
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div
+            style={{
+              padding: '18px',
+              background: 'var(--bg-tertiary)',
+              borderRadius: '14px',
+              border: '1px solid var(--border-subtle)',
+            }}
+          >
+            <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '6px' }}>
+              🧠 Ghi nhớ ngắt quãng SM-2 (SRS)
+            </div>
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.45', marginBottom: '10px' }}>
+              Thuật toán tự động tính toán thời điểm vàng ôn tập trước khi não bộ quên:
+            </p>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '12px 10px',
+                background: 'var(--bg-card)',
+                borderRadius: '8px',
+                fontSize: '0.78rem',
+                fontWeight: '700',
+                color: 'var(--text-primary)',
+              }}
+            >
+              <span style={{ color: '#ef4444' }}>Ngày 1</span>
+              <span>➔</span>
+              <span style={{ color: '#f59e0b' }}>Ngày 3</span>
+              <span>➔</span>
+              <span style={{ color: '#0ea5e9' }}>Ngày 7</span>
+              <span>➔</span>
+              <span style={{ color: '#10b981' }}>Trí nhớ dài hạn</span>
+            </div>
+            <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)', textAlign: 'center', marginTop: '8px' }}>
+              Tiết kiệm 70% thời gian ôn luyện từ vựng mỗi ngày
+            </div>
+          </div>
         </div>
       </section>
     </div>
